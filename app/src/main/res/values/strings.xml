@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Todo Mate Clone</string>
+    <string name="login">로그인</string>
+    <string name="guest_login">게스트로 시작</string>
+    <string name="signup">가입하기</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">로그인</string>
 </resources>
