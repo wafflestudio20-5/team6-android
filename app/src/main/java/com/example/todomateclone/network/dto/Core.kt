@@ -4,7 +4,9 @@ import java.time.LocalDateTime
 
 data class UserDTO(
     val id: Int,
-    val username: String
+    val email: String,
+    val nickname: String,
+    val detail: String,
 )
 
 data class CommentDTO(
