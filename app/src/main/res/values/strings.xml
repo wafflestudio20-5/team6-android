@@ -2,9 +2,18 @@
     <string name="app_name">Todo Mate Clone</string>
     <string name="login">로그인</string>
     <string name="guest_login">게스트로 시작</string>
-    <string name="signup">가입하기</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
+    <string name="signup">회원가입</string>
+    <string name="email_authenticate">이메일 인증하기</string>
+    <string name="email_resend">이메일 재전송</string>
+    <string name="prompt_username">이름</string>
+    <string name="prompt_email">이메일</string>
+    <string name="prompt_password">비밀번호</string>
+    <string name="check_password">비밀번호 재확인</string>
     <string name="action_sign_in">로그인</string>
-    <string name="account">계정</string>
+    <string name="explanation_sign_up">가입하면:
+        <item>다른기기에서 로그인 가능합니다.</item>
+        <item>다른 사용자들과 함께할 수 있습니다.</item>
+    </string>
+    <string name="explanation_email_authenticate">인증 이메일을 보냈습니다. 이메일 링크를 누르고, 확인 버튼을 눌러주세요. 만약, 이메일이 오지 않는다면, 이메일 주소가 올바른지 확인하고, 재전송 버튼을 눌러주세요.</string>
+    <string name="verified">확인</string>
 </resources>
