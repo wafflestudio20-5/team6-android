@@ -6,9 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.todomateclone.databinding.FragmentLoginBinding
+import com.example.todomateclone.util.AuthStorage
+import com.example.todomateclone.util.Toaster
 import com.example.todomateclone.viewmodel.UserViewModel
 import kotlinx.coroutines.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -16,15 +20,14 @@ class LoginFragment : Fragment() {
 
     private val userViewModel: UserViewModel by viewModel()
     private var _binding:FragmentLoginBinding? = null
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+    private val authStorage: AuthStorage by inject()
+    private val toaster: Toaster by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -32,18 +35,35 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val username = binding.username
+        val email = binding.email
         val password = binding.password
         val loginButton = binding.login
         val loadingProgressBar = binding.loading
 
+        // when loginButton is clicked, start login
         loginButton.setOnClickListener {
+            // show loadingProgressBar
             loadingProgressBar.visibility = View.VISIBLE
             Log.d("userViewModel", "Start Login")
+            // request server user login with email and password
             CoroutineScope(Dispatchers.IO).launch {
-                userViewModel.login(username.toString(), password.toString())
+                userViewModel.login(email.toString(), password.toString())
+                authStorage.authInfo.collect {
+                    if (it == null){
+                        Log.d("LoginFragment", "Unauthorized error")
+                        toaster.toast("유효하지 않은 계정입니다.")
+                        loadingProgressBar.visibility = View.INVISIBLE
+                    } else {
+                        navigateToMain()
+                    }
+                }
             }
-            loadingProgressBar.visibility = View.INVISIBLE
+
         }
+    }
+
+    private fun navigateToMain() {
+        val action = LoginFragmentDirections.actionLoginFragmentToMainFragment()
+        this.findNavController().navigate(action)
     }
 }

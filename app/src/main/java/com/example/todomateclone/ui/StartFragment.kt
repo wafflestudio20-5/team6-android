@@ -13,23 +13,14 @@ import com.example.todomateclone.viewmodel.UserViewModel
 
 class StartFragment : Fragment() {
 
-    private lateinit var userViewModel: UserViewModel
+//    private val userViewModel: UserViewModel
     private var _binding:FragmentStartBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentStartBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -37,8 +28,6 @@ class StartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        userViewModel = ViewModelProvider(this, UserViewModelFactory())
-//            .get(UserViewModel::class.java)
         val loginButton = binding.loginButton
         val guestButton = binding.guestButton
         val signUpText = binding.signUpText
@@ -53,7 +42,8 @@ class StartFragment : Fragment() {
         }
 
         signUpText.setOnClickListener(){
-            // todo: add navigation action to signup page
+            val action = StartFragmentDirections.actionStartFragmentToSignUpFragment()
+            this.findNavController().navigate(action)
         }
     }
 
