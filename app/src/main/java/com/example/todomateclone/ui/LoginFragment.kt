@@ -47,17 +47,18 @@ class LoginFragment : Fragment() {
             Log.d("userViewModel", "Start Login")
             // request server user login with email and password
             CoroutineScope(Dispatchers.IO).launch {
-                userViewModel.login(email.toString(), password.toString())
+                userViewModel.login(email.text.toString(), password.text.toString())
                 authStorage.authInfo.collect {
                     if (it == null){
                         Log.d("LoginFragment", "Unauthorized error")
                         toaster.toast("유효하지 않은 계정입니다.")
                         loadingProgressBar.visibility = View.INVISIBLE
                     } else {
-                        navigateToMain()
+                        Log.d("LoginFragment", "Login Succeeded")
                     }
                 }
             }
+//            navigateToMain()
 
         }
     }

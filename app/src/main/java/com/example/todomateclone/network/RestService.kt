@@ -5,17 +5,20 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface RestService {
-    @POST("/accounts/login")
+    @POST("/accounts/login/")
     suspend fun login(@Body() request: LoginRequest): LoginResult
 
-    @POST("/accounts/logout")
-    suspend fun logout()
+//    @POST("/accounts/logout")
+//    suspend fun logout()
 
-    @POST("/accounts/registration")
+    @POST("/accounts/registration/")
     suspend fun signup(@Body() request: SignupRequest)
 
     @POST("/accounts/registration/resend-email")
     suspend fun resendEmail(@Body() request: ResendEmailRequest): ResendEmailResult
+
+    @POST("/accounts/kakao/login")
+    suspend fun kakaoLogin(@Body() request: String): LoginResult
 
     // Simple CMS 과제에서 사용되었던 API 입니다.
 //    @GET("/post/{postId}")

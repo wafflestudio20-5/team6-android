@@ -47,12 +47,16 @@
             android:name="email"
             app:argType="string" />
         <deepLink
-            android:id="@+id/deepLink"
-            app:uri="https://wafmate/fragment/emailauthenticate2301061457/{email}" />
+            android:id="@+id/email_deepLink"
+            app:uri="https://wafmate.com/fragment/emailauthenticate2301061457/{email}" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.todomateclone.ui.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main">
+        <deepLink
+            android:id="@+id/kakao_deepLink"
+            app:uri="https://wafmate.com/fragment/mainpage/oauth"/>
+    </fragment>
 </navigation>

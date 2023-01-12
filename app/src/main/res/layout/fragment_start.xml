@@ -7,13 +7,14 @@
     tools:context=".ui.StartFragment">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/signUpText"
@@ -27,22 +28,29 @@
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="140dp"
+        android:layout_width="148dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="75dp"
-        android:layout_marginLeft="150dp"
         android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/kakaoButton"/>
 
     <Button
         android:id="@+id/guestButton"
-        android:layout_width="140dp"
+        android:layout_width="148dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="75dp"
-        android:layout_marginRight="150dp"
         android:text="@string/guest_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/kakaoButton" />
+
+    <ImageButton
+        android:id="@+id/kakaoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="124dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/kakao_login_medium_wide"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
