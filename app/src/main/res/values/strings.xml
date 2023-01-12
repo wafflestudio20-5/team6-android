@@ -16,4 +16,5 @@
     </string>
     <string name="explanation_email_authenticate">인증 이메일을 보냈습니다. 이메일 링크를 누르고, 확인 버튼을 눌러주세요. 만약, 이메일이 오지 않는다면, 이메일 주소가 올바른지 확인하고, 재전송 버튼을 눌러주세요.</string>
     <string name="verified">확인</string>
+    <string name="kakao_app_key">fae7bb96d4999fa3bf475728a31c6711</string>
 </resources>

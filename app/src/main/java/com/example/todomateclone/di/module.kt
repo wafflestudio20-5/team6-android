@@ -21,7 +21,7 @@ val appModule = module {
         val sharedPreference =
             context.getSharedPreferences(AuthStorage.SharedPreferenceName, Context.MODE_PRIVATE)
         Retrofit.Builder()
-            .baseUrl("https://account.readthedocs.io/en/latest/api_endpoints.html/")
+            .baseUrl("http://ec2-43-200-6-175.ap-northeast-2.compute.amazonaws.com:8000/")
             .addConverterFactory(MoshiConverterFactory.create(get()))
             .client(
                 OkHttpClient.Builder()
@@ -30,7 +30,7 @@ val appModule = module {
                         val newRequest = it.request().newBuilder()
                             .addHeader(
                                 "Authorization",
-                                "Bearer " + sharedPreference.getString(
+                                "" + sharedPreference.getString(
                                     AuthStorage.AccessTokenKey,
                                     ""
                                 )
