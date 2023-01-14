@@ -17,6 +17,9 @@ interface RestService {
     @POST("/accounts/registration/resend-email")
     suspend fun resendEmail(@Body() request: ResendEmailRequest): ResendEmailResult
 
+    @GET("/accounts/user")
+    suspend fun getUser(@Body() request: UserRequest): ResendEmailResult
+
     // Simple CMS 과제에서 사용되었던 API 입니다.
 //    @GET("/post/{postId}")
 //    suspend fun getPost(@Path("postId") postId: Int): GetPostResponse

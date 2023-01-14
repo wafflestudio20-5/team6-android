@@ -15,6 +15,7 @@ class UserViewModel(
     private val toaster: Toaster,
 ) : ViewModel() {
 
+
     suspend fun login(email: String, password: String) {
         try {
             val response = restService.login(LoginRequest(email, password))

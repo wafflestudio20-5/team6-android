@@ -7,6 +7,7 @@ data class UserDTO(
     val email: String,
     val nickname: String,
     val detail: String,
+    // val image : : "Image"
 )
 
 data class CommentDTO(
@@ -15,7 +16,6 @@ data class CommentDTO(
     val author: UserDTO,
     val createdAt: LocalDateTime,
 )
-
 
 data class PostDTO(
     val id: Int,

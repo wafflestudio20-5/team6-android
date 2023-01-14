@@ -16,4 +16,12 @@
     </string>
     <string name="explanation_email_authenticate">인증 이메일을 보냈습니다. 이메일 링크를 누르고, 확인 버튼을 눌러주세요. 만약, 이메일이 오지 않는다면, 이메일 주소가 올바른지 확인하고, 재전송 버튼을 눌러주세요.</string>
     <string name="verified">확인</string>
+    <string name="account">계정</string>
+    <string name="linked_email">연동된 이메일</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile">프로필</string>
+    <string name="change_email">이메일 변경</string>
+    <string name="change_password">비밀번호 재설정</string>
+    <string name="delete_account">계정 삭제하기</string>
 </resources>
