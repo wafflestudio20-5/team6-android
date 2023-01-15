@@ -1,27 +1,39 @@
 package com.example.todomateclone.ui
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.todomateclone.MainActivity
+import com.example.todomateclone.R
 import com.example.todomateclone.databinding.FragmentStartBinding
+import com.example.todomateclone.network.dto.AuthStorageUserDTO
+import com.example.todomateclone.util.AuthStorage
 import com.example.todomateclone.viewmodel.UserViewModel
-import com.kakao.sdk.auth.AuthApiClient
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.SignInButton
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
-import com.kakao.sdk.common.model.KakaoSdkError
 import com.kakao.sdk.user.UserApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+
+@Suppress("DEPRECATION")
 class StartFragment : Fragment() {
 
     // 1. Context를 할당할 변수를 프로퍼티로 선언(어디서든 사용할 수 있게)
@@ -52,6 +64,8 @@ class StartFragment : Fragment() {
         val guestButton = binding.guestButton
         val signUpText = binding.signUpText
         val kakaoButton = binding.kakaoButton
+        val googleButton = binding.googleLoginButton
+        googleButton.setSize(SignInButton.SIZE_WIDE)
 
         loginButton.setOnClickListener {
             val action = StartFragmentDirections.actionStartFragmentToLoginFragment()
@@ -59,7 +73,7 @@ class StartFragment : Fragment() {
         }
 
         guestButton.setOnClickListener {
-
+            // Todo: add guestLogin function and navigation
         }
 
         signUpText.setOnClickListener {
@@ -69,6 +83,10 @@ class StartFragment : Fragment() {
 
         kakaoButton.setOnClickListener {
             kakaoLogin()
+        }
+
+        googleButton.setOnClickListener {
+            googleLogin()
         }
     }
 
@@ -82,8 +100,11 @@ class StartFragment : Fragment() {
             } else if (token != null) {
                 Log.i("KakaoLogin", "카카오계정으로 로그인 성공 ${token.accessToken}")
 
-                CoroutineScope(Dispatchers.IO).launch{
+                CoroutineScope(Dispatchers.IO).launch {
                     userViewModel.kakaoLogin(token.accessToken)
+                    launch(Dispatchers.Main) {
+                        navigateToMain()
+                    }
                 }
             }
         }
@@ -105,37 +126,76 @@ class StartFragment : Fragment() {
                 } else if (token != null) {
                     Log.i("KakaoLogin", "카카오톡으로 로그인 성공 ${token.accessToken}")
                     kakaoToken = token
-                    CoroutineScope(Dispatchers.IO).launch{
+                    CoroutineScope(Dispatchers.IO).launch {
                         userViewModel.kakaoLogin(kakaoToken.accessToken)
+                        launch(Dispatchers.Main) {
+                            navigateToMain()
+                        }
                     }
                 }
             }
         } else {
             UserApiClient.instance.loginWithKakaoAccount(mainActivity, callback = callback)
         }
-
     }
 
-    private fun checkKakaoToken(){
-        if (AuthApiClient.instance.hasToken()) {
-            UserApiClient.instance.accessTokenInfo { _, error ->
-                if (error != null) {
-                    if (error is KakaoSdkError && error.isInvalidTokenError() == true) {
-                        Log.d("KakaoLogin","Invalid token error is occurred")
-                    } else {
-                        //기타 에러
-                        Log.d("KakaoLogin", "Unknown error is occurred")
-                    }
-                } else {
-                    //토큰 유효성 체크 성공(필요 시 토큰 갱신됨)
-                    Log.d("KakaoLogin", "Access token is valid")
-                }
-            }
-        } else {
-            //로그인 필요
-            Log.d("KakaoLogin", "Login is necessary")
+    private fun googleLogin() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.google_server_client_id))
+                .requestEmail()
+                .build()
+            val googleSignInClient = GoogleSignIn.getClient(mainActivity, gso)
+            val signInIntent: Intent = googleSignInClient.signInIntent
+            startActivityForResult(signInIntent, RC_SIGN_IN)
+            Log.d("GoogleLogin", "showing google login page")
         }
     }
 
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
+            handleSignInResult(task)
+        }
+    }
+
+    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+        try {
+            val account: GoogleSignInAccount = completedTask.getResult(ApiException::class.java)
+            val idToken: String = account.idToken!!
+            Log.d("GoogleLogin", "get idToken: ${account.idToken}")
+
+            // send ID Token to server and validate
+            CoroutineScope(Dispatchers.IO).launch {
+                userViewModel.googleLogin(idToken)
+                Log.d("GoogleLogin", "googleLogin process is succeeded")
+                launch(Dispatchers.Main) {
+                    navigateToMain()
+                }
+            }
+            // Signed in successfully, show authenticated UI.
+
+        } catch (e: ApiException) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w("GoogleLogin", "signInResult:failed code=" + e.statusCode)
+        }
+    }
+
+    private fun navigateToMain() {
+        val action = StartFragmentDirections.actionStartFragmentToMainFragment()
+        this.findNavController().navigate(action)
+    }
+
+    companion object {
+        const val RC_SIGN_IN = 0
+    }
 
 }
+

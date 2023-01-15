@@ -8,9 +8,6 @@ interface RestService {
     @POST("/accounts/login/")
     suspend fun login(@Body() request: LoginRequest): LoginResult
 
-//    @POST("/accounts/logout")
-//    suspend fun logout()
-
     @POST("/accounts/registration/")
     suspend fun signup(@Body() request: SignupRequest)
 
@@ -19,6 +16,9 @@ interface RestService {
 
     @POST("/accounts/kakao/login")
     suspend fun kakaoLogin(@Body() request: String): LoginResult
+
+    @POST("/accounts/google/login")
+    suspend fun googleLogin(@Body() request: String): LoginResult
 
     // Simple CMS 과제에서 사용되었던 API 입니다.
 //    @GET("/post/{postId}")

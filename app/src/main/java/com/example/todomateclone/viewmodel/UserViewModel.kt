@@ -1,14 +1,12 @@
 package com.example.todomateclone.viewmodel
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.todomateclone.MainApplication
 import com.example.todomateclone.network.RestService
-import com.example.todomateclone.network.dto.LoginRequest
-import com.example.todomateclone.network.dto.ResendEmailRequest
-import com.example.todomateclone.network.dto.SignupRequest
-import com.example.todomateclone.network.dto.UserDTO
+import com.example.todomateclone.network.dto.*
 import com.example.todomateclone.util.AuthStorage
 import com.example.todomateclone.util.Toaster
 import com.kakao.sdk.user.UserApiClient
@@ -25,10 +23,16 @@ class UserViewModel(
             authStorage.setAuthInfo(
                 response.access_token,
                 response.refresh_token,
-                UserDTO(response.user.id, response.user.email, response.user.nickname, response.user.detail))
+                AuthStorageUserDTO(response.user.id, response.user.email)
+            )
         } catch (e: Exception) {
             toaster.toastApiError(e)
         }
+    }
+
+    // Apply() writes the changes to the in-memory SharedPreferences immediately but begins an asynchronous commit to disk
+    fun logout() {
+        authStorage.sharedPref.edit().clear().apply()
     }
 
     suspend fun resendEmail(email: String) {
@@ -47,13 +51,33 @@ class UserViewModel(
         }
     }
 
-    // 카카오계정으로 로그인
+    // login with kakao account
     suspend fun kakaoLogin(accessToken: String) {
         try {
-            restService.kakaoLogin(accessToken)
+            Log.d("KakaoLogin", "send idToken to server")
+            val response = restService.kakaoLogin(accessToken)
+            authStorage.setAuthInfo(
+                response.access_token,
+                response.refresh_token,
+                AuthStorageUserDTO(response.user.id, response.user.email)
+            )
         } catch(e: Exception) {
             toaster.toastApiError(e)
         }
     }
 
+    // login with google account
+    suspend fun googleLogin(accessToken: String) {
+        try {
+            Log.d("GoogleLogin", "send idToken to server")
+            val response = restService.googleLogin(accessToken)
+            authStorage.setAuthInfo(
+                response.access_token,
+                response.refresh_token,
+                AuthStorageUserDTO(response.user.id, response.user.email)
+            )
+        } catch(e: Exception) {
+            toaster.toastApiError(e)
+        }
+    }
 }

@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_startFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -53,10 +56,13 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.todomateclone.ui.MainFragment"
-        android:label="fragment_main"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_main">
         <deepLink
             android:id="@+id/kakao_deepLink"
             app:uri="https://wafmate.com/fragment/mainpage/oauth"/>
+        <action
+            android:id="@+id/action_mainFragment_to_startFragment"
+            app:destination="@id/startFragment" />
     </fragment>
 </navigation>

@@ -44,11 +44,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/kakaoButton" />
 
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/googleLoginButton"
+        android:layout_gravity="center"
+        android:layout_width="306dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="180dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
     <ImageButton
         android:id="@+id/kakaoButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="124dp"
+        android:layout_marginBottom="128dp"
         android:background="@android:color/transparent"
         android:src="@drawable/kakao_login_medium_wide"
         app:layout_constraintBottom_toBottomOf="parent"

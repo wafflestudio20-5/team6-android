@@ -1,5 +1,6 @@
 package com.example.todomateclone.network.dto
 
+import android.media.Image
 import java.time.LocalDateTime
 
 data class UserDTO(
@@ -7,6 +8,12 @@ data class UserDTO(
     val email: String,
     val nickname: String,
     val detail: String,
+//    val image: Image
+)
+
+data class AuthStorageUserDTO(
+    val id: Int,
+    val email: String,
 )
 
 data class CommentDTO(

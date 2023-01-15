@@ -22,7 +22,7 @@ val appModule = module {
             context.getSharedPreferences(AuthStorage.SharedPreferenceName, Context.MODE_PRIVATE)
         Retrofit.Builder()
             .baseUrl("http://ec2-43-200-6-175.ap-northeast-2.compute.amazonaws.com:8000/")
-            .addConverterFactory(MoshiConverterFactory.create(get()))
+            .addConverterFactory(MoshiConverterFactory.create(get()).asLenient())
             .client(
                 OkHttpClient.Builder()
                     .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
@@ -57,6 +57,7 @@ val appModule = module {
             .add(KotlinJsonAdapterFactory())
             .build()
     }
+
 
     viewModel { UserViewModel(get(), get(), get())}
 }

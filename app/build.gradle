@@ -6,16 +6,19 @@ plugins {
 
 android {
     namespace 'com.example.todomateclone'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.todomateclone"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
     }
 
     buildTypes {
@@ -35,7 +38,6 @@ android {
     buildFeatures {
         viewBinding true
     }
-
 }
 
 dependencies {
@@ -80,4 +82,6 @@ dependencies {
 
     // Google Login
     implementation 'com.google.android.gms:play-services-auth:20.4.0'
+
+    // Appbar Custom
 }
