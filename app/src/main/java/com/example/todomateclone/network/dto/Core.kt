@@ -1,6 +1,8 @@
 package com.example.todomateclone.network.dto
 
 import android.media.Image
+import retrofit2.http.Url
+import java.net.URL
 import java.time.LocalDateTime
 
 data class UserDTO(
@@ -8,7 +10,7 @@ data class UserDTO(
     val email: String,
     val nickname: String,
     val detail: String,
-//    val image: Image
+    val image: URL
 )
 
 data class AuthStorageUserDTO(

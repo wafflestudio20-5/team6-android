@@ -40,6 +40,7 @@ class EmailAuthenticateFragment : Fragment() {
         val email = binding.email
         val signupButton = binding.signupButton
         val resendButton = binding.emailResend
+        val upButton = binding.upButton
 
         // if signupButton is clicked, navigate to login fragment
         signupButton.setOnClickListener {
@@ -52,6 +53,11 @@ class EmailAuthenticateFragment : Fragment() {
             CoroutineScope(Dispatchers.IO).launch {
                 userViewModel.resendEmail(email.text.toString())
             }
+        }
+
+        // navigate up action
+        upButton.setOnClickListener {
+            this.findNavController().navigateUp()
         }
     }
 

@@ -38,6 +38,8 @@ class LoginFragment : Fragment() {
         val password = binding.password
         val loginButton = binding.login
         val loadingProgressBar = binding.loading
+        val upButton = binding.upButton
+
 
         // when loginButton is clicked, start login
         loginButton.setOnClickListener {
@@ -62,6 +64,11 @@ class LoginFragment : Fragment() {
                     }
                 }
             }
+        }
+
+        // navigate up action
+        upButton.setOnClickListener {
+            this.findNavController().navigateUp()
         }
     }
 

@@ -2,6 +2,8 @@ package com.example.todomateclone.ui
 
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -22,7 +24,7 @@ class MainFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+
     }
 
     override fun onCreateView(
@@ -37,7 +39,10 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val logoutButton = binding.logoutButton
+        val toolbar:Toolbar = binding.toolbar
         val menuHost: MenuHost = requireActivity()
+
+        toolbar.inflateMenu(R.menu.appbar)
 
         // when click button, user logout
         logoutButton.setOnClickListener {
@@ -51,9 +56,13 @@ class MainFragment : Fragment() {
 
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menu.findItem(R.id.menu_icon)
-                menu.findItem(R.id.notice_icon)
-                menu.findItem(R.id.follow_icon)
+
+                val menuButton = menu.findItem(R.id.menu_icon)
+                val noticeButton = menu.findItem(R.id.notice_icon)
+                val followButton = menu.findItem(R.id.follow_icon)
+                menuButton.icon = ContextCompat.getDrawable(context!!, R.drawable.ic_outline_menu_24 )
+                noticeButton.icon = ContextCompat.getDrawable(context!!, R.drawable.ic_baseline_favorite_border_24 )
+                followButton.icon = ContextCompat.getDrawable(context!!, R.drawable.ic_baseline_search_24 )
                 menuInflater.inflate(R.menu.appbar, menu)
             }
 

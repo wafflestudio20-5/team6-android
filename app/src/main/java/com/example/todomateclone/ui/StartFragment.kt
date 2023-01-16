@@ -73,7 +73,7 @@ class StartFragment : Fragment() {
         }
 
         guestButton.setOnClickListener {
-            // Todo: add guestLogin function and navigation
+            navigateToMain()
         }
 
         signUpText.setOnClickListener {
