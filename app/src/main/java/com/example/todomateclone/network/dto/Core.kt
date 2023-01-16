@@ -10,7 +10,7 @@ data class UserDTO(
     val email: String,
     val nickname: String,
     val detail: String,
-    val image: URL
+    val image: String
 )
 
 data class AuthStorageUserDTO(
