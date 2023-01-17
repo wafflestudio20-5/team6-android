@@ -21,7 +21,7 @@ val appModule = module {
         val sharedPreference =
             context.getSharedPreferences(AuthStorage.SharedPreferenceName, Context.MODE_PRIVATE)
         Retrofit.Builder()
-            .baseUrl("http://ec2-43-200-6-175.ap-northeast-2.compute.amazonaws.com:8000/")
+            .baseUrl("http://ec2-3-38-100-94.ap-northeast-2.compute.amazonaws.com:8000/")
             .addConverterFactory(MoshiConverterFactory.create(get()).asLenient())
             .client(
                 OkHttpClient.Builder()

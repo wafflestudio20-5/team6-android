@@ -1,11 +1,14 @@
 package com.example.todomateclone.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -13,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.todomateclone.R
 import com.example.todomateclone.databinding.FragmentMainBinding
 import com.example.todomateclone.viewmodel.UserViewModel
+import com.google.android.material.navigation.NavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -24,7 +28,6 @@ class MainFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -40,9 +43,11 @@ class MainFragment : Fragment() {
 
         val logoutButton = binding.logoutButton
         val toolbar:Toolbar = binding.toolbar
-        val menuHost: MenuHost = requireActivity()
+        val navigationView: NavigationView = binding.navigationView
+        val drawerLayout: DrawerLayout = binding.drawerLayout
 
-        toolbar.inflateMenu(R.menu.appbar)
+        toolbar.inflateMenu(R.menu.appbar) // 여기서 appbar layout 확장
+        navigationView.itemIconTintList = null
 
         // when click button, user logout
         logoutButton.setOnClickListener {
@@ -50,30 +55,23 @@ class MainFragment : Fragment() {
             // navigate to start fragment
             val action = MainFragmentDirections.actionMainFragmentToStartFragment()
             this.findNavController().navigate(action)
-            // fragment backstack clear
-            parentFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
 
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-
-                val menuButton = menu.findItem(R.id.menu_icon)
-                val noticeButton = menu.findItem(R.id.notice_icon)
-                val followButton = menu.findItem(R.id.follow_icon)
-                menuButton.icon = ContextCompat.getDrawable(context!!, R.drawable.ic_outline_menu_24 )
-                noticeButton.icon = ContextCompat.getDrawable(context!!, R.drawable.ic_baseline_favorite_border_24 )
-                followButton.icon = ContextCompat.getDrawable(context!!, R.drawable.ic_baseline_search_24 )
-                menuInflater.inflate(R.menu.appbar, menu)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                when (menuItem.itemId) {
-                    R.id.menu_icon -> {}
-                    R.id.notice_icon -> {}
-                    R.id.follow_icon -> {}
+        toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_icon -> {
+                    drawerLayout.openDrawer(GravityCompat.END)
+                    Log.d("MainFragment", "drawer is opened")
+                    true
                 }
-                return true
+                R.id.notice_icon -> {
+                    true
+                }
+                R.id.follow_icon -> {
+                    true
+                }
+                else -> true
             }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        }
     }
 }

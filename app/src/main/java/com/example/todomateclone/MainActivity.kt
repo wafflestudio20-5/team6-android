@@ -46,24 +46,5 @@ class MainActivity : AppCompatActivity() {
             navGraph.setStartDestination(R.id.mainFragment)
             navController.graph = navGraph
         }
-
-        // Add menu items without overriding methods in the Activity
-        addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                // Add menu items here
-                menuInflater.inflate(R.menu.appbar, menu)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                // Handle the menu selection
-                return true
-            }
-        })
-
-//        setupActionBarWithNavController(navController)
     }
-
-//    override fun onSupportNavigateUp(): Boolean {
-//        return navController.navigateUp() || super.onSupportNavigateUp()
-//    }
 }

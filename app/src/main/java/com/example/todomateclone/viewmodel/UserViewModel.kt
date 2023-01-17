@@ -55,7 +55,7 @@ class UserViewModel(
     suspend fun kakaoLogin(accessToken: String) {
         try {
             Log.d("KakaoLogin", "send idToken to server")
-            val response = restService.kakaoLogin(accessToken)
+            val response = restService.kakaoLogin(SocialLoginRequest(accessToken))
             authStorage.setAuthInfo(
                 response.access_token,
                 response.refresh_token,
@@ -70,7 +70,7 @@ class UserViewModel(
     suspend fun googleLogin(accessToken: String) {
         try {
             Log.d("GoogleLogin", "send idToken to server")
-            val response = restService.googleLogin(accessToken)
+            val response = restService.googleLogin(SocialLoginRequest(accessToken))
             authStorage.setAuthInfo(
                 response.access_token,
                 response.refresh_token,

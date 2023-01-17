@@ -23,4 +23,10 @@
     <string name="menu">메뉴</string>
     <string name="notice">알림</string>
     <string name="follow">팔로우</string>
+    <!-- navigation menu string resource -->
+    <string name="user_page">계정페이지</string>
+    <string name="todo_page">할일 목록</string>
+    <string name="diary_page">일기</string>
+
+
 </resources>
