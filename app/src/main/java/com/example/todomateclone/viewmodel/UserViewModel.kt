@@ -1,20 +1,14 @@
 package com.example.todomateclone.viewmodel
 
-<<<<<<< HEAD
-
-=======
 import android.annotation.SuppressLint
 import android.app.Application
 import android.util.Log
->>>>>>> upstream/develop
 import androidx.lifecycle.ViewModel
 import com.example.todomateclone.MainApplication
 import com.example.todomateclone.network.RestService
 import com.example.todomateclone.network.dto.*
 import com.example.todomateclone.util.AuthStorage
 import com.example.todomateclone.util.Toaster
-import com.kakao.sdk.user.UserApiClient
-
 
 class UserViewModel(
     private val restService: RestService,
@@ -71,12 +65,18 @@ class UserViewModel(
         }
     }
 
-    suspend fun deleteUser(){
+    suspend fun deleteUser() {
         try {
-            restService.deleteUser(accessToken = authStorage.authInfo.value?.accessToken.toString(),
-                id = authStorage.authInfo.value?.user!!.id)
+            restService.deleteUser(
+                accessToken = authStorage.authInfo.value?.accessToken.toString(),
+                id = authStorage.authInfo.value?.user!!.id
+            )
         } catch (e: Exception) {
+            toaster.toastApiError(e)
+        }
+    }
     // login with google account
+
     suspend fun googleLogin(accessToken: String) {
         try {
             Log.d("GoogleLogin", "send idToken to server")
