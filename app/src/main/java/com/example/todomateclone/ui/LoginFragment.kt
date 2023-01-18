@@ -22,7 +22,6 @@ class LoginFragment : Fragment() {
     private var _binding:FragmentLoginBinding? = null
     private val binding get() = _binding!!
     private val authStorage: AuthStorage by inject()
-    private val toaster: Toaster by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,26 +38,37 @@ class LoginFragment : Fragment() {
         val password = binding.password
         val loginButton = binding.login
         val loadingProgressBar = binding.loading
+        val upButton = binding.upButton
+
 
         // when loginButton is clicked, start login
         loginButton.setOnClickListener {
             // show loadingProgressBar
             loadingProgressBar.visibility = View.VISIBLE
             Log.d("userViewModel", "Start Login")
-            // request server user login with email and password
+
             CoroutineScope(Dispatchers.IO).launch {
-                userViewModel.login(email.toString(), password.toString())
+
+                // request server user login with email and password
+                userViewModel.login(email.text.toString(), password.text.toString())
                 authStorage.authInfo.collect {
                     if (it == null){
                         Log.d("LoginFragment", "Unauthorized error")
-                        toaster.toast("유효하지 않은 계정입니다.")
                         loadingProgressBar.visibility = View.INVISIBLE
                     } else {
-                        navigateToMain()
+                        Log.d("LoginFragment", "Login Succeeded")
+                        loadingProgressBar.visibility = View.INVISIBLE
+                        launch(Dispatchers.Main) {
+                            navigateToMain()
+                        }
                     }
                 }
             }
+        }
 
+        // navigate up action
+        upButton.setOnClickListener {
+            this.findNavController().navigateUp()
         }
     }
 

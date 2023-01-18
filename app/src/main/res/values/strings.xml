@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">Todo Mate Clone</string>
+    <string name="app_name">투두뚜두</string>
     <string name="login">로그인</string>
+    <string name="logout">로그아웃</string>
     <string name="guest_login">게스트로 시작</string>
     <string name="signup">회원가입</string>
     <string name="email_authenticate">이메일 인증하기</string>
@@ -16,4 +17,16 @@
     </string>
     <string name="explanation_email_authenticate">인증 이메일을 보냈습니다. 이메일 링크를 누르고, 확인 버튼을 눌러주세요. 만약, 이메일이 오지 않는다면, 이메일 주소가 올바른지 확인하고, 재전송 버튼을 눌러주세요.</string>
     <string name="verified">확인</string>
+    <string name="kakao_app_key">fae7bb96d4999fa3bf475728a31c6711</string>
+    <string name="google_server_client_id">189776577344-db1p2bqio25foooglemunepjku3nblf4.apps.googleusercontent.com</string>
+    <!-- app bar string resource -->
+    <string name="menu">메뉴</string>
+    <string name="notice">알림</string>
+    <string name="follow">팔로우</string>
+    <!-- navigation menu string resource -->
+    <string name="user_page">계정페이지</string>
+    <string name="todo_page">할일 목록</string>
+    <string name="diary_page">일기</string>
+
+
 </resources>

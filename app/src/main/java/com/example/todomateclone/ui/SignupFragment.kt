@@ -36,6 +36,7 @@ class SignupFragment : Fragment() {
         val password2 = binding.password2
         val signUpButton = binding.signup
         val loadingProgressBar = binding.loading
+        val upButton = binding.upButton
 
         signUpButton.setOnClickListener {
             loadingProgressBar.visibility = View.VISIBLE
@@ -46,6 +47,10 @@ class SignupFragment : Fragment() {
 
             val action = SignupFragmentDirections.actionSignUpFragmentToEmailAuthenticateFragment(email.text.toString())
             this.findNavController().navigate(action)
+        }
+        // navigate up action
+        upButton.setOnClickListener {
+            this.findNavController().navigateUp()
         }
     }
 

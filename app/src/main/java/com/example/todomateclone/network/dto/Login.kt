@@ -1,12 +1,17 @@
 package com.example.todomateclone.network.dto
 
 data class LoginRequest(
-    val id: String,
+    val email: String,
     val password: String
 )
 
 data class LoginResult(
-    val accessToken: String,
-    val refreshToken: String,
+    val access_token: String,
+    val refresh_token: String,
     val user: UserDTO
+)
+
+data class SocialLoginRequest(
+    val access_token: String,
+    val code: String = ""
 )
