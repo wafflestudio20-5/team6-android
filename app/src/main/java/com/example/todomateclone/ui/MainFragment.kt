@@ -4,15 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import com.example.todomateclone.R
 import com.example.todomateclone.databinding.FragmentMainBinding
 import com.example.todomateclone.viewmodel.UserViewModel
@@ -42,7 +39,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val logoutButton = binding.logoutButton
-        val toolbar:Toolbar = binding.toolbar
+        val toolbar: Toolbar = binding.toolbar
         val navigationView: NavigationView = binding.navigationView
         val drawerLayout: DrawerLayout = binding.drawerLayout
 
@@ -55,6 +52,12 @@ class MainFragment : Fragment() {
             // navigate to start fragment
             val action = MainFragmentDirections.actionMainFragmentToStartFragment()
             this.findNavController().navigate(action)
+            if (childFragmentManager.backStackEntryCount != 1) {
+                parentFragmentManager.popBackStack(
+                    "MainFragment",
+                    FragmentManager.POP_BACK_STACK_INCLUSIVE
+                )
+            }
         }
 
         toolbar.setOnMenuItemClickListener {
@@ -72,6 +75,24 @@ class MainFragment : Fragment() {
                 }
                 else -> true
             }
+        }
+
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            val id = menuItem.itemId
+            //it's possible to do more actions on several items, if there is a large amount of items I prefer switch(){case} instead of if()
+            when (id) {
+                // navigate to user page
+                R.id.nav_user_page -> {
+                    Log.d("MainFragment", "navigate to user page")
+                }
+                R.id.nav_todo_page -> {}
+                R.id.nav_diary_page -> {}
+            }
+            //This is for maintaining the behavior of the Navigation view
+            onNavDestinationSelected(menuItem, this.findNavController() )
+            //This is for closing the drawer after acting on it
+            drawerLayout.closeDrawer(GravityCompat.END)
+            true
         }
     }
 }
