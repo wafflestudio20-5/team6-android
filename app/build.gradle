@@ -30,7 +30,8 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-        coreLibraryDesugaringEnabled true // Add this to use LocalDateTime on a lower versions of Android
+        coreLibraryDesugaringEnabled true
+        // Add this to use LocalDateTime on a lower versions of Android
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -55,7 +56,6 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
-
 
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
@@ -82,6 +82,4 @@ dependencies {
 
     // Google Login
     implementation 'com.google.android.gms:play-services-auth:20.4.0'
-
-    // Appbar Custom
 }

@@ -1,15 +1,12 @@
 package com.example.todomateclone.viewmodel
 
-import android.annotation.SuppressLint
-import android.app.Application
+
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.example.todomateclone.MainApplication
 import com.example.todomateclone.network.RestService
 import com.example.todomateclone.network.dto.*
 import com.example.todomateclone.util.AuthStorage
 import com.example.todomateclone.util.Toaster
-import com.kakao.sdk.user.UserApiClient
 
 class UserViewModel(
     private val restService: RestService,
