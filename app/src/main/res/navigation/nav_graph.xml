@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/startFragment">
+
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.example.todomateclone.ui.StartFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.todomateclone.ui.LoginFragment"
+        android:label="@string/login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.todomateclone.ui.SignupFragment"
+        android:label="@string/signup"
+        tools:layout="@layout/fragment_signup">
+        <action
+            android:id="@+id/action_signUpFragment_to_emailAuthenticateFragment"
+            app:destination="@id/emailAuthenticateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/emailAuthenticateFragment"
+        android:name="com.example.todomateclone.ui.EmailAuthenticateFragment"
+        android:label="@string/email_authenticate"
+        tools:layout="@layout/fragment_email_authenticate">
+        <action
+            android:id="@+id/action_emailAuthenticateFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <deepLink
+            android:id="@+id/email_deepLink"
+            app:uri="https://wafmate.com/fragment/emailauthenticate2301061457/{email}" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.todomateclone.ui.MainFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_main">
+        <deepLink
+            android:id="@+id/kakao_deepLink"
+            app:uri="https://wafmate.com/fragment/mainpage/oauth"/>
+        <action
+            android:id="@+id/action_mainFragment_to_startFragment"
+            app:destination="@id/startFragment"
+            app:popUpTo="@id/startFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_mainFragment_to_todoListFragment"
+            app:destination="@id/todoListFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/todoListFragment"
+        android:name="com.example.todomateclone.ui.TodoListFragment"
+        android:label="TodoListFragment"
+        tools:layout="@layout/fragment_todo_list">
+        <action
+            android:id="@+id/action_todoListFragment_to_todoAdderFragment"
+            app:destination="@id/todoAdderFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            />
+<!--        <argument-->
+<!--            android:name="id"-->
+<!--            app:argType="long" />-->
+        <!--        <action-->
+        <!--            android:id="@+id/action_todoListFragment_to_itemListFragment"-->
+        <!--            app:destination="@id/itemListFragment" />-->
+    </fragment>
+
+    <fragment
+        android:id="@+id/todoAdderFragment"
+        android:name="com.example.todomateclone.ui.TodoAdderFragment"
+        android:label="TodoAdderFragment"
+        tools:layout="@layout/fragment_todo_adder">
+        <action
+            android:id="@+id/action_todoAdderFragment_to_todoListFragment"
+            app:destination="@id/todoListFragment" />
+<!--        <argument-->
+<!--            android:name="id"-->
+<!--            app:argType="long" />-->
+    </fragment>
+
+</navigation>
