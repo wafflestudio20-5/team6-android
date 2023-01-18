@@ -13,7 +13,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : Fragment() {
 
-    private val userViewModel: UserViewModel by viewModel()
+    private val userDetailViewModel: UserViewModel by viewModel()
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 

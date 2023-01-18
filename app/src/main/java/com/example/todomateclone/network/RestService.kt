@@ -9,7 +9,9 @@ interface RestService {
     suspend fun login(@Body() request: LoginRequest): LoginResult
 
     @POST("/accounts/logout")
-    suspend fun logout()
+    suspend fun logout(
+        @Header("authorization") accessToken: String,
+    ): Response<Unit>
 
     @POST("/accounts/registration")
     suspend fun signup(@Body() request: SignupRequest)
@@ -18,7 +20,24 @@ interface RestService {
     suspend fun resendEmail(@Body() request: ResendEmailRequest): ResendEmailResult
 
     @GET("/accounts/user")
-    suspend fun getUser(@Body() request: UserRequest): ResendEmailResult
+    suspend fun getUser(
+        @Header("authorization") accessToken: String,
+        @Body request: GetUserRequest
+    ): GetUserResult
+
+    @PUT("/accounts/user")
+    suspend fun updateUser(
+        @Header("authorization") accessToken: String,
+        @Body() request: UpdateUserRequest
+    ): UpdateUserResult
+
+    @DELETE("/accounts/user/{id}")
+    suspend fun deleteUser(
+        @Header("authorization") accessToken: String,
+        @Path("id") id: Int
+    ): Response<Unit>
+
+
 
     // Simple CMS 과제에서 사용되었던 API 입니다.
 //    @GET("/post/{postId}")
