@@ -3,6 +3,7 @@ package com.example.todomateclone.network
 import com.example.todomateclone.network.dto.*
 import retrofit2.Response
 import retrofit2.http.*
+import java.time.LocalDate
 
 interface RestService {
     @POST("/accounts/login")
@@ -30,19 +31,23 @@ interface RestService {
 //        @Query("count") count: Int = 10
 //    ): GetAllPostResponse
 //
-//    @POST("/post")
-//    suspend fun createPost(@Body() request: CreatePostRequest): CreatePostResponse
-//
+
+
+    @POST("/task/list/{date}")
+    suspend fun createTask(@Body() request: CreateTaskRequest, @Path("date") date: String): TaskDTO
+
+
+
 //    @POST("/post/{postId}/comment")
 //    suspend fun createComment(
 //        @Body() request: CreateCommentRequest,
 //        @Path("postId") postId: Int
 //    ): CreateCommentResponse
 //
-//    // update on deletion
+    // update on deletion
 //    @DELETE("/post/{postId}")
 //    suspend fun deletePost(@Path("postId") postId: Int): Response<Unit>
-//
+
 //    @DELETE("/post/comment/{commentId}")
 //    suspend fun deleteComment(@Path("commentId") commentId: Int): Response<Unit>
 }

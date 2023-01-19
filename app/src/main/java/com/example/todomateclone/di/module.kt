@@ -5,6 +5,7 @@ import com.example.todomateclone.network.RestService
 import com.example.todomateclone.util.AuthStorage
 import com.example.todomateclone.util.LocalDateTimeConverter
 import com.example.todomateclone.util.Toaster
+import com.example.todomateclone.viewmodel.TodoViewModel
 import com.example.todomateclone.viewmodel.UserViewModel
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -57,7 +58,6 @@ val appModule = module {
             .add(KotlinJsonAdapterFactory())
             .build()
     }
-
-
+    viewModel {TodoViewModel(get(), get())}
     viewModel { UserViewModel(get(), get(), get())}
 }

@@ -3,6 +3,7 @@ package com.example.todomateclone.network.dto
 import android.media.Image
 import retrofit2.http.Url
 import java.net.URL
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 data class UserDTO(
@@ -18,22 +19,22 @@ data class AuthStorageUserDTO(
     val email: String,
 )
 
-data class CommentDTO(
-    val id: Int,
-    val message: String,
-    val author: UserDTO,
-    val createdAt: LocalDateTime,
-)
+//data class CommentDTO(
+//    val id: Int,
+//    val message: String,
+//    val author: UserDTO,
+//    val createdAt: LocalDateTime,
+//)
 
 
-data class PostDTO(
+data class TaskDTO(
     val id: Int,
-    val content: String,
-    val title: String,
-    val author: UserDTO,
-    val comments: List<CommentDTO>,
-    val createdAt: LocalDateTime,
+    val date: String,
+    val name: String,
+    val complete: Boolean,
+    val created_by: UserDTO,
 )
+
 
 data class ErrorDTO(
     val statusCode: Int?,
