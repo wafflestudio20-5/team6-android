@@ -5,5 +5,5 @@ data class CreateCommentRequest(
 )
 
 data class CreateCommentResponse(
-    val result: PostDTO
+    val result: TaskDTO
 )
