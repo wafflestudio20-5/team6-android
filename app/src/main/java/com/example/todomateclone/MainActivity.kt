@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         val navGraph = navHostFragment.navController.navInflater.inflate(R.navigation.nav_graph)
 
         // auto login
-        if (authStorage.tokenValid == null) {
+        if (authStorage.tokenValid == "") {
             navGraph.setStartDestination(R.id.startFragment)
             navController.graph = navGraph
         } else {

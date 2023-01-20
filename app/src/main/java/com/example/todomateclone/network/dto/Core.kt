@@ -19,20 +19,28 @@ data class AuthStorageUserDTO(
     val email: String,
 )
 
-//data class CommentDTO(
-//    val id: Int,
-//    val message: String,
-//    val author: UserDTO,
-//    val createdAt: LocalDateTime,
-//)
+data class CommentDTO(
+    val id: Int,
+    val message: String,
+    val author: UserDTO,
+    val createdAt: LocalDateTime,
+)
 
+data class PostDTO(
+    val id: Int,
+    val content: String,
+    val title: String,
+    val author: UserDTO,
+    val comments: List<CommentDTO>,
+    val createdAt: LocalDateTime,
+)
 
 data class TaskDTO(
     val id: Int,
     val date: String,
     val name: String,
     val complete: Boolean,
-    val created_by: UserDTO,
+    val created_by: Int,
 )
 
 

@@ -6,11 +6,11 @@ import retrofit2.http.*
 import java.time.LocalDate
 
 interface RestService {
-    @POST("/accounts/login")
+    @POST("/accounts/login/")
     suspend fun login(@Body() request: LoginRequest): LoginResult
 
     @POST("/accounts/registration/")
-    suspend fun signup(@Body() request: SignupRequest)
+    suspend fun signup(@Body() request: SignupRequest): Response<Unit>
 
     @POST("/accounts/registration/resend-email")
     suspend fun resendEmail(@Body() request: ResendEmailRequest): ResendEmailResult
@@ -34,7 +34,7 @@ interface RestService {
 
 
     @POST("/task/list/{date}")
-    suspend fun createTask(@Body() request: CreateTaskRequest, @Path("date") date: String): TaskDTO
+    suspend fun createTask(@Body() request: CreateTaskRequest, @Path("date") date: String): CreateTaskResponse
 
 
 

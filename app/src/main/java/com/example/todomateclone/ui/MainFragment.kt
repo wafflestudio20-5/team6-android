@@ -4,24 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.Toolbar
-<<<<<<< HEAD
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
-=======
-import androidx.core.content.ContextCompat
-import androidx.core.view.GravityCompat
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Lifecycle
-import androidx.navigation.fragment.findNavController
->>>>>>> jinchaeyeon/main
 import com.example.todomateclone.R
 import com.example.todomateclone.databinding.FragmentMainBinding
 import com.example.todomateclone.viewmodel.UserViewModel
@@ -51,11 +39,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val logoutButton = binding.logoutButton
-<<<<<<< HEAD
         val toolbar: Toolbar = binding.toolbar
-=======
-        val toolbar:Toolbar = binding.toolbar
->>>>>>> jinchaeyeon/main
         val navigationView: NavigationView = binding.navigationView
         val drawerLayout: DrawerLayout = binding.drawerLayout
 
@@ -68,15 +52,12 @@ class MainFragment : Fragment() {
             // navigate to start fragment
             val action = MainFragmentDirections.actionMainFragmentToStartFragment()
             this.findNavController().navigate(action)
-<<<<<<< HEAD
             if (childFragmentManager.backStackEntryCount != 1) {
                 parentFragmentManager.popBackStack(
                     "MainFragment",
                     FragmentManager.POP_BACK_STACK_INCLUSIVE
                 )
             }
-=======
->>>>>>> jinchaeyeon/main
         }
 
         toolbar.setOnMenuItemClickListener {
@@ -96,7 +77,6 @@ class MainFragment : Fragment() {
             }
         }
 
-<<<<<<< HEAD
         navigationView.setNavigationItemSelectedListener { menuItem ->
             val id = menuItem.itemId
             //it's possible to do more actions on several items, if there is a large amount of items I prefer switch(){case} instead of if()
@@ -105,7 +85,9 @@ class MainFragment : Fragment() {
                 R.id.nav_user_page -> {
                     Log.d("MainFragment", "navigate to user page")
                 }
-                R.id.nav_todo_page -> {}
+                R.id.nav_todo_page -> {
+                    navigateToTodo()
+                }
                 R.id.nav_diary_page -> {}
             }
             //This is for maintaining the behavior of the Navigation view
@@ -115,15 +97,9 @@ class MainFragment : Fragment() {
             true
         }
     }
-=======
-        binding.todoListButton.setOnClickListener {
-            navigateToTodo()
-        }
-    }
 
     private fun navigateToTodo() {
         val action = MainFragmentDirections.actionMainFragmentToTodoListFragment()
         this.findNavController().navigate(action)
     }
->>>>>>> jinchaeyeon/main
 }
