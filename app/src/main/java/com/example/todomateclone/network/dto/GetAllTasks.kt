@@ -1,6 +1,6 @@
 package com.example.todomateclone.network.dto
 
-data class GetAllPostResponse(
-    val posts: List<PostDTO>,
+data class GetAllTaskResponse(
+    val posts: List<TaskDTO>,
     val nextCursor: Int?
 )

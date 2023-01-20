@@ -28,5 +28,31 @@
     <string name="todo_page">할일 목록</string>
     <string name="diary_page">일기</string>
 
+    <string name="write_name_hint">할 일을 입력하세요</string>
+    <string name="write_date_hint">날짜를 입력하세요</string>
+    <string name="content_name">태그</string>
+    <string name="title_name">할 일</string>
+    <string name="status">상태</string>
+    <string name="add_new_todo">Add new todo</string>
+    <string name="no">no</string>
+    <string name="yes">yes</string>
+    <string name="delete_question">정말 삭제하시겠습니까?</string>
+    <string name="sell">Sell</string>
+    <string name="content">content:</string>
+    <string name="content_req">Content <font color='#FF0000'>*</font></string>
+    <string name="item_name_req">Item Name <font color='#FF0000'>*</font></string>
+    <string name="item_date_req">Item Date <font color='#FF0000'>*</font></string>
+    <string name="save_action">저장</string>
+    <string name="item_detail_fragment_title">Item Details</string>
+    <string name="add_fragment_title">Add Item</string>
+    <string name="edit_fragment_title">Edit Item</string>
+    <string name="date">날짜</string>
+    <string name="content_of_diary">내용</string>
+    <string name="item">일기</string>
+    <string name="delete">삭제</string>
+    <string name="currency_symbol">$</string>
+    <string name="edit_item">Edit Item</string>
+    <string name="add_new_item">Add new item</string>
+
 
 </resources>
