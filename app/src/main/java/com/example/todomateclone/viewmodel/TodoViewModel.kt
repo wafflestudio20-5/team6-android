@@ -33,6 +33,10 @@ class TodoViewModel(
         }
     }
 
+    fun getTodoList() {
+
+    }
+
 //    private fun getUpdatedTodoEntry(id: Long, title: String, content: String, done: Int): Todo {
 //        return Todo(
 //            id = id,

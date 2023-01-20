@@ -33,10 +33,11 @@ interface RestService {
 //
 
 
-    @POST("/task/list/{date}")
-    suspend fun createTask(@Body() request: CreateTaskRequest, @Path("date") date: String): CreateTaskResponse
+    @POST("/task/list/{date}/")
+    suspend fun createTask(@Body() request: CreateTaskRequest, @Path("date") date: String): TaskDTO
 
-
+    @GET("/task/list/{date}/")
+    suspend fun getTaskList(@Body() request: CreateTaskRequest, @Path("date") date: String): CreatePostResponse
 
 //    @POST("/post/{postId}/comment")
 //    suspend fun createComment(
