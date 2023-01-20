@@ -85,9 +85,9 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             />
-<!--        <argument-->
-<!--            android:name="id"-->
-<!--            app:argType="long" />-->
+        <!--        <argument-->
+        <!--            android:name="id"-->
+        <!--            app:argType="long" />-->
         <!--        <action-->
         <!--            android:id="@+id/action_todoListFragment_to_itemListFragment"-->
         <!--            app:destination="@id/itemListFragment" />-->
@@ -101,9 +101,9 @@
         <action
             android:id="@+id/action_todoAdderFragment_to_todoListFragment"
             app:destination="@id/todoListFragment" />
-<!--        <argument-->
-<!--            android:name="id"-->
-<!--            app:argType="long" />-->
+        <!--        <argument-->
+        <!--            android:name="id"-->
+        <!--            app:argType="long" />-->
     </fragment>
 
 </navigation>
