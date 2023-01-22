@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.todomateclone.R
 import com.example.todomateclone.databinding.FragmentLoginBinding
 import com.example.todomateclone.util.AuthStorage
 import com.example.todomateclone.util.Toaster
@@ -73,7 +74,6 @@ class LoginFragment : Fragment() {
     }
 
     private fun navigateToMain() {
-        val action = LoginFragmentDirections.actionLoginFragmentToMainFragment()
-        this.findNavController().navigate(action)
+        this.findNavController().navigate(R.id.action_global_mainFragment)
     }
 }

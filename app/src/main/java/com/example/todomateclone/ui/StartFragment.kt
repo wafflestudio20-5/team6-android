@@ -189,8 +189,7 @@ class StartFragment : Fragment() {
     }
 
     private fun navigateToMain() {
-        val action = StartFragmentDirections.actionStartFragmentToMainFragment()
-        this.findNavController().navigate(action)
+        this.findNavController().navigate(R.id.action_global_mainFragment)
     }
 
     companion object {

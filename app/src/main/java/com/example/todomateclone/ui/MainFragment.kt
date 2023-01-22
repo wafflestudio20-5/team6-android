@@ -10,10 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
+import com.example.todomateclone.MainActivity
 import com.example.todomateclone.R
 import com.example.todomateclone.databinding.FragmentMainBinding
+import com.example.todomateclone.util.AuthStorage
 import com.example.todomateclone.viewmodel.UserViewModel
 import com.google.android.material.navigation.NavigationView
+import com.kakao.auth.StringSet.access_token
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -22,10 +26,7 @@ class MainFragment : Fragment() {
     private val userViewModel: UserViewModel by viewModel()
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private val authStorage: AuthStorage by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +38,10 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (authStorage.tokenValid == "") {
+            this.findNavController().navigate(R.id.action_global_login_graph)
+        }
 
         val logoutButton = binding.logoutButton
         val toolbar: Toolbar = binding.toolbar
@@ -50,14 +55,8 @@ class MainFragment : Fragment() {
         logoutButton.setOnClickListener {
             userViewModel.logout()
             // navigate to start fragment
-            val action = MainFragmentDirections.actionMainFragmentToStartFragment()
-            this.findNavController().navigate(action)
-            if (childFragmentManager.backStackEntryCount != 1) {
-                parentFragmentManager.popBackStack(
-                    "MainFragment",
-                    FragmentManager.POP_BACK_STACK_INCLUSIVE
-                )
-            }
+            this.findNavController().navigate(R.id.action_global_login_graph)
+
         }
 
         toolbar.setOnMenuItemClickListener {
