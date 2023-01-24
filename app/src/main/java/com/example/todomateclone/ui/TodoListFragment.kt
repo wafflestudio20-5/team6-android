@@ -6,10 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todomateclone.databinding.FragmentTodoListBinding
 import com.example.todomateclone.viewmodel.TodoViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -42,6 +49,13 @@ class TodoListFragment : Fragment() {
 
         binding.apply {
             dateTextView.text = todaysdate
+            viewLifecycleOwner.lifecycleScope.launch {
+                Log.d("TodoListFragment", "Collecting Pager")
+                val pager=viewModel.createPager(binding.dateTextView.text.toString())
+                pager.collect { pagingData ->
+                    adapter.submitData(pagingData)
+                }
+            }
             calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
                 dateTextView.visibility = View.VISIBLE
                 if(month<9) monthstr="0"+(month+1).toString()
@@ -51,6 +65,14 @@ class TodoListFragment : Fragment() {
                 yearstr=year.toString()
 
                 dateTextView.text = String.format("%s-%s-%s", yearstr, monthstr, daystr)
+
+                viewLifecycleOwner.lifecycleScope.launch {
+                    Log.d("TodoListFragment", "Collecting Pager")
+                    val pager=viewModel.createPager(binding.dateTextView.text.toString())
+                    pager.collect { pagingData ->
+                        adapter.submitData(pagingData)
+                    }
+                }
             }
         }
 
@@ -59,5 +81,8 @@ class TodoListFragment : Fragment() {
             val action = TodoListFragmentDirections.actionTodoListFragmentToTodoAdderFragment(binding.dateTextView.text.toString())
             this.findNavController().navigate(action)
         }
+
+
+
     }
 }

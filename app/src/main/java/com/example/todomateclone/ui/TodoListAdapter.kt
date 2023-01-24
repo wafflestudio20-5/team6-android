@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.ClipData
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +14,7 @@ import com.example.todomateclone.network.dto.TaskDTO
 import java.text.SimpleDateFormat
 
 
-class TodoListAdapter(private val onItemClicked1: (TaskDTO) -> Unit) : ListAdapter<TaskDTO, TodoListAdapter.TodoViewHolder>(DiffCallback) {
+class TodoListAdapter(private val onItemClicked1: (TaskDTO) -> Unit) : PagingDataAdapter<TaskDTO, TodoListAdapter.TodoViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         return TodoViewHolder(
             TodoListItemBinding.inflate(
@@ -26,10 +27,12 @@ class TodoListAdapter(private val onItemClicked1: (TaskDTO) -> Unit) : ListAdapt
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val current = getItem(position)
-        holder.donebutton.setOnClickListener {
-            onItemClicked1(current)
+        current?.let {
+            holder.donebutton.setOnClickListener {
+                onItemClicked1(current)
+            }
+            holder.bind(it)
         }
-        holder.bind(current)
     }
 
     class TodoViewHolder(private var binding: TodoListItemBinding) :
