@@ -6,19 +6,19 @@ import retrofit2.http.*
 import java.time.LocalDate
 
 interface RestService {
-    @POST("/accounts/login")
+    @POST("/accounts/login/")
     suspend fun login(@Body() request: LoginRequest): LoginResult
 
     @POST("/accounts/registration/")
     suspend fun signup(@Body() request: SignupRequest)
 
-    @POST("/accounts/registration/resend-email")
+    @POST("/accounts/registration/resend-email/")
     suspend fun resendEmail(@Body() request: ResendEmailRequest): ResendEmailResult
 
-    @POST("/accounts/kakao/login")
+    @POST("/accounts/kakao/login/")
     suspend fun kakaoLogin(@Body() request: SocialLoginRequest): LoginResult
 
-    @POST("/accounts/google/login")
+    @POST("/accounts/google/login/")
     suspend fun googleLogin(@Body() request: SocialLoginRequest): LoginResult
 
     // Simple CMS 과제에서 사용되었던 API 입니다.
@@ -33,9 +33,14 @@ interface RestService {
 //
 
 
-    @POST("/task/list/{date}")
+    @POST("/task/list/{date}/")
     suspend fun createTask(@Body() request: CreateTaskRequest, @Path("date") date: String): TaskDTO
 
+    @GET("/task/list/{date}/")
+    suspend fun getTasksByDatePaged(@Path("date") date: String): GetTasksByDateResponse
+
+    @GET("/task/list/")
+    suspend fun getAllTasksPaged(): GetAllTasksResponse
 
 
 //    @POST("/post/{postId}/comment")

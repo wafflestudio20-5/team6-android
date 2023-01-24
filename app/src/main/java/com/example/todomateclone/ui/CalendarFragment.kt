@@ -7,33 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.todomateclone.databinding.FragmentTodoListBinding
+import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.todomateclone.databinding.FragmentCalendarBinding
+import com.example.todomateclone.databinding.FragmentTodoAdderBinding
 import com.example.todomateclone.viewmodel.TodoViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class TodoListFragment : Fragment() {
-    private lateinit var binding: FragmentTodoListBinding
-
-    private val viewModel: TodoViewModel by viewModel()
-
+class CalendarFragment : Fragment() {
+    private lateinit var binding: FragmentCalendarBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        binding = FragmentTodoListBinding.inflate(inflater, container, false)
+        binding = FragmentCalendarBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = TodoListAdapter {
-            //viewModel.toggleTodo(it.id, it.title, it.content, it.done)
-        }
-        binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
 
         val todaysdate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         lateinit var yearstr: String
@@ -54,10 +47,7 @@ class TodoListFragment : Fragment() {
             }
         }
 
-        binding.floatingActionButton.setOnClickListener {
-            Log.d("TodoList to TodoAdder", binding.dateTextView.text.toString())
-            val action = TodoListFragmentDirections.actionTodoListFragmentToTodoAdderFragment(binding.dateTextView.text.toString())
-            this.findNavController().navigate(action)
-        }
     }
+
+
 }

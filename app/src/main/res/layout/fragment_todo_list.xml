@@ -6,32 +6,38 @@
     android:layout_height="match_parent"
     >
 
-
 <!--    <TextView-->
-<!--        android:id="@+id/content_name"-->
-<!--        android:text="@string/content_name"-->
-<!--        app:layout_constraintHorizontal_weight="2"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-
-<!--    <TextView-->
-<!--        android:id="@+id/title_name"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:text="@string/title_name"-->
-<!--        android:textAlignment="center"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_weight="1"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/recyclerView"-->
-<!--        android:layout_width="match_parent"-->
+<!--        android:id="@+id/todotitle"-->
+<!--        android:layout_width="0dp"-->
 <!--        android:layout_height="wrap_content"-->
-<!--        android:scrollbars="vertical"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:text="@string/todaytodo"-->
+<!--        android:textAlignment="viewStart"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="16sp"-->
+<!--        android:textStyle="bold"-->
 <!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"/>-->
+<!--        app:layout_constraintStart_toStartOf="@id/calendarView"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="viewStart"
+        android:textSize="14sp"
+        android:text="yyyy-MM-dd"
+        app:layout_constraintStart_toStartOf="@id/calendarView"
+        app:layout_constraintEnd_toEndOf="@id/calendarView"
+        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
@@ -46,58 +52,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@android:color/white" />
 
+
     <Button
         android:id="@+id/goDiary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
         android:backgroundTint="@color/teal_700"
-        android:drawableLeft="@drawable/ic_diary"
         android:drawableTint="@color/white"
-        android:text="Diary"
+        android:text="Go Diary"
         android:textColor="@color/white"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:text="할 일"
-        android:textAlignment="textStart"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:text="날짜"
-        android:textAlignment="textEnd"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="@id/dateTextView"
+        app:layout_constraintEnd_toEndOf="@id/dateTextView"
+        app:layout_constraintTop_toTopOf="@id/dateTextView" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:scrollbars="vertical"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name"
+        app:layout_constraintTop_toBottomOf="@+id/dateTextView"
         tools:listitem="@layout/todo_list_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

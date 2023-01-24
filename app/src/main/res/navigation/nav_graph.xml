@@ -53,6 +53,7 @@
             android:id="@+id/email_deepLink"
             app:uri="https://wafmate.com/fragment/emailauthenticate2301061457/{email}" />
     </fragment>
+
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.todomateclone.ui.MainFragment"
@@ -69,6 +70,17 @@
         <action
             android:id="@+id/action_mainFragment_to_todoListFragment"
             app:destination="@id/todoListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.example.todomateclone.ui.CalendarFragment"
+        android:label="달력"
+        tools:layout="@layout/fragment_calendar" >
     </fragment>
 
 
@@ -85,12 +97,6 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             />
-        <!--        <argument-->
-        <!--            android:name="id"-->
-        <!--            app:argType="long" />-->
-        <!--        <action-->
-        <!--            android:id="@+id/action_todoListFragment_to_itemListFragment"-->
-        <!--            app:destination="@id/itemListFragment" />-->
     </fragment>
 
     <fragment
@@ -101,6 +107,9 @@
         <action
             android:id="@+id/action_todoAdderFragment_to_todoListFragment"
             app:destination="@id/todoListFragment" />
+        <argument
+            android:name="date"
+            app:argType="string" />
         <!--        <argument-->
         <!--            android:name="id"-->
         <!--            app:argType="long" />-->

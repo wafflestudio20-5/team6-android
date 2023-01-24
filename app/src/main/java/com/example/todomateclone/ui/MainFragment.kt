@@ -77,10 +77,19 @@ class MainFragment : Fragment() {
         binding.todoListButton.setOnClickListener {
             navigateToTodo()
         }
+
+//        binding.calendarButton.setOnClickListener {
+//            navigateToCalendar()
+//        }
     }
 
     private fun navigateToTodo() {
         val action = MainFragmentDirections.actionMainFragmentToTodoListFragment()
+        this.findNavController().navigate(action)
+    }
+
+    private fun navigateToCalendar() {
+        val action = MainFragmentDirections.actionMainFragmentToCalendarFragment()
         this.findNavController().navigate(action)
     }
 }
