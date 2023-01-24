@@ -32,7 +32,7 @@ data class TaskDTO(
     val date: String,
     val name: String,
     val complete: Boolean,
-    val created_by: UserDTO,
+    val created_by: Int,
 )
 
 

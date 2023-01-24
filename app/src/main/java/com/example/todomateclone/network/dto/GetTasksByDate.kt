@@ -1,6 +1,6 @@
 package com.example.todomateclone.network.dto
 
-data class GetAllTasksResponse(
+data class GetTasksByDateResponse(
     val count: Int,
     val next: String,
     val previous: String,

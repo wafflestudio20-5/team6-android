@@ -1,13 +1,13 @@
 package com.example.todomateclone.viewmodel
 
-import android.content.ClipData
 import android.util.Log
 import androidx.lifecycle.*
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
 import com.example.todomateclone.network.RestService
 import com.example.todomateclone.network.dto.CreateTaskRequest
 import com.example.todomateclone.util.Toaster
-import com.kakao.usermgmt.StringSet.tag
-import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
@@ -15,6 +15,10 @@ class TodoViewModel(
     private val restService: RestService,
     private val toaster: Toaster
     ) : ViewModel() {
+
+//    val pager = Pager(PagingConfig(pageSize = 15)) {
+//        TaskPagingSource(restService)
+//    }.flow.cachedIn(viewModelScope)
 
 
     fun createTodo(name: String, date: String) {
