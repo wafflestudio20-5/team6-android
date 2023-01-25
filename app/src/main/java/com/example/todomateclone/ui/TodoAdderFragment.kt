@@ -79,31 +79,3 @@ class TodoAdderFragment : Fragment() {
 }
 
 
-//package com.example.todomateclone.ui
-//
-//import androidx.paging.PagingSource
-//import androidx.paging.PagingState
-//import com.example.todomateclone.network.RestService
-//import com.example.todomateclone.network.dto.TaskDTO
-//
-//class TaskPagingSource(
-//    private val restService: RestService
-//) : PagingSource<Int, TaskDTO>() {
-//
-//    override fun getRefreshKey(state: PagingState<Int, TaskDTO>): Int? {
-//        return null
-//    }
-//
-//    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, TaskDTO> {
-//        val response = restService.getAllTasksPaged(cursor = params.key, count = params.loadSize)
-//        val prevItemId = ((params.key ?: 0) - params.loadSize).let {
-//            if (it > 0) it
-//            else null
-//        }
-//        return LoadResult.Page(
-//            data = response.results,
-//            nextKey = response.next,
-//            prevKey = response.previous
-//        )
-//    }
-//}

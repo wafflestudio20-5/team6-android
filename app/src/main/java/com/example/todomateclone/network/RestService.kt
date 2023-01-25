@@ -37,10 +37,19 @@ interface RestService {
     suspend fun createTask(@Body() request: CreateTaskRequest, @Path("date") date: String): TaskDTO
 
     @GET("/task/list/{date}/")
-    suspend fun getTasksByDatePaged(@Path("date") date: String): GetTasksByDateResponse
+    suspend fun getTasksByDateFirstPage(@Path("date") date: String): GetTasksByDateResponse
+
+    @GET("/task/list/{date}/")
+    suspend fun getTasksByDatePaged(@Path("date") date: String, @Query("page") page: Int): GetTasksByDateResponse
 
     @GET("/task/list/")
     suspend fun getAllTasksPaged(): GetAllTasksResponse
+
+    @GET("/task/detail/{tid}/check/")
+    suspend fun checkTask(@Path("tid") tid: Int): TaskDTO
+
+    @DELETE("/task/detail/{tid}/")
+    suspend fun deleteTask(@Path("tid") tid: Int): TaskDTO?
 
 
 //    @POST("/post/{postId}/comment")

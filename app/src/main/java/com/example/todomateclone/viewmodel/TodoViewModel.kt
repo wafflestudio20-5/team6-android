@@ -4,10 +4,15 @@ import android.util.Log
 import androidx.lifecycle.*
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.todomateclone.network.RestService
 import com.example.todomateclone.network.dto.CreateTaskRequest
+import com.example.todomateclone.network.dto.TaskDTO
+import com.example.todomateclone.ui.TaskPagingSource
 import com.example.todomateclone.util.Toaster
+import com.kakao.usermgmt.StringSet.name
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
@@ -16,9 +21,11 @@ class TodoViewModel(
     private val toaster: Toaster
     ) : ViewModel() {
 
-//    val pager = Pager(PagingConfig(pageSize = 15)) {
-//        TaskPagingSource(restService)
-//    }.flow.cachedIn(viewModelScope)
+    fun createPager(date: String): Flow<PagingData<TaskDTO>> {
+        return Pager(PagingConfig(pageSize = 10)) {
+            TaskPagingSource(restService, date)
+        }.flow.cachedIn(viewModelScope)
+    }
 
 
     fun createTodo(name: String, date: String) {
@@ -31,7 +38,34 @@ class TodoViewModel(
                 )
                 toaster.toast("Successfully created.")
             } catch (e: Exception) {
-                Log.d("TodoViewModel", "here is error")
+                toaster.toastApiError(e)
+            }
+        }
+    }
+
+    fun checkTodo(tid: Int) {
+        viewModelScope.launch {
+            try {
+                restService.checkTask(
+                    tid = tid
+                )
+                toaster.toast("Successfully created.")
+            } catch (e: Exception) {
+                toaster.toastApiError(e)
+            }
+        }
+    }
+
+    fun deleteTodo(tid: Int) {
+        viewModelScope.launch {
+            try {
+                restService.deleteTask(
+                    tid = tid
+                )
+                toaster.toast("Successfully created.")
+            } catch (e: NullPointerException) {
+
+            } catch (e: Exception) {
                 toaster.toastApiError(e)
             }
         }

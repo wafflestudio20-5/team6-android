@@ -88,8 +88,4 @@ class MainFragment : Fragment() {
         this.findNavController().navigate(action)
     }
 
-    private fun navigateToCalendar() {
-        val action = MainFragmentDirections.actionMainFragmentToCalendarFragment()
-        this.findNavController().navigate(action)
-    }
 }
