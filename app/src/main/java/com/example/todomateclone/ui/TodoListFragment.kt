@@ -38,6 +38,7 @@ class TodoListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val adapter = TodoListAdapter {
             //viewModel.toggleTodo(it.id, it.title, it.content, it.done)
+            viewModel.checkTodo(it.id)
         }
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this.context)

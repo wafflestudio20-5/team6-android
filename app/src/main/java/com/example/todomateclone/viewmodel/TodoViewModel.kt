@@ -11,6 +11,7 @@ import com.example.todomateclone.network.dto.CreateTaskRequest
 import com.example.todomateclone.network.dto.TaskDTO
 import com.example.todomateclone.ui.TaskPagingSource
 import com.example.todomateclone.util.Toaster
+import com.kakao.usermgmt.StringSet.name
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -19,12 +20,6 @@ class TodoViewModel(
     private val restService: RestService,
     private val toaster: Toaster
     ) : ViewModel() {
-
-//    val pager = Pager(PagingConfig(pageSize = 15)) {
-//        TaskPagingSource(restService, "2023-01-01")
-//    }.flow.cachedIn(viewModelScope)
-
-    //TODO: date가 반영이 안 됐음
 
     fun createPager(date: String): Flow<PagingData<TaskDTO>> {
         return Pager(PagingConfig(pageSize = 15)) {
@@ -40,6 +35,19 @@ class TodoViewModel(
                     CreateTaskRequest(
                         name = name
                     ), date = date
+                )
+                toaster.toast("Successfully created.")
+            } catch (e: Exception) {
+                toaster.toastApiError(e)
+            }
+        }
+    }
+
+    fun checkTodo(tid: Int) {
+        viewModelScope.launch {
+            try {
+                restService.checkTask(
+                    tid = tid
                 )
                 toaster.toast("Successfully created.")
             } catch (e: Exception) {

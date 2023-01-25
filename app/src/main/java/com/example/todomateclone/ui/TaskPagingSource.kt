@@ -51,7 +51,7 @@ class TaskPagingSource(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, TaskDTO> {
         val page = params.key ?: 1
-        val response = restService.getTasksByDatePaged(date)
+        val response = if(page==1) restService.getTasksByDateFirstPage(date) else restService.getTasksByDatePaged(date, page)
 //        val nextPage = response.next?.let { Uri.parse(it).getQueryParameter("count")?.toInt() }
 //        val prevPage = response.previous?.let { Uri.parse(it).getQueryParameter("count")?.toInt() }
 //        val nextPage = if(response.next==null) null else response.next.split("page=")[1].toInt()
