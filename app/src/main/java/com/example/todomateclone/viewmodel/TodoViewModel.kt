@@ -22,7 +22,7 @@ class TodoViewModel(
     ) : ViewModel() {
 
     fun createPager(date: String): Flow<PagingData<TaskDTO>> {
-        return Pager(PagingConfig(pageSize = 15)) {
+        return Pager(PagingConfig(pageSize = 10)) {
             TaskPagingSource(restService, date)
         }.flow.cachedIn(viewModelScope)
     }
@@ -50,6 +50,21 @@ class TodoViewModel(
                     tid = tid
                 )
                 toaster.toast("Successfully created.")
+            } catch (e: Exception) {
+                toaster.toastApiError(e)
+            }
+        }
+    }
+
+    fun deleteTodo(tid: Int) {
+        viewModelScope.launch {
+            try {
+                restService.deleteTask(
+                    tid = tid
+                )
+                toaster.toast("Successfully created.")
+            } catch (e: NullPointerException) {
+
             } catch (e: Exception) {
                 toaster.toastApiError(e)
             }

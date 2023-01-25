@@ -14,7 +14,7 @@ import com.example.todomateclone.network.dto.TaskDTO
 import java.text.SimpleDateFormat
 
 
-class TodoListAdapter(private val onItemClicked: (TaskDTO) -> Unit) : PagingDataAdapter<TaskDTO, TodoListAdapter.TodoViewHolder>(DiffCallback) {
+class TodoListAdapter(private val onItemClicked: (TaskDTO) -> Unit, private val onItemClicked2: (TaskDTO) -> Unit) : PagingDataAdapter<TaskDTO, TodoListAdapter.TodoViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         return TodoViewHolder(
             TodoListItemBinding.inflate(
@@ -31,6 +31,9 @@ class TodoListAdapter(private val onItemClicked: (TaskDTO) -> Unit) : PagingData
             holder.donebutton.setOnClickListener {
                 onItemClicked(current)
             }
+            holder.deletebutton.setOnClickListener {
+                onItemClicked2(current)
+            }
             holder.bind(it)
         }
     }
@@ -38,12 +41,10 @@ class TodoListAdapter(private val onItemClicked: (TaskDTO) -> Unit) : PagingData
     class TodoViewHolder(private var binding: TodoListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         val donebutton = binding.doneSwitch
-
+        val deletebutton = binding.deleteButton
         fun bind(todo: TaskDTO) {
             binding.apply {
                 nameTextView.text = todo.name
-//                if(todo.done>0) doneSwitch.setChecked(true)
-//                else doneSwitch.setChecked(false)
             }
         }
     }
