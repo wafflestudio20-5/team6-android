@@ -51,6 +51,9 @@ interface RestService {
     @DELETE("/task/detail/{tid}/")
     suspend fun deleteTask(@Path("tid") tid: Int): TaskDTO?
 
+    @GET("/task/detail/{tid}/delay")
+    suspend fun delayTask(@Path("tid") tid: Int): TaskDTO?
+
 
 //    @POST("/post/{postId}/comment")
 //    suspend fun createComment(
