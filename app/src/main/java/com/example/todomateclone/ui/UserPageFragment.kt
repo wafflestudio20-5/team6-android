@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.todomateclone.R
@@ -31,16 +33,15 @@ class UserPageFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentUserPageBinding.inflate(inflater, container, false)
 
         CoroutineScope(Dispatchers.IO).launch {
-            userDetailViewModel.getUser() }
 
-        CoroutineScope(Dispatchers.IO).launch {
             lifecycleScope.launchWhenStarted {
                 userDetailViewModel.user.collectLatest {
-                    binding.textViewEmail.text = it?.email.toString()
+                    userDetailViewModel.getUser()
+                    binding.textViewEmail.text = userDetailViewModel.user.value?.email.toString()
                 }
             }
         }
@@ -50,7 +51,6 @@ class UserPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val profileButton = binding.buttonProfile
         val changeEmailButton = binding.buttonChangeEmail
         val changePasswordButton = binding.buttonChangePassword
@@ -68,12 +68,13 @@ class UserPageFragment : Fragment() {
         }
 
         changePasswordButton.setOnClickListener(){
-            // 비밀번호 변경을 위한 이메일 전송
+            // 비밀번호 변경을 위한 인증코드 이메일 전송
+            val action = UserPageFragmentDirections.actionUserPageFragmentToChangePasswordFragment()
+            this.findNavController().navigate(action)
         }
         deleteAccountButton.setOnClickListener(){
             // 확인을 위한 팝업창 출력
-
-            // 계정삭제 실행, 로그아웃 실행
+            
             CoroutineScope(Dispatchers.IO).launch{
                 userViewModel.deleteUser()
                 userViewModel.logout()

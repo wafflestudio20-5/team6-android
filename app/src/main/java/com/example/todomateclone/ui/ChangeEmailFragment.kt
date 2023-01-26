@@ -24,19 +24,4 @@ class ChangeEmailFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_change_email, container, false)
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val submitEmailButton = binding.buttonSubmitEmail
-
-        submitEmailButton.setOnClickListener(){
-            // api통신으로 서버데이터 바꾸고
-            // viewModel로 현재 ui로 보여지고 있는 데이터도 바꿔야겠지?
-            val action = ChangeEmailFragmentDirections.actionChangeEmailFragmentToUserPageFragment()
-            this.findNavController().navigate(action)
-        }
-
-    }
-
 }

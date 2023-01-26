@@ -5,6 +5,8 @@ import com.example.todomateclone.network.RestService
 import com.example.todomateclone.util.AuthStorage
 import com.example.todomateclone.util.LocalDateTimeConverter
 import com.example.todomateclone.util.Toaster
+//
+import com.example.todomateclone.viewmodel.UserDetailViewModel
 import com.example.todomateclone.viewmodel.UserViewModel
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -21,22 +23,35 @@ val appModule = module {
         val sharedPreference =
             context.getSharedPreferences(AuthStorage.SharedPreferenceName, Context.MODE_PRIVATE)
         Retrofit.Builder()
-            .baseUrl("http://ec2-3-38-100-94.ap-northeast-2.compute.amazonaws.com:8000/")
+            .baseUrl("http://3.38.100.94/")
             .addConverterFactory(MoshiConverterFactory.create(get()).asLenient())
             .client(
                 OkHttpClient.Builder()
                     .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                     .addInterceptor {
-                        val newRequest = it.request().newBuilder()
-                            .addHeader(
-                                "Authorization",
-                                "" + sharedPreference.getString(
-                                    AuthStorage.AccessTokenKey,
-                                    ""
+                        if((sharedPreference.getString(AuthStorage.AccessTokenKey, "") ?: "").isEmpty()) {
+                            val newRequest = it.request().newBuilder()
+                                .addHeader(
+                                    "Authorization",
+                                    "" + sharedPreference.getString(
+                                        AuthStorage.AccessTokenKey,
+                                        ""
+                                    )
                                 )
-                            )
-                            .build()
-                        it.proceed(newRequest)
+                                .build()
+                            it.proceed(newRequest)
+                        } else {
+                            val newRequest = it.request().newBuilder()
+                                .addHeader(
+                                    "Authorization",
+                                    "Bearer " + sharedPreference.getString(
+                                        AuthStorage.AccessTokenKey,
+                                        ""
+                                    )
+                                )
+                                .build()
+                            it.proceed(newRequest)
+                        }
                     }
                     .build()
             )
@@ -57,7 +72,6 @@ val appModule = module {
             .add(KotlinJsonAdapterFactory())
             .build()
     }
-
-
+    viewModel { UserDetailViewModel(get(), get(),get())}
     viewModel { UserViewModel(get(), get(), get())}
 }

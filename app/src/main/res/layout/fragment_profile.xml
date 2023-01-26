@@ -47,7 +47,6 @@
             android:layout_width="140dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="nickname"
             android:textSize="17dp" />
 
 
@@ -81,5 +80,18 @@
             android:textSize="17dp" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button_submit"
+        android:layout_width="258dp"
+        android:layout_height="57dp"
+        android:layout_marginBottom="152dp"
+        android:text="확인"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout_detail"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

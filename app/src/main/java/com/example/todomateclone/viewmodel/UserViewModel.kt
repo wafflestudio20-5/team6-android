@@ -68,7 +68,6 @@ class UserViewModel(
     suspend fun deleteUser() {
         try {
             restService.deleteUser(
-                accessToken = authStorage.authInfo.value?.accessToken.toString(),
                 id = authStorage.authInfo.value?.user!!.id
             )
         } catch (e: Exception) {

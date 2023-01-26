@@ -1,9 +1,11 @@
 package com.example.todomateclone.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.todomateclone.network.RestService
-import com.example.todomateclone.network.dto.GetUserRequest
+
 import com.example.todomateclone.network.dto.SignupRequest
 import com.example.todomateclone.network.dto.UpdateUserRequest
 import com.example.todomateclone.network.dto.UserDTO
@@ -17,20 +19,13 @@ class UserDetailViewModel (
     private val authStorage: AuthStorage,
     private val toaster: Toaster,
 ) : ViewModel() {
-    // 처음 UserDTO는 그럼 어디서 등록??
+
     private val _user = MutableStateFlow<UserDTO?>(null)
     val user: StateFlow<UserDTO?> = _user
-    val isOwner: StateFlow<Boolean> =
-        _user.combine(authStorage.authInfo.map { it?.user?.id }) { user, userId ->
-            userId != null && user?.id == userId
-        }.stateIn(viewModelScope, started = SharingStarted.WhileSubscribed(), initialValue = false)
 
     suspend fun getUser() {
         try {
-            _user.value = restService.getUser(
-                accessToken = authStorage.authInfo.value?.accessToken.toString(),
-                GetUserRequest()
-            ).userDTO
+            _user.value = restService.getUser().user
 
         } catch (e: Exception) {
             toaster.toastApiError(e)
@@ -39,9 +34,9 @@ class UserDetailViewModel (
 
     suspend fun updateUser(userDTO: UserDTO){
         try {
-            _user.value = restService.updateUser(accessToken = authStorage.authInfo.value?.accessToken.toString(),
+            _user.value = restService.updateUser(
                 UpdateUserRequest(userDTO)
-            ).userDTO
+            ).user
         } catch (e: Exception) {
             toaster.toastApiError(e)
         }

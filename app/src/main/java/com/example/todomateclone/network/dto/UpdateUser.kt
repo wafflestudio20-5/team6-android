@@ -1,9 +1,9 @@
 package com.example.todomateclone.network.dto
 
 data class UpdateUserRequest(
-    val userDTO: UserDTO
+    val user: UserDTO
 )
 
 data class UpdateUserResult(
-    val userDTO: UserDTO
+    val user: UserDTO
 )

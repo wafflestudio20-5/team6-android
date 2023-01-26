@@ -1,11 +1,12 @@
 package com.example.todomateclone.network
 
 import com.example.todomateclone.network.dto.*
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import retrofit2.http.*
 
 interface RestService {
-    @POST("/accounts/login")
+    @POST("/accounts/login/")
     suspend fun login(@Body() request: LoginRequest): LoginResult
 
     @POST("/accounts/logout")
@@ -14,26 +15,21 @@ interface RestService {
     ): Response<Unit>
 
     @POST("/accounts/registration/")
-    suspend fun signup(@Body() request: SignupRequest)
+    suspend fun signup(@Body() request: SignupRequest): Response<Unit>
 
     @POST("/accounts/registration/resend-email")
     suspend fun resendEmail(@Body() request: ResendEmailRequest): ResendEmailResult
 
-    @GET("/accounts/user")
-    suspend fun getUser(
-        @Header("authorization") accessToken: String,
-        @Body request: GetUserRequest
-    ): GetUserResult
+    @GET("/accounts/user/")
+    suspend fun getUser(): GetUserResult
 
-    @PUT("/accounts/user")
+    @PUT("/accounts/user/")
     suspend fun updateUser(
-        @Header("authorization") accessToken: String,
         @Body() request: UpdateUserRequest
     ): UpdateUserResult
 
     @DELETE("/accounts/user/{id}")
     suspend fun deleteUser(
-        @Header("authorization") accessToken: String,
         @Path("id") id: Int
     ): Response<Unit>
 

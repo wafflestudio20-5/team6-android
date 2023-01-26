@@ -43,6 +43,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val logoutButton = binding.logoutButton
+        val accountButton = binding.buttonAccount
         val toolbar:Toolbar = binding.toolbar
         val navigationView: NavigationView = binding.navigationView
         val drawerLayout: DrawerLayout = binding.drawerLayout
@@ -58,6 +59,11 @@ class MainFragment : Fragment() {
             this.findNavController().navigate(action)
         }
 
+        accountButton.setOnClickListener {
+            val action = MainFragmentDirections.actionMainFragmentToUserPageFragment()
+            this.findNavController().navigate(action)
+        }
+        
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.menu_icon -> {
