@@ -1,5 +1,6 @@
 package com.example.todomateclone.ui
 
+import android.app.ProgressDialog.show
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -22,6 +23,7 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import android.app.ProgressDialog.show
 
 class TodoListFragment : Fragment() {
     private lateinit var binding: FragmentTodoListBinding
@@ -41,7 +43,8 @@ class TodoListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         adapter = TodoListAdapter(
             { task -> checkFinal(task) },
-            { task -> deleteFinal(task) }
+            { task -> deleteFinal(task) },
+            { task -> delayFinal(task) }
         )
         binding.recyclerView.adapter = adapter
         val layoutManager = LinearLayoutManager(this.context)
@@ -83,11 +86,15 @@ class TodoListFragment : Fragment() {
         }
 
         binding.floatingActionButton.setOnClickListener {
-            Log.d("TodoList to TodoAdder", binding.dateTextView.text.toString())
-            val action = TodoListFragmentDirections.actionTodoListFragmentToTodoAdderFragment(binding.dateTextView.text.toString())
-            this.findNavController().navigate(action)
+            val bottomSheetDialog = TodoAdderFragment(binding.dateTextView.text.toString())
+            bottomSheetDialog.show(requireFragmentManager(), "BottomSheetDialog")
         }
 
+        binding.refreshButton.setOnClickListener { refreshTask() }
+        binding.goDiary.setOnClickListener{
+            val action = TodoListFragmentDirections.actionTodoListFragmentToDiaryjcyFragment()
+            this.findNavController().navigate(action)
+        }
 
 
     }
@@ -108,6 +115,11 @@ class TodoListFragment : Fragment() {
 
     fun deleteFinal(task: TaskDTO) {
         viewModel.deleteTodo(task.id)
+        refreshTask()
+    }
+
+    fun delayFinal(task: TaskDTO) {
+        viewModel.delayTodo(task.id)
         refreshTask()
     }
 }

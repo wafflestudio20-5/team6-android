@@ -31,13 +31,12 @@
 
     <TextView
         android:id="@+id/dateTextView"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="viewStart"
         android:textSize="14sp"
         android:text="yyyy-MM-dd"
         app:layout_constraintStart_toStartOf="@id/calendarView"
-        app:layout_constraintEnd_toEndOf="@id/calendarView"
         app:layout_constraintTop_toBottomOf="@+id/calendarView" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -64,7 +63,20 @@
         android:textColor="@color/white"
         android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="@id/dateTextView"
-        app:layout_constraintEnd_toEndOf="@id/dateTextView"
+        app:layout_constraintEnd_toEndOf="@id/calendarView"
+        app:layout_constraintTop_toTopOf="@id/dateTextView" />
+
+    <ImageButton
+        android:id="@+id/refreshButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:tint="@color/teal_700"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        android:src="@drawable/ic_refresh"
+        app:layout_constraintBottom_toBottomOf="@id/dateTextView"
+        app:layout_constraintStart_toEndOf="@id/dateTextView"
         app:layout_constraintTop_toTopOf="@id/dateTextView" />
 
     <androidx.recyclerview.widget.RecyclerView

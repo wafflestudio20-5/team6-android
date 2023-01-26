@@ -79,13 +79,18 @@
         android:label="TodoListFragment"
         tools:layout="@layout/fragment_todo_list">
         <action
-            android:id="@+id/action_todoListFragment_to_todoAdderFragment"
-            app:destination="@id/todoAdderFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            />
+            android:id="@+id/action_todoListFragment_to_diaryjcyFragment"
+            app:destination="@id/diaryjcyFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/diaryjcyFragment"
+        android:name="com.example.todomateclone.ui.DiaryJCYFragment"
+        android:label="TodoListFragment"
+        tools:layout="@layout/fragment_todo_list">
+        <action
+            android:id="@+id/action_diaryjcyFragment_to_todoListFragment"
+            app:destination="@id/todoListFragment" />
     </fragment>
 
     <fragment
@@ -93,15 +98,6 @@
         android:name="com.example.todomateclone.ui.TodoAdderFragment"
         android:label="TodoAdderFragment"
         tools:layout="@layout/fragment_todo_adder">
-        <action
-            android:id="@+id/action_todoAdderFragment_to_todoListFragment"
-            app:destination="@id/todoListFragment" />
-        <argument
-            android:name="date"
-            app:argType="string" />
-        <!--        <argument-->
-        <!--            android:name="id"-->
-        <!--            app:argType="long" />-->
     </fragment>
 
 </navigation>

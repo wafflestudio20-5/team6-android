@@ -39,33 +39,38 @@
 
     <TextView
         android:id="@+id/name_text_view"
-        android:layout_width="300dp"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:text="hi"
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/done_switch"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/delete_button"
-        android:layout_width="30dp"
+        android:layout_width="20dp"
         android:layout_height="30dp"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_delete"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/name_text_view"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="#B4B4B4" />
-<!--    <Button-->
-<!--        android:id="@+id/button"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="30sp"-->
-<!--        app:tint="#B4B4B4"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <ImageButton
+        android:id="@+id/delay_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_delay"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/delete_button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#B4B4B4" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
