@@ -7,19 +7,19 @@ import java.time.LocalDate
 
 interface RestService {
     // Login, SignUp, Social Login API
-    @POST("/accounts/login")
+    @POST("/accounts/login/")
     suspend fun login(@Body() request: LoginRequest): LoginResult
 
     @POST("/accounts/registration/")
     suspend fun signup(@Body() request: SignupRequest)
 
-    @POST("/accounts/registration/resend-email")
+    @POST("/accounts/registration/resend-email/")
     suspend fun resendEmail(@Body() request: ResendEmailRequest): ResendEmailResult
 
-    @POST("/accounts/kakao/login")
+    @POST("/accounts/kakao/login/")
     suspend fun kakaoLogin(@Body() request: SocialLoginRequest): LoginResult
 
-    @POST("/accounts/google/login")
+    @POST("/accounts/google/login/")
     suspend fun googleLogin(@Body() request: SocialLoginRequest): LoginResult
 
     @POST("/task/list/{date}/")
@@ -46,13 +46,13 @@ interface RestService {
 
     // Diary API
     // 해당 사용자의 모든 일기 불러오기
-    @GET("/diary/mydiary")
+    @GET("/diary/mydiary/")
     suspend fun getDiaryList(): GetDiaryListResponse
     // 해당 날짜의 다이어리 불러오기
     @GET("/diary/mydiary/{date}/")
     suspend fun getDateDiary(@Path("date") date: String): GetDateDiaryResponse
     // 해당 날짜에 일기 등록하기
-    @POST("/diary/mydiary/{date}/create")
+    @POST("/diary/mydiary/{date}/create/")
     suspend fun createDateDiary(@Body() request: CreateDiaryRequest, @Path("date") date: String): DiaryDTO
     // 해당 날짜의 일기 수정하기
     @PATCH("/diary/mydiary/{date}/update/")

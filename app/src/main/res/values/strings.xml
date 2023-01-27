@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">투두뚜두</string>
+    <string name="app_name">waffle mate</string>
     <string name="login">로그인</string>
     <string name="logout">로그아웃</string>
     <string name="guest_login">게스트로 시작</string>
@@ -27,7 +27,17 @@
     <string name="user_page">계정페이지</string>
     <string name="todo_page">할일 목록</string>
     <string name="diary_page">일기</string>
-
+    <!-- diary string resource-->
+    <string name="diary_title">일기 제목입니다</string>
+    <string name="diary_user">사용자</string>
+    <string name="up_button">navigate up</string>
+    <string name="diary_list">일기장</string>
+    <string name="diary_detail">일기</string>
+    <string name="diary_adder">일기 작성</string>
+    <string name="add_new_diary">일기 목록</string>
+    <string name="diary_hint_title">제목</string>
+    <string name="diary_hint_content">내용을 입력하세요</string>
+    <!-- task string resource-->
     <string name="write_name_hint">할 일을 입력하세요</string>
     <string name="write_date_hint">날짜를 입력하세요</string>
     <string name="content_name">태그</string>

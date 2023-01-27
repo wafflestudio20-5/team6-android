@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todomateclone.databinding.FragmentDiaryListBinding
@@ -43,7 +44,7 @@ class DiaryListFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
 
         // show entire diaryList
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch {
             diaryViewModel.getDiaryList()
             diaryViewModel.diaryList.collect {
                 adapter.submitList(it)
