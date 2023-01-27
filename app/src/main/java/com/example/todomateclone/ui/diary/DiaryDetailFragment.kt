@@ -1,4 +1,4 @@
-package com.example.todomateclone.ui
+package com.example.todomateclone.ui.diary
 
 import android.content.Context
 import android.os.Bundle
@@ -12,8 +12,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.todomateclone.databinding.FragmentDiaryDetailBinding
 import com.example.todomateclone.viewmodel.DiaryViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

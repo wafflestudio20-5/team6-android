@@ -8,7 +8,7 @@
     <navigation android:id="@+id/login_graph" app:startDestination="@id/startFragment">
         <fragment
             android:id="@+id/startFragment"
-            android:name="com.example.todomateclone.ui.StartFragment"
+            android:name="com.example.todomateclone.ui.login.StartFragment"
             android:label="@string/app_name"
             tools:layout="@layout/fragment_start" >
             <action
@@ -20,7 +20,7 @@
         </fragment>
         <fragment
             android:id="@+id/loginFragment"
-            android:name="com.example.todomateclone.ui.LoginFragment"
+            android:name="com.example.todomateclone.ui.login.LoginFragment"
             android:label="@string/login"
             tools:layout="@layout/fragment_login" >
             <action
@@ -31,7 +31,7 @@
         </fragment>
         <fragment
             android:id="@+id/signUpFragment"
-            android:name="com.example.todomateclone.ui.SignupFragment"
+            android:name="com.example.todomateclone.ui.login.SignupFragment"
             android:label="@string/signup"
             tools:layout="@layout/fragment_signup">
             <action
@@ -40,7 +40,7 @@
         </fragment>
         <fragment
             android:id="@+id/emailAuthenticateFragment"
-            android:name="com.example.todomateclone.ui.EmailAuthenticateFragment"
+            android:name="com.example.todomateclone.ui.login.EmailAuthenticateFragment"
             android:label="@string/email_authenticate"
             tools:layout="@layout/fragment_email_authenticate">
             <action
@@ -74,10 +74,13 @@
         <action
             android:id="@+id/action_mainFragment_to_diaryListFragment"
             app:destination="@id/diaryListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_userPageFragment"
+            app:destination="@id/userPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/todoListFragment"
-        android:name="com.example.todomateclone.ui.TodoListFragment"
+        android:name="com.example.todomateclone.ui.todo.TodoListFragment"
         android:label="TodoListFragment"
         tools:layout="@layout/fragment_todo_list">
         <action
@@ -95,18 +98,18 @@
     </fragment>
     <fragment
         android:id="@+id/todoAdderFragment"
-        android:name="com.example.todomateclone.ui.TodoAdderFragment"
+        android:name="com.example.todomateclone.ui.todo.TodoAdderFragment"
         android:label="TodoAdderFragment"
         tools:layout="@layout/fragment_todo_adder">
     </fragment>
     <fragment
         android:id="@+id/diaryAdderFragment"
-        android:name="com.example.todomateclone.ui.DiaryAdderFragment"
+        android:name="com.example.todomateclone.ui.diary.DiaryAdderFragment"
         android:label="fragment_diary_adder"
         tools:layout="@layout/fragment_diary_adder" />
     <fragment
         android:id="@+id/diaryListFragment"
-        android:name="com.example.todomateclone.ui.DiaryListFragment"
+        android:name="com.example.todomateclone.ui.diary.DiaryListFragment"
         android:label="fragment_diary_list"
         tools:layout="@layout/fragment_diary_list" >
         <action
@@ -118,7 +121,7 @@
     </fragment>
     <fragment
         android:id="@+id/diaryDetailFragment"
-        android:name="com.example.todomateclone.ui.DiaryDetailFragment"
+        android:name="com.example.todomateclone.ui.diary.DiaryDetailFragment"
         android:label="fragment_diary_detail"
         tools:layout="@layout/fragment_diary_detail" >
         <argument
@@ -127,33 +130,25 @@
     </fragment>
     <fragment
         android:id="@+id/changeEmailFragment"
-        android:name="com.example.todomateclone.ui.ChangeEmailFragment"
+        android:name="com.example.todomateclone.ui.user.ChangeEmailFragment"
         android:label="ChangeEmailFragment"
         tools:layout="@layout/fragment_change_email" >
-        <action
-            android:id="@+id/action_changeEmailFragment_to_userPageFragment"
-            app:destination="@id/userPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"
-        android:name="com.example.todomateclone.ui.ChangePasswordFragment"
+        android:name="com.example.todomateclone.ui.user.ChangePasswordFragment"
         android:label="ChangePasswordFragment"
         tools:layout="@layout/fragment_change_password" >
-        <action
-            android:id="@+id/action_changePasswordFragment_to_userPageFragment"
-            app:destination="@id/userPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.todomateclone.ui.ProfileFragment"
+        android:name="com.example.todomateclone.ui.user.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile" >
-        <action
-            android:id="@+id/action_profileFragment_to_userPageFragment"
-            app:destination="@id/userPageFragment" />
+    </fragment>
     <fragment
         android:id="@+id/userPageFragment"
-        android:name="com.example.todomateclone.ui.UserPageFragment"
+        android:name="com.example.todomateclone.ui.user.UserPageFragment"
         android:label="UserPageFragment"
         tools:layout="@layout/fragment_user_page" >
         <action
@@ -168,6 +163,7 @@
         <action
             android:id="@+id/action_userPageFragment_to_changePasswordFragment"
             app:destination="@id/changePasswordFragment" />
+    </fragment>
 
     <!-- global action-->
     <action

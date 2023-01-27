@@ -1,4 +1,4 @@
-package com.example.todomateclone.ui
+package com.example.todomateclone.ui.login
 
 import android.os.Bundle
 import android.util.Log
@@ -7,10 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.example.todomateclone.R
 import com.example.todomateclone.databinding.FragmentLoginBinding
 import com.example.todomateclone.util.AuthStorage
-import com.example.todomateclone.util.Toaster
 import com.example.todomateclone.viewmodel.UserViewModel
 import kotlinx.coroutines.*
 import org.koin.android.ext.android.inject

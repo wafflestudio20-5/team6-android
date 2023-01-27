@@ -1,4 +1,4 @@
-package com.example.todomateclone.ui
+package com.example.todomateclone.ui.diary
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

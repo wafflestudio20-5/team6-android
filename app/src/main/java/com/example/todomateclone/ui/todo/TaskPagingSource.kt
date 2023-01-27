@@ -1,4 +1,4 @@
-package com.example.todomateclone.ui
+package com.example.todomateclone.ui.todo
 
 import android.net.Uri
 import androidx.paging.PagingSource

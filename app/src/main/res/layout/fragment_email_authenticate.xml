@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/fragment_vertical_margin"
     android:background="@color/white"
-    tools:context=".ui.EmailAuthenticateFragment">
+    tools:context=".ui.login.EmailAuthenticateFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

@@ -1,4 +1,4 @@
-package com.example.todomateclone.ui
+package com.example.todomateclone.ui.todo
 
 import android.os.Bundle
 import android.util.Log

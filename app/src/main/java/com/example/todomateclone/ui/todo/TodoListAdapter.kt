@@ -1,20 +1,18 @@
-package com.example.todomateclone.ui
+package com.example.todomateclone.ui.todo
 
-import android.annotation.SuppressLint
-import android.content.ClipData
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todomateclone.R
 import com.example.todomateclone.databinding.TodoListItemBinding
 import com.example.todomateclone.network.dto.TaskDTO
 import java.text.SimpleDateFormat
 
 
-class TodoListAdapter(private val onItemClicked: (TaskDTO) -> Unit, private val onItemClicked2: (TaskDTO) -> Unit, private val onItemClicked3: (TaskDTO) -> Unit) : PagingDataAdapter<TaskDTO, TodoListAdapter.TodoViewHolder>(DiffCallback) {
+class TodoListAdapter(private val onItemClicked: (TaskDTO) -> Unit, private val onItemClicked2: (TaskDTO) -> Unit, private val onItemClicked3: (TaskDTO) -> Unit) : PagingDataAdapter<TaskDTO, TodoListAdapter.TodoViewHolder>(
+    DiffCallback
+) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         return TodoViewHolder(
             TodoListItemBinding.inflate(

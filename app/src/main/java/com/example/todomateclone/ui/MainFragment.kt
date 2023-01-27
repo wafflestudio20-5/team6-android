@@ -65,7 +65,7 @@ class MainFragment : Fragment() {
             // navigate to start fragment
             this.findNavController().navigate(R.id.action_global_login_graph)
         }
-
+        // toolbar menu selected action
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.menu_icon -> {
@@ -82,14 +82,15 @@ class MainFragment : Fragment() {
                 else -> true
             }
         }
-
+        // navigationView item selected action
         navigationView.setNavigationItemSelectedListener { menuItem ->
             val id = menuItem.itemId
             //it's possible to do more actions on several items, if there is a large amount of items I prefer switch(){case} instead of if()
             when (id) {
                 // navigate to user page
                 R.id.nav_user_page -> {
-                    Log.d("MainFragment", "navigate to user page")
+                    val action = MainFragmentDirections.actionMainFragmentToUserPageFragment()
+                    this.findNavController().navigate(action)
                 }
                 R.id.nav_todo_page -> {
                     val action = MainFragmentDirections.actionMainFragmentToTodoListFragment()
