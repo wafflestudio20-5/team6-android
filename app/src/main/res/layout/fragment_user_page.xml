@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.UserPageFragment">
+
+    <LinearLayout
+        android:id="@+id/linearLayout_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/button_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginHorizontal="15dp">
+
+        <TextView
+            android:id="@+id/textView_linked_email"
+            android:layout_width="match_parent"
+            android:layout_height="98dp"
+            android:gravity="bottom"
+            android:text="@string/linked_email" />
+
+        <TextView
+            android:id="@+id/textView_email"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="98dp"
+            android:text="@string/prompt_email"
+            android:textColor="@color/teal_700"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_profile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/profile"
+        android:textColor="@color/black"
+        android:gravity="start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout_email"
+        android:background="#00ff0000"
+        android:textSize="16sp"/>
+
+    <Button
+        android:id="@+id/button_change_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#00ff0000"
+        android:gravity="start"
+        android:text="@string/change_email"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_profile"
+        android:textSize="16sp"/>
+
+    <Button
+        android:id="@+id/button_change_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#00ff0000"
+        android:gravity="start"
+        android:text="@string/change_password"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_change_email"
+        android:textSize="16sp"/>
+
+    <Button
+        android:id="@+id/button_delete_account"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#00ff0000"
+        android:gravity="start"
+        android:text="@string/delete_account"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_change_password"
+        android:textSize="16sp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.example.todomateclone.network
 
 import com.example.todomateclone.network.dto.*
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import retrofit2.http.*
 import java.time.LocalDate
@@ -10,13 +11,31 @@ interface RestService {
     @POST("/accounts/login/")
     suspend fun login(@Body() request: LoginRequest): LoginResult
 
+    @POST("/accounts/logout")
+    suspend fun logout(
+        @Header("authorization") accessToken: String,
+    ): Response<Unit>
+
     @POST("/accounts/registration/")
     suspend fun signup(@Body() request: SignupRequest)
 
     @POST("/accounts/registration/resend-email/")
     suspend fun resendEmail(@Body() request: ResendEmailRequest): ResendEmailResult
 
-    @POST("/accounts/kakao/login/")
+    @GET("/accounts/user/")
+    suspend fun getUser(): GetUserResult
+
+    @PUT("/accounts/user/")
+    suspend fun updateUser(
+        @Body() request: UpdateUserRequest
+    ): UpdateUserResult
+
+    @DELETE("/accounts/user/{id}")
+    suspend fun deleteUser(
+        @Path("id") id: Int
+    ): Response<Unit>
+
+    @POST("/accounts/kakao/login")
     suspend fun kakaoLogin(@Body() request: SocialLoginRequest): LoginResult
 
     @POST("/accounts/google/login/")

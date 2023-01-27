@@ -43,6 +43,14 @@ data class TaskDTO(
     val created_by: Int,
 )
 
+data class PostDTO(
+    val id: Int,
+    val content: String,
+    val title: String,
+    val author: UserDTO,
+    val comments: List<CommentDTO>,
+    val createdAt: LocalDateTime,
+)
 
 data class ErrorDTO(
     val statusCode: Int?,

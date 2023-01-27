@@ -64,7 +64,17 @@ class UserViewModel(
         }
     }
 
+    suspend fun deleteUser() {
+        try {
+            restService.deleteUser(
+                id = authStorage.authInfo.value?.user!!.id
+            )
+        } catch (e: Exception) {
+            toaster.toastApiError(e)
+        }
+    }
     // login with google account
+
     suspend fun googleLogin(accessToken: String) {
         try {
             Log.d("GoogleLogin", "send idToken to server")
