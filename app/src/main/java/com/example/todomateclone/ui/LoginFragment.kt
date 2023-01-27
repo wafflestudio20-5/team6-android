@@ -60,7 +60,8 @@ class LoginFragment : Fragment() {
                         Log.d("LoginFragment", "Login Succeeded")
                         loadingProgressBar.visibility = View.INVISIBLE
                         launch(Dispatchers.Main) {
-                            navigateToMain()
+                            val action = LoginFragmentDirections.actionLoginFragmentToMainFragment()
+                            findNavController().navigate(action)
                         }
                     }
                 }
@@ -71,9 +72,5 @@ class LoginFragment : Fragment() {
         upButton.setOnClickListener {
             this.findNavController().navigateUp()
         }
-    }
-
-    private fun navigateToMain() {
-        this.findNavController().navigate(R.id.action_global_mainFragment)
     }
 }

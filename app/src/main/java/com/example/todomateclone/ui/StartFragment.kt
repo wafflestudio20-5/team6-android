@@ -189,7 +189,9 @@ class StartFragment : Fragment() {
     }
 
     private fun navigateToMain() {
-        this.findNavController().navigate(R.id.action_global_mainFragment)
+        Log.d("StartFragment", "navigate to nav graph")
+        this.findNavController().navigate(R.id.action_global_nav_graph)
+        Log.d("StartFragment", "navigate is succeeded")
     }
 
     companion object {

@@ -22,6 +22,7 @@ class UserViewModel(
                 response.refresh_token,
                 AuthStorageUserDTO(response.user.id, response.user.email)
             )
+            Log.d("UserViewModel", "authInfo is valid")
         } catch (e: Exception) {
             toaster.toastApiError(e)
         }

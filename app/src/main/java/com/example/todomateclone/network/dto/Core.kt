@@ -11,7 +11,7 @@ data class UserDTO(
     val email: String,
     val nickname: String,
     val detail: String,
-    val image: String
+//    val image: String
 )
 
 data class AuthStorageUserDTO(
@@ -26,13 +26,13 @@ data class CommentDTO(
     val createdAt: LocalDateTime,
 )
 
-data class PostDTO(
+data class DiaryDTO(
     val id: Int,
-    val content: String,
+    val date: String,
     val title: String,
-    val author: UserDTO,
-    val comments: List<CommentDTO>,
-    val createdAt: LocalDateTime,
+    val context: String,
+    val created_by: Int,
+    val nickname: String
 )
 
 data class TaskDTO(

@@ -53,6 +53,11 @@
                 android:id="@+id/email_deepLink"
                 app:uri="https://wafmate.com/fragment/emailauthenticate2301061457/{email}" />
         </fragment>
+        <action
+            android:id="@+id/action_global_nav_graph"
+            app:destination="@id/nav_graph"
+            app:popUpTo="@id/login_graph"
+            app:popUpToInclusive="true"/>
     </navigation>
 
     <fragment
@@ -66,6 +71,9 @@
         <action
             android:id="@+id/action_mainFragment_to_todoListFragment"
             app:destination="@id/todoListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_diaryListFragment"
+            app:destination="@id/diaryListFragment" />
     </fragment>
     <fragment
         android:id="@+id/todoListFragment"
@@ -90,7 +98,7 @@
             android:id="@+id/action_todoAdderFragment_to_todoListFragment"
             app:destination="@id/todoListFragment" />
     </fragment>
-
+    <!-- global action-->
     <action
         android:id="@+id/action_global_login_graph"
         app:destination="@id/login_graph"
@@ -100,6 +108,33 @@
         android:id="@+id/action_global_mainFragment"
         app:destination="@id/mainFragment"
         app:popUpTo="@id/nav_graph"
-        app:popUpToInclusive="false"/>
+        app:popUpToInclusive="true"/>
+    <!-- end -->
+    <fragment
+        android:id="@+id/diaryAdderFragment"
+        android:name="com.example.todomateclone.ui.DiaryAdderFragment"
+        android:label="fragment_diary_adder"
+        tools:layout="@layout/fragment_diary_adder" />
+    <fragment
+        android:id="@+id/diaryListFragment"
+        android:name="com.example.todomateclone.ui.DiaryListFragment"
+        android:label="fragment_diary_list"
+        tools:layout="@layout/fragment_diary_list" >
+        <action
+            android:id="@+id/action_diaryListFragment_to_diaryAdderFragment"
+            app:destination="@id/diaryAdderFragment" />
+        <action
+            android:id="@+id/action_diaryListFragment_to_diaryDetailFragment"
+            app:destination="@id/diaryDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/diaryDetailFragment"
+        android:name="com.example.todomateclone.ui.DiaryDetailFragment"
+        android:label="fragment_diary_detail"
+        tools:layout="@layout/fragment_diary_detail" >
+        <argument
+            android:name="diary_id"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>
