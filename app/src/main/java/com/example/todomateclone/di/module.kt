@@ -69,7 +69,6 @@ val appModule = module {
 
     single<Moshi> {
         Moshi.Builder()
-            .add(LocalDateTimeConverter())
             .add(KotlinJsonAdapterFactory())
             .build()
     }

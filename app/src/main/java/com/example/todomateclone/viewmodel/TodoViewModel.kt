@@ -1,33 +1,90 @@
 package com.example.todomateclone.viewmodel
 
-import android.content.ClipData
 import android.util.Log
 import androidx.lifecycle.*
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.todomateclone.network.RestService
 import com.example.todomateclone.network.dto.CreateTaskRequest
+import com.example.todomateclone.network.dto.TaskDTO
+import com.example.todomateclone.ui.TaskPagingSource
 import com.example.todomateclone.util.Toaster
-import com.kakao.usermgmt.StringSet.tag
-import kotlinx.coroutines.flow.*
+import com.kakao.usermgmt.StringSet.name
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import java.time.LocalDate
+
 
 class TodoViewModel(
     private val restService: RestService,
     private val toaster: Toaster
     ) : ViewModel() {
+    val job = Job()
+
+    fun createPager(date: String): Flow<PagingData<TaskDTO>> {
+        return Pager(PagingConfig(pageSize = 10)) {
+            TaskPagingSource(restService, date)
+        }.flow.cachedIn(viewModelScope)
+    }
 
 
     fun createTodo(name: String, date: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(job) {
             try {
                 restService.createTask(
                     CreateTaskRequest(
                         name = name
                     ), date = date
                 )
-                toaster.toast("Successfully created.")
+                toaster.toast("todo를 추가했습니다. 새로고침해보세요.")
             } catch (e: Exception) {
-                Log.d("TodoViewModel", "here is error")
+                toaster.toastApiError(e)
+            }
+        }
+    }
+
+    fun checkTodo(tid: Int) {
+        viewModelScope.launch {
+            try {
+                val task = restService.checkTask(
+                    tid = tid
+                )
+                if(task.complete) toaster.toast("todo를 완료했습니다.")
+                else toaster.toast("todo를 다시 진행합니다.")
+            } catch (e: Exception) {
+                toaster.toastApiError(e)
+            }
+        }
+    }
+
+    fun deleteTodo(tid: Int) {
+        viewModelScope.launch {
+            try {
+                restService.deleteTask(
+                    tid = tid
+                )
+                toaster.toast("todo를 삭제했습니다.")
+            } catch (e: NullPointerException) {
+
+            } catch (e: Exception) {
+                toaster.toastApiError(e)
+            }
+        }
+    }
+
+    fun delayTodo(tid: Int) {
+        viewModelScope.launch {
+            try {
+                restService.delayTask(
+                    tid = tid
+                )
+                toaster.toast("todo를 하루 미뤘습니다.")
+            } catch (e: NullPointerException) {
+
+            } catch (e: Exception) {
                 toaster.toastApiError(e)
             }
         }

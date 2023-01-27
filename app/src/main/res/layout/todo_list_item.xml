@@ -13,47 +13,64 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
+<!--    android:descendantFocusability="blocksDescendants"-->
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:descendantFocusability="blocksDescendants">
+    android:layout_width="400dp"
+    android:layout_height="40dp"
+    android:layout_gravity="center_horizontal"
+    android:descendantFocusability="blocksDescendants"
+    >
 
     <CheckBox
         android:id="@+id/done_switch"
         android:layout_width="30dp"
-        android:layout_height="0dp"
+        android:layout_height="30dp"
         android:layout_marginStart="20dp"
+        android:buttonTint="#009688"
         android:checked="false"
-        android:scaleX="0.8"
-        android:scaleY="0.8"
-        app:layout_constraintBottom_toBottomOf="@+id/name_text_view"
+
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
         android:id="@+id/name_text_view"
-        android:layout_width="150dp"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:text="hi"
         android:textAlignment="textStart"
-        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/done_switch"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/date_text_view"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:text="2023-01-01"
-        android:textAlignment="textEnd"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ImageButton
+        android:id="@+id/delete_button"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/name_text_view"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#B4B4B4" />
+
+    <ImageButton
+        android:id="@+id/delay_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_delay"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/delete_button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#B4B4B4" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

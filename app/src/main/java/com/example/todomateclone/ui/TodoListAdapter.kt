@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.ClipData
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +14,7 @@ import com.example.todomateclone.network.dto.TaskDTO
 import java.text.SimpleDateFormat
 
 
-class TodoListAdapter(private val onItemClicked1: (TaskDTO) -> Unit) : ListAdapter<TaskDTO, TodoListAdapter.TodoViewHolder>(DiffCallback) {
+class TodoListAdapter(private val onItemClicked: (TaskDTO) -> Unit, private val onItemClicked2: (TaskDTO) -> Unit, private val onItemClicked3: (TaskDTO) -> Unit) : PagingDataAdapter<TaskDTO, TodoListAdapter.TodoViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         return TodoViewHolder(
             TodoListItemBinding.inflate(
@@ -26,21 +27,29 @@ class TodoListAdapter(private val onItemClicked1: (TaskDTO) -> Unit) : ListAdapt
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val current = getItem(position)
-        holder.donebutton.setOnClickListener {
-            onItemClicked1(current)
+        current?.let {
+            holder.donebutton.setOnClickListener {
+                onItemClicked(current)
+            }
+            holder.deletebutton.setOnClickListener {
+                onItemClicked2(current)
+            }
+            holder.delaybutton.setOnClickListener {
+                onItemClicked3(current)
+            }
+            holder.bind(it)
         }
-        holder.bind(current)
     }
 
     class TodoViewHolder(private var binding: TodoListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         val donebutton = binding.doneSwitch
-
+        val deletebutton = binding.deleteButton
+        val delaybutton = binding.delayButton
         fun bind(todo: TaskDTO) {
             binding.apply {
                 nameTextView.text = todo.name
-//                if(todo.done>0) doneSwitch.setChecked(true)
-//                else doneSwitch.setChecked(false)
+                doneSwitch.setChecked(todo.complete)
             }
         }
     }

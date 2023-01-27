@@ -4,9 +4,11 @@ data class CreateTaskRequest(
     val name: String,
 )
 
-data class CreateTaskResponse(
-    val count: Int,
-    val next: String? = null,
-    val previous: String? = null,
-    val results: TaskDTO,
+data class CheckTaskRequest(
+    val uid: String,
 )
+
+//data class CreateTaskResponse(
+//    val result: TaskDTO,
+//)
+//TaskDTO 자체를 Response로 사용

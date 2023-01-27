@@ -81,35 +81,24 @@
         android:label="TodoListFragment"
         tools:layout="@layout/fragment_todo_list">
         <action
-            android:id="@+id/action_todoListFragment_to_todoAdderFragment"
-            app:destination="@id/todoAdderFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            />
+            android:id="@+id/action_todoListFragment_to_diaryjcyFragment"
+            app:destination="@id/diaryjcyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/diaryjcyFragment"
+        android:name="com.example.todomateclone.ui.DiaryJCYFragment"
+        android:label="TodoListFragment"
+        tools:layout="@layout/fragment_todo_list">
+        <action
+            android:id="@+id/action_diaryjcyFragment_to_todoListFragment"
+            app:destination="@id/todoListFragment" />
     </fragment>
     <fragment
         android:id="@+id/todoAdderFragment"
         android:name="com.example.todomateclone.ui.TodoAdderFragment"
         android:label="TodoAdderFragment"
         tools:layout="@layout/fragment_todo_adder">
-        <action
-            android:id="@+id/action_todoAdderFragment_to_todoListFragment"
-            app:destination="@id/todoListFragment" />
     </fragment>
-    <!-- global action-->
-    <action
-        android:id="@+id/action_global_login_graph"
-        app:destination="@id/login_graph"
-        app:popUpTo="@id/nav_graph"
-        app:popUpToInclusive="true"/>
-    <action
-        android:id="@+id/action_global_mainFragment"
-        app:destination="@id/mainFragment"
-        app:popUpTo="@id/nav_graph"
-        app:popUpToInclusive="true"/>
-    <!-- end -->
     <fragment
         android:id="@+id/diaryAdderFragment"
         android:name="com.example.todomateclone.ui.DiaryAdderFragment"
@@ -136,5 +125,18 @@
             android:name="diary_id"
             app:argType="integer" />
     </fragment>
+
+    <!-- global action-->
+    <action
+        android:id="@+id/action_global_login_graph"
+        app:destination="@id/login_graph"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true"/>
+    <action
+        android:id="@+id/action_global_mainFragment"
+        app:destination="@id/mainFragment"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true"/>
+    <!-- end -->
 
 </navigation>
