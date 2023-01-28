@@ -11,15 +11,18 @@ interface RestService {
     @POST("/accounts/login/")
     suspend fun login(@Body() request: LoginRequest): LoginResult
 
-    @POST("/accounts/logout")
+    @POST("/accounts/logout/")
     suspend fun logout(
         @Header("authorization") accessToken: String,
     ): Response<Unit>
 
     @POST("/accounts/registration/")
-    suspend fun signup(@Body() request: SignupRequest)
+    suspend fun signup(@Body() request: SignupRequest): SignupResult
 
-    @POST("/accounts/registration/resend-email/")
+    @POST("/accounts/registration/confirm/")
+    suspend fun signupConfirm(@Body() request: SignUpConfirmRequest): SignUpConfirmResult
+
+    @POST("/accounts/resend-email/")
     suspend fun resendEmail(@Body() request: ResendEmailRequest): ResendEmailResult
 
     @GET("/accounts/user/")
