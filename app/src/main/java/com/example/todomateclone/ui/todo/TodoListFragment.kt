@@ -1,43 +1,42 @@
-package com.example.todomateclone.ui
+package com.example.todomateclone.ui.todo
 
-import android.app.ProgressDialog.show
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todomateclone.databinding.FragmentTodoListBinding
 import com.example.todomateclone.network.dto.TaskDTO
+import com.example.todomateclone.ui.todo.TodoFixerFragment
+import com.example.todomateclone.ui.TodoListAdapter
 import com.example.todomateclone.viewmodel.TodoViewModel
-import com.google.android.gms.tasks.Task
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import android.app.ProgressDialog.show
 
-class TodoListFragment : Fragment(), OnDismissListener {
+class TodoListFragment : Fragment(), OnDismissListener, OnDismissListenerAdder {
     private lateinit var binding: FragmentTodoListBinding
 
     private val viewModel: TodoViewModel by viewModel()
     lateinit var adapter: TodoListAdapter
 
+    override fun onDismiss() {
+        refreshTask()
+    }
+
     override fun onDismissFix(task: TaskDTO) {
-        //TODO: not yet implemented
+        val bottomSheetDialog = TodoAdderFragment(binding.dateTextView.text.toString(), task)
+        bottomSheetDialog.setOnDismissListenerAdder(this)
+        bottomSheetDialog.show(requireFragmentManager(), "BottomSheetDialog")
         refreshTask()
     }
 
     override fun onDismissDelay(task: TaskDTO) {
-        viewModel.deleteTodo(task.id)
+        viewModel.delayTodo(task.id)
         refreshTask()
     }
 
@@ -45,6 +44,7 @@ class TodoListFragment : Fragment(), OnDismissListener {
         viewModel.deleteTodo(task.id)
         refreshTask()
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -57,9 +57,8 @@ class TodoListFragment : Fragment(), OnDismissListener {
         super.onViewCreated(view, savedInstanceState)
         adapter = TodoListAdapter(
             { task -> checkFinal(task) },
-            { task -> deleteFinal(task) },
-            { task -> delayFinal(task) },
-            { task -> callTodoFixer(task) }
+            { task -> callTodoFixer(task)}
+
         )
         binding.recyclerView.adapter = adapter
         val layoutManager = LinearLayoutManager(this.context)
@@ -91,18 +90,13 @@ class TodoListFragment : Fragment(), OnDismissListener {
 
                 dateTextView.text = String.format("%s-%s-%s", yearstr, monthstr, daystr)
 
-//                viewLifecycleOwner.lifecycleScope.launch {
-//                    val pager=viewModel.createPager(binding.dateTextView.text.toString())
-//                    pager.collect { pagingData ->
-//                        adapter.submitData(pagingData)
-//                    }
-//                }
                 refreshTask()
             }
         }
 
         binding.floatingActionButton.setOnClickListener {
-            val bottomSheetDialog = TodoAdderFragment(binding.dateTextView.text.toString())
+            val bottomSheetDialog = TodoAdderFragment(binding.dateTextView.text.toString(), null)
+            bottomSheetDialog.setOnDismissListenerAdder(this)
             bottomSheetDialog.show(requireFragmentManager(), "BottomSheetDialog")
         }
 
@@ -128,20 +122,11 @@ class TodoListFragment : Fragment(), OnDismissListener {
         viewModel.checkTodo(task.id)
         refreshTask()
     }
-
-    fun deleteFinal(task: TaskDTO) {
-        viewModel.deleteTodo(task.id)
-        refreshTask()
-    }
-
-    fun delayFinal(task: TaskDTO) {
-        viewModel.deleteTodo(task.id)
-        refreshTask()
-    }
-
+//
     fun callTodoFixer(task: TaskDTO) {
         val bottomSheetDialog = TodoFixerFragment(task)
         bottomSheetDialog.setOnDismissListener(this)
         bottomSheetDialog.show(requireFragmentManager(), "BottomSheetDialog")
     }
+
 }

@@ -1,21 +1,20 @@
 package com.example.todomateclone.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.*
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.todomateclone.network.RestService
+import com.example.todomateclone.network.dto.ChangeTaskRequest
 import com.example.todomateclone.network.dto.CreateTaskRequest
 import com.example.todomateclone.network.dto.TaskDTO
-import com.example.todomateclone.ui.TaskPagingSource
+import com.example.todomateclone.ui.todo.TaskPagingSource
 import com.example.todomateclone.util.Toaster
-import com.kakao.usermgmt.StringSet.name
+import com.kakao.usermgmt.StringSet
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 
 
 class TodoViewModel(
@@ -39,7 +38,7 @@ class TodoViewModel(
                         name = name
                     ), date = date
                 )
-                toaster.toast("todo를 추가했습니다. 새로고침해보세요.")
+                toaster.toast("todo를 추가했습니다.")
             } catch (e: Exception) {
                 toaster.toastApiError(e)
             }
@@ -68,7 +67,7 @@ class TodoViewModel(
                 )
                 toaster.toast("todo를 삭제했습니다.")
             } catch (e: NullPointerException) {
-
+                toaster.toast("todo를 삭제했습니다.")
             } catch (e: Exception) {
                 toaster.toastApiError(e)
             }
@@ -84,6 +83,22 @@ class TodoViewModel(
                 toaster.toast("todo를 하루 미뤘습니다.")
             } catch (e: NullPointerException) {
 
+            } catch (e: Exception) {
+                toaster.toastApiError(e)
+            }
+        }
+    }
+
+    fun changeTodo(name: String, tid: Int) {
+        viewModelScope.launch {
+            try {
+                restService.changeTask(
+                    ChangeTaskRequest(
+                        name = name
+                    ),
+                    tid = tid
+                )
+                toaster.toast("todo를 수정했습니다.")
             } catch (e: Exception) {
                 toaster.toastApiError(e)
             }

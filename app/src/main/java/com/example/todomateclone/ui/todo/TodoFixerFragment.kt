@@ -1,5 +1,6 @@
-package com.example.todomateclone.ui
+package com.example.todomateclone.ui.todo
 
+import android.content.ClipData
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -21,13 +23,11 @@ import java.time.LocalDate
 import androidx.lifecycle.viewModelScope
 import com.example.todomateclone.databinding.FragmentTodoFixerBinding
 import com.example.todomateclone.network.dto.TaskDTO
+import com.example.todomateclone.ui.TodoListAdapter
 
 
 class TodoFixerFragment(val task: TaskDTO) : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentTodoFixerBinding
-
-    private val viewModel: TodoViewModel by viewModel()
-//    private val navigationArgs: TodoAdderFragmentArgs by navArgs()
 
     private var listener: OnDismissListener? = null
 
@@ -43,9 +43,11 @@ class TodoFixerFragment(val task: TaskDTO) : BottomSheetDialogFragment() {
             listener?.onDismissFix(task)
         }
         binding.deleteButton.setOnClickListener{
+            dismiss()
             listener?.onDismissDelete(task)
         }
         binding.delayButton.setOnClickListener{
+            dismiss()
             listener?.onDismissDelay(task)
         }
     }

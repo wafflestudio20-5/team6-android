@@ -1,41 +1,53 @@
 package com.example.todomateclone.network
 
 import com.example.todomateclone.network.dto.*
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import retrofit2.http.*
 import java.time.LocalDate
 
 interface RestService {
+    // Login, SignUp, Social Login API
     @POST("/accounts/login/")
     suspend fun login(@Body() request: LoginRequest): LoginResult
 
-    @POST("/accounts/registration/")
-    suspend fun signup(@Body() request: SignupRequest)
+    @POST("/accounts/logout/")
+    suspend fun logout(
+        @Header("authorization") accessToken: String,
+    ): Response<Unit>
 
-    @POST("/accounts/registration/resend-email/")
+    @POST("/accounts/registration/")
+    suspend fun signup(@Body() request: SignupRequest): SignupResult
+
+    @POST("/accounts/registration/confirm/")
+    suspend fun signupConfirm(@Body() request: SignUpConfirmRequest): SignUpConfirmResult
+
+    @POST("/accounts/resend-email/")
     suspend fun resendEmail(@Body() request: ResendEmailRequest): ResendEmailResult
 
-    @POST("/accounts/kakao/login/")
+    @GET("/accounts/user/")
+    suspend fun getUser(): GetUserResult
+
+    @PUT("/accounts/user/")
+    suspend fun updateUser(
+        @Body() request: UpdateUserRequest
+    ): UpdateUserResult
+
+    @DELETE("/accounts/user/{id}")
+    suspend fun deleteUser(
+        @Path("id") id: Int
+    ): Response<Unit>
+
+    @POST("/accounts/kakao/login")
     suspend fun kakaoLogin(@Body() request: SocialLoginRequest): LoginResult
 
     @POST("/accounts/google/login/")
     suspend fun googleLogin(@Body() request: SocialLoginRequest): LoginResult
 
-    // Simple CMS 과제에서 사용되었던 API 입니다.
-//    @GET("/post/{postId}")
-//    suspend fun getPost(@Path("postId") postId: Int): GetPostResponse
-//
-//    @GET("/post")
-//    suspend fun getAllPostPaged(
-//        @Query("cursor") cursor: Int? = null,
-//        @Query("count") count: Int = 10
-//    ): GetAllPostResponse
-//
-
-
     @POST("/task/list/{date}/")
     suspend fun createTask(@Body() request: CreateTaskRequest, @Path("date") date: String): TaskDTO
 
+    // Task API
     @GET("/task/list/{date}/")
     suspend fun getTasksByDateFirstPage(@Path("date") date: String): GetTasksByDateResponse
 
@@ -51,20 +63,35 @@ interface RestService {
     @DELETE("/task/detail/{tid}/")
     suspend fun deleteTask(@Path("tid") tid: Int): TaskDTO?
 
-    @GET("/task/detail/{tid}/delay")
+    @GET("/task/detail/{tid}/delay/")
     suspend fun delayTask(@Path("tid") tid: Int): TaskDTO?
 
+    @PUT("/task/detail/{tid}/name/")
+    suspend fun changeTask(@Body() request: ChangeTaskRequest, @Path("tid") tid: Int): TaskDTO?
 
-//    @POST("/post/{postId}/comment")
-//    suspend fun createComment(
-//        @Body() request: CreateCommentRequest,
-//        @Path("postId") postId: Int
-//    ): CreateCommentResponse
-//
-    // update on deletion
-//    @DELETE("/post/{postId}")
-//    suspend fun deletePost(@Path("postId") postId: Int): Response<Unit>
-
-//    @DELETE("/post/comment/{commentId}")
-//    suspend fun deleteComment(@Path("commentId") commentId: Int): Response<Unit>
+    // Diary API
+    // 해당 사용자의 모든 일기 불러오기
+    @GET("/diary/mydiary/")
+    suspend fun getDiaryList(): GetDiaryListResponse
+    // 해당 날짜의 다이어리 불러오기
+    @GET("/diary/mydiary/{date}/")
+    suspend fun getDateDiary(@Path("date") date: String): GetDateDiaryResponse
+    // 해당 날짜에 일기 등록하기
+    @POST("/diary/mydiary/{date}/create/")
+    suspend fun createDateDiary(@Body() request: CreateDiaryRequest, @Path("date") date: String): DiaryDTO
+    // 해당 날짜의 일기 수정하기
+    @PATCH("/diary/mydiary/{date}/update/")
+    suspend fun updateDateDiary(@Body() request: UpdateDiaryRequest, @Path("date") date: String): DiaryDTO
+    // 해당 날짜의 일기 삭제하기
+    @DELETE("/diary/mydiary/{date}/update/")
+    suspend fun deleteDateDiary(@Path("date") date: String): Response<Unit>
+    // 해당 id의 일기 불러오기
+    @GET("/diary/watch/{did}/")
+    suspend fun getIdDiary(@Path("did") did: Int): DiaryDTO
+    // 해당 id의 일기 수정하기
+    @PATCH("/diary/watch/{did}/")
+    suspend fun updateIdDiary(@Body() request: UpdateDiaryRequest, @Path("did") did: Int): DiaryDTO
+    // 해당 id의 일기 삭제하기
+    @DELETE("/diary/watch/{did}/")
+    suspend fun deleteIdDiary(@Path("did") did: Int): Response<Unit>
 }

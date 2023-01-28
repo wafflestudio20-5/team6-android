@@ -8,6 +8,10 @@ data class CheckTaskRequest(
     val uid: String,
 )
 
+data class ChangeTaskRequest(
+    val name: String,
+)
+
 //data class CreateTaskResponse(
 //    val result: TaskDTO,
 //)

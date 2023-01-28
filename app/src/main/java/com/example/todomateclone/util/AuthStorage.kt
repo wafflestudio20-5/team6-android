@@ -30,7 +30,6 @@ class AuthStorage(
         )
 
     val authInfo: StateFlow<AuthInfo?> = _authInfo
-    val tokenValid = sharedPref.getString(AccessTokenKey, "")
 
     fun setAuthInfo(accessToken: String, refreshToken: String, user: AuthStorageUserDTO) {
         _authInfo.value = AuthInfo(accessToken, refreshToken, user)

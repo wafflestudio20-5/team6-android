@@ -1,5 +1,7 @@
 package com.example.todomateclone.network.dto
 
+import retrofit2.Response
+
 data class LoginRequest(
     val email: String,
     val password: String

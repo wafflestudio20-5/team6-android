@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">투두뚜두</string>
+    <string name="app_name">waffle mate</string>
     <string name="login">로그인</string>
     <string name="logout">로그아웃</string>
     <string name="guest_login">게스트로 시작</string>
@@ -15,8 +15,17 @@
         <item>다른기기에서 로그인 가능합니다.</item>
         <item>다른 사용자들과 함께할 수 있습니다.</item>
     </string>
-    <string name="explanation_email_authenticate">인증 이메일을 보냈습니다. 이메일 링크를 누르고, 확인 버튼을 눌러주세요. 만약, 이메일이 오지 않는다면, 이메일 주소가 올바른지 확인하고, 재전송 버튼을 눌러주세요.</string>
+    <string name="email_auth_code">인증 번호 6자리</string>
+    <string name="explanation_email_authenticate">인증 이메일을 보냈습니다. 인증 번호 6자리를 입력해주세요. 만약, 이메일이 오지 않는다면, 이메일 주소가 올바른지 확인하고, 재전송 버튼을 눌러주세요.</string>
     <string name="verified">확인</string>
+    <string name="account">계정</string>
+    <string name="linked_email">연동된 이메일</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile">프로필</string>
+    <string name="change_email">이메일 변경</string>
+    <string name="change_password">비밀번호 재설정</string>
+    <string name="delete_account">계정 삭제하기</string>
     <string name="kakao_app_key">fae7bb96d4999fa3bf475728a31c6711</string>
     <string name="google_server_client_id">189776577344-db1p2bqio25foooglemunepjku3nblf4.apps.googleusercontent.com</string>
     <!-- app bar string resource -->
@@ -27,6 +36,16 @@
     <string name="user_page">계정페이지</string>
     <string name="todo_page">할일 목록</string>
     <string name="diary_page">일기</string>
+    <!-- diary string resource-->
+    <string name="diary_title">일기 제목입니다</string>
+    <string name="diary_user">사용자</string>
+    <string name="up_button">navigate up</string>
+    <string name="diary_list">일기장</string>
+    <string name="diary_detail">일기</string>
+    <string name="diary_adder">일기 작성</string>
+    <string name="add_new_diary">일기 목록</string>
+    <string name="diary_hint_title">제목</string>
+    <string name="diary_hint_content">내용을 입력하세요</string>
 
     <string name="write_name_hint">할 일을 입력하세요</string>
     <string name="write_date_hint">날짜를 입력하세요</string>

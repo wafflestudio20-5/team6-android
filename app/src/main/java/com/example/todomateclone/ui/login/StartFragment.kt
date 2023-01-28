@@ -1,4 +1,4 @@
-package com.example.todomateclone.ui
+package com.example.todomateclone.ui.login
 
 import android.content.Context
 import android.content.Intent
@@ -8,13 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.todomateclone.MainActivity
 import com.example.todomateclone.R
 import com.example.todomateclone.databinding.FragmentStartBinding
-import com.example.todomateclone.network.dto.AuthStorageUserDTO
-import com.example.todomateclone.util.AuthStorage
 import com.example.todomateclone.viewmodel.UserViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -29,7 +26,6 @@ import com.kakao.sdk.user.UserApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -189,8 +185,9 @@ class StartFragment : Fragment() {
     }
 
     private fun navigateToMain() {
-        val action = StartFragmentDirections.actionStartFragmentToMainFragment()
-        this.findNavController().navigate(action)
+        Log.d("StartFragment", "navigate to nav graph")
+        this.findNavController().navigate(R.id.action_global_nav_graph)
+        Log.d("StartFragment", "navigate is succeeded")
     }
 
     companion object {

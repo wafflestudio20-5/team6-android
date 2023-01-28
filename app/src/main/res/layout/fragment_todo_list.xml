@@ -37,16 +37,18 @@
         android:textSize="14sp"
         android:text="yyyy-MM-dd"
         app:layout_constraintStart_toStartOf="@id/calendarView"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+        app:layout_constraintBottom_toBottomOf="@+id/calendarView" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:contentDescription="@string/add_new_todo"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
         android:backgroundTint="@color/teal_200"
+        android:contentDescription="@string/add_new_todo"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
         android:src="@android:drawable/ic_input_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,11 +86,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
+
         android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@id/floatingActionButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateTextView"
-        app:layout_constraintBottom_toTopOf="@id/floatingActionButton"
+        app:layout_constraintVertical_bias="1.0"
         tools:listitem="@layout/todo_list_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
