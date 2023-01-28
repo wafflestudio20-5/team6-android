@@ -22,6 +22,7 @@ class UserViewModel(
                 response.refresh_token,
                 AuthStorageUserDTO(response.user.id, response.user.email)
             )
+            Log.d("UserViewModel", "authInfo is valid")
         } catch (e: Exception) {
             toaster.toastApiError(e)
         }
@@ -63,7 +64,17 @@ class UserViewModel(
         }
     }
 
+    suspend fun deleteUser() {
+        try {
+            restService.deleteUser(
+                id = authStorage.authInfo.value?.user!!.id
+            )
+        } catch (e: Exception) {
+            toaster.toastApiError(e)
+        }
+    }
     // login with google account
+
     suspend fun googleLogin(accessToken: String) {
         try {
             Log.d("GoogleLogin", "send idToken to server")

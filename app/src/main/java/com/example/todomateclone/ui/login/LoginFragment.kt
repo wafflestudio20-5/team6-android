@@ -1,4 +1,4 @@
-package com.example.todomateclone.ui
+package com.example.todomateclone.ui.login
 
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.todomateclone.databinding.FragmentLoginBinding
 import com.example.todomateclone.util.AuthStorage
-import com.example.todomateclone.util.Toaster
 import com.example.todomateclone.viewmodel.UserViewModel
 import kotlinx.coroutines.*
 import org.koin.android.ext.android.inject
@@ -59,7 +58,8 @@ class LoginFragment : Fragment() {
                         Log.d("LoginFragment", "Login Succeeded")
                         loadingProgressBar.visibility = View.INVISIBLE
                         launch(Dispatchers.Main) {
-                            navigateToMain()
+                            val action = LoginFragmentDirections.actionLoginFragmentToMainFragment()
+                            findNavController().navigate(action)
                         }
                     }
                 }
@@ -70,10 +70,5 @@ class LoginFragment : Fragment() {
         upButton.setOnClickListener {
             this.findNavController().navigateUp()
         }
-    }
-
-    private fun navigateToMain() {
-        val action = LoginFragmentDirections.actionLoginFragmentToMainFragment()
-        this.findNavController().navigate(action)
     }
 }

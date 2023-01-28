@@ -36,15 +36,8 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
-        val navGraph = navHostFragment.navController.navInflater.inflate(R.navigation.nav_graph)
+        val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
+        navController.graph = navGraph
 
-        // auto login
-        if (authStorage.tokenValid == null) {
-            navGraph.setStartDestination(R.id.startFragment)
-            navController.graph = navGraph
-        } else {
-            navGraph.setStartDestination(R.id.mainFragment)
-            navController.graph = navGraph
-        }
     }
 }

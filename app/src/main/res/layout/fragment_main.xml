@@ -44,6 +44,7 @@
             android:backgroundTint="@color/black"
             android:layout_gravity="center_horizontal"
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -53,5 +54,7 @@
         android:layout_gravity="end"
         app:headerLayout="@layout/layout_navigation_header"
         app:menu="@menu/navigation_menu" />
+
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

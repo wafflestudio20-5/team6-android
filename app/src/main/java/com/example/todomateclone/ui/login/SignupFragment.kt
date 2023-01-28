@@ -1,4 +1,4 @@
-package com.example.todomateclone.ui
+package com.example.todomateclone.ui.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
