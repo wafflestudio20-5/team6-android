@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.todomateclone.databinding.FragmentEmailAuthenticateBinding
@@ -37,14 +38,20 @@ class EmailAuthenticateFragment : Fragment() {
         binding.email.setText(navigationArgs.email)
 
         val email = binding.email
-        val signupButton = binding.signupButton
+        val authCode = binding.authCode
+        val confirmButton = binding.confirmButton
         val resendButton = binding.emailResend
         val upButton = binding.upButton
 
-        // if signupButton is clicked, navigate to login fragment
-        signupButton.setOnClickListener {
-            val action = EmailAuthenticateFragmentDirections.actionEmailAuthenticateFragmentToLoginFragment()
-            this.findNavController().navigate(action)
+        // if confirmButton is clicked, navigate to login fragment
+        confirmButton.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                userViewModel.confirmCode(email.text.toString(), authCode.text.toString())
+                launch(Dispatchers.Main) {
+                    val action = EmailAuthenticateFragmentDirections.actionEmailAuthenticateFragmentToLoginFragment()
+                    findNavController().navigate(action)
+                }
+            }
         }
 
         // if resendButton is clicked, resend email authentication link to user email

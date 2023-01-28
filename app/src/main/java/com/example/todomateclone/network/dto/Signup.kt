@@ -6,14 +6,23 @@ data class SignupRequest(
     val password2: String,
 )
 
-//data class SignupResult(
-//    val response: Boolean = true
-//)
+data class SignupResult(
+    val detail: String
+)
+
+data class SignUpConfirmRequest(
+    val email: String,
+    val code: String
+)
+
+data class SignUpConfirmResult(
+    val message: String
+)
 
 data class ResendEmailRequest(
     val email: String,
 )
 
 data class ResendEmailResult(
-    val detail: String = "ok"
+    val detail: String
 )

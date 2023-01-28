@@ -41,6 +41,14 @@ class UserViewModel(
         }
     }
 
+    suspend fun confirmCode(email: String, code: String) {
+        try {
+            restService.signupConfirm(SignUpConfirmRequest(email, code))
+        } catch (e: Exception) {
+            toaster.toastApiError(e)
+        }
+    }
+
     suspend fun signup(email: String, password1: String, password2: String){
         try {
             restService.signup(SignupRequest(email, password1, password2))
