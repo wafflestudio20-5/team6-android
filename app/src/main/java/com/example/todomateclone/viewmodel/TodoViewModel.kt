@@ -6,10 +6,12 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.todomateclone.network.RestService
+import com.example.todomateclone.network.dto.ChangeTaskRequest
 import com.example.todomateclone.network.dto.CreateTaskRequest
 import com.example.todomateclone.network.dto.TaskDTO
 import com.example.todomateclone.ui.todo.TaskPagingSource
 import com.example.todomateclone.util.Toaster
+import com.kakao.usermgmt.StringSet
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -36,7 +38,7 @@ class TodoViewModel(
                         name = name
                     ), date = date
                 )
-                toaster.toast("todo를 추가했습니다. 새로고침해보세요.")
+                toaster.toast("todo를 추가했습니다.")
             } catch (e: Exception) {
                 toaster.toastApiError(e)
             }
@@ -65,7 +67,7 @@ class TodoViewModel(
                 )
                 toaster.toast("todo를 삭제했습니다.")
             } catch (e: NullPointerException) {
-
+                toaster.toast("todo를 삭제했습니다.")
             } catch (e: Exception) {
                 toaster.toastApiError(e)
             }
@@ -87,8 +89,20 @@ class TodoViewModel(
         }
     }
 
-    fun getTodoList() {
-
+    fun changeTodo(name: String, tid: Int) {
+        viewModelScope.launch {
+            try {
+                restService.changeTask(
+                    ChangeTaskRequest(
+                        name = name
+                    ),
+                    tid = tid
+                )
+                toaster.toast("todo를 수정했습니다.")
+            } catch (e: Exception) {
+                toaster.toastApiError(e)
+            }
+        }
     }
 
 //    private fun getUpdatedTodoEntry(id: Long, title: String, content: String, done: Int): Todo {
