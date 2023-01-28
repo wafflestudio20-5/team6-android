@@ -25,12 +25,26 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import android.app.ProgressDialog.show
 
-class TodoListFragment : Fragment() {
+class TodoListFragment : Fragment(), OnDismissListener {
     private lateinit var binding: FragmentTodoListBinding
 
     private val viewModel: TodoViewModel by viewModel()
     lateinit var adapter: TodoListAdapter
 
+    override fun onDismissFix(task: TaskDTO) {
+        //TODO: not yet implemented
+        refreshTask()
+    }
+
+    override fun onDismissDelay(task: TaskDTO) {
+        viewModel.deleteTodo(task.id)
+        refreshTask()
+    }
+
+    override fun onDismissDelete(task: TaskDTO) {
+        viewModel.deleteTodo(task.id)
+        refreshTask()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -44,11 +58,13 @@ class TodoListFragment : Fragment() {
         adapter = TodoListAdapter(
             { task -> checkFinal(task) },
             { task -> deleteFinal(task) },
-            { task -> delayFinal(task) }
+            { task -> delayFinal(task) },
+            { task -> callTodoFixer(task) }
         )
         binding.recyclerView.adapter = adapter
         val layoutManager = LinearLayoutManager(this.context)
         binding.recyclerView.layoutManager = layoutManager
+        binding.recyclerView.setHasFixedSize(true)
 
 
         val todaysdate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
@@ -119,7 +135,13 @@ class TodoListFragment : Fragment() {
     }
 
     fun delayFinal(task: TaskDTO) {
-        viewModel.delayTodo(task.id)
+        viewModel.deleteTodo(task.id)
         refreshTask()
+    }
+
+    fun callTodoFixer(task: TaskDTO) {
+        val bottomSheetDialog = TodoFixerFragment(task)
+        bottomSheetDialog.setOnDismissListener(this)
+        bottomSheetDialog.show(requireFragmentManager(), "BottomSheetDialog")
     }
 }

@@ -19,20 +19,34 @@ import kotlinx.coroutines.Job
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalDate
 import androidx.lifecycle.viewModelScope
+import com.example.todomateclone.databinding.FragmentTodoFixerBinding
+import com.example.todomateclone.network.dto.TaskDTO
 
 
-class TodoAdderFragment(val date: String) : BottomSheetDialogFragment() {
-    private lateinit var binding: FragmentTodoAdderBinding
+class TodoFixerFragment(val task: TaskDTO) : BottomSheetDialogFragment() {
+    private lateinit var binding: FragmentTodoFixerBinding
 
     private val viewModel: TodoViewModel by viewModel()
 //    private val navigationArgs: TodoAdderFragmentArgs by navArgs()
 
+    private var listener: OnDismissListener? = null
+
+    fun setOnDismissListener(listener: OnDismissListener) {
+        this.listener = listener
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.submitButton.setOnClickListener {
-            viewModel.createTodo(binding.writeName.text.toString(), date)
+        binding.fixButton.setOnClickListener {
             dismiss()
+            listener?.onDismissFix(task)
+        }
+        binding.deleteButton.setOnClickListener{
+            listener?.onDismissDelete(task)
+        }
+        binding.delayButton.setOnClickListener{
+            listener?.onDismissDelay(task)
         }
     }
 
@@ -40,10 +54,15 @@ class TodoAdderFragment(val date: String) : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        binding = FragmentTodoAdderBinding.inflate(inflater, container, false)
+        binding = FragmentTodoFixerBinding.inflate(inflater, container, false)
         return binding.root
     }
-
 }
 
 
+interface OnDismissListener {
+    fun onDismissFix(task: TaskDTO)
+    fun onDismissDelete(task: TaskDTO)
+    fun onDismissDelay(task: TaskDTO)
+
+}
