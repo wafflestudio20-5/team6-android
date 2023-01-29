@@ -61,7 +61,7 @@ class UserViewModel(
     suspend fun kakaoLogin(accessToken: String) {
         try {
             Log.d("KakaoLogin", "send idToken to server")
-            val response = restService.kakaoLogin(SocialLoginRequest(accessToken))
+            val response = restService.kakaoLogin(KakaoLoginRequest(accessToken))
             authStorage.setAuthInfo(
                 response.access_token,
                 response.refresh_token,
@@ -81,12 +81,12 @@ class UserViewModel(
             toaster.toastApiError(e)
         }
     }
-    // login with google account
 
-    suspend fun googleLogin(accessToken: String) {
+    // login with google account
+    suspend fun googleLogin(idToken: String) {
         try {
             Log.d("GoogleLogin", "send idToken to server")
-            val response = restService.googleLogin(SocialLoginRequest(accessToken))
+            val response = restService.googleLogin(GoogleLoginRequest(access_token = idToken))
             authStorage.setAuthInfo(
                 response.access_token,
                 response.refresh_token,

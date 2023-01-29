@@ -13,7 +13,13 @@ data class LoginResult(
     val user: UserDTO
 )
 
-data class SocialLoginRequest(
+data class KakaoLoginRequest(
     val access_token: String,
+    val code: String = ""
+)
+
+data class GoogleLoginRequest(
+    val id_token: String = "",
+    val access_token: String = "",
     val code: String = ""
 )

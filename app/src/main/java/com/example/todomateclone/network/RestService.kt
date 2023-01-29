@@ -38,11 +38,11 @@ interface RestService {
         @Path("id") id: Int
     ): Response<Unit>
 
-    @POST("/accounts/kakao/login")
-    suspend fun kakaoLogin(@Body() request: SocialLoginRequest): LoginResult
+    @POST("/accounts/kakao/login/")
+    suspend fun kakaoLogin(@Body() request: KakaoLoginRequest): LoginResult
 
     @POST("/accounts/google/login/")
-    suspend fun googleLogin(@Body() request: SocialLoginRequest): LoginResult
+    suspend fun googleLogin(@Body() request: GoogleLoginRequest): LoginResult
 
     @POST("/task/list/{date}/")
     suspend fun createTask(@Body() request: CreateTaskRequest, @Path("date") date: String): TaskDTO

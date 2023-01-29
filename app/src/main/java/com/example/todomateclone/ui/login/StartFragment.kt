@@ -1,5 +1,6 @@
 package com.example.todomateclone.ui.login
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.todomateclone.MainActivity
@@ -18,6 +20,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.gms.tasks.Task
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
@@ -61,6 +66,8 @@ class StartFragment : Fragment() {
         val signUpText = binding.signUpText
         val kakaoButton = binding.kakaoButton
         val googleButton = binding.googleLoginButton
+        val googleLogoutButton = binding.googleLogoutButton
+        
         googleButton.setSize(SignInButton.SIZE_WIDE)
 
         loginButton.setOnClickListener {
@@ -84,8 +91,13 @@ class StartFragment : Fragment() {
         googleButton.setOnClickListener {
             googleLogin()
         }
+
+        googleLogoutButton.setOnClickListener {
+            googleRevokeAccess()
+        }
     }
 
+    // 카카오 로그인
     private fun kakaoLogin() {
         // 카카오톡으로 로그인 할 수 없어 카카오계정으로 로그인할 경우 사용됨
         lateinit var kakaoToken: OAuthToken
@@ -135,37 +147,39 @@ class StartFragment : Fragment() {
         }
     }
 
+    // 구글 로그인
+    private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
+            Log.d("GoogleLogin", "google sign in task is completed")
+            handleSignInResult(task)
+        }
+    }
+
     private fun googleLogin() {
         CoroutineScope(Dispatchers.IO).launch {
+            //사용자의 ID, 이메일 주소 및 기본정보를 요청하도록 로그인 구성
+            //프로파일링 합니다. ID 및 기본 프로파일은 DEFAULT_SIGN_IN에 포함됩니다.
+            //추가로 요청해야하는 정보는 requestScopes를 지정하여 요청함. 꼭 필요한 것들만 요청하도록 한다.
             val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.google_server_client_id))
                 .requestEmail()
                 .build()
             val googleSignInClient = GoogleSignIn.getClient(mainActivity, gso)
             val signInIntent: Intent = googleSignInClient.signInIntent
-            startActivityForResult(signInIntent, RC_SIGN_IN)
+            resultLauncher.launch(signInIntent)
             Log.d("GoogleLogin", "showing google login page")
-        }
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
-            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
-            handleSignInResult(task)
         }
     }
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account: GoogleSignInAccount = completedTask.getResult(ApiException::class.java)
-            val idToken: String = account.idToken!!
+            val idToken: String = account.idToken.toString()
+            val googleTokenAuth: String = account.serverAuthCode.toString()
             Log.d("GoogleLogin", "get idToken: ${account.idToken}")
+            Log.d("GoogleLogin", "get authCode: ${account.serverAuthCode}")
 
             // send ID Token to server and validate
             CoroutineScope(Dispatchers.IO).launch {
@@ -184,15 +198,37 @@ class StartFragment : Fragment() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        // Check for existing Google Sign In account, if the user is already signed in
+        // the GoogleSignInAccount will be non-null.
+        val account: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(mainActivity)
+        if (account != null) {
+            Log.d("GoogleLogin", "already logged in")
+        } else {
+            Log.d("GoogleLogin", "not yet logged in")
+        }
+    }
+
+    // 구글 계정 연동 해제
+    private fun googleRevokeAccess() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.google_server_client_id))
+                .requestEmail()
+                .build()
+
+            val googleSignInClient = GoogleSignIn.getClient(mainActivity, gso)
+
+            googleSignInClient.revokeAccess()
+                .addOnCompleteListener(mainActivity) {
+                    Log.d("GoogleLogin", "Revoked")
+                }
+        }
+    }
+
     private fun navigateToMain() {
-        Log.d("StartFragment", "navigate to nav graph")
         this.findNavController().navigate(R.id.action_global_nav_graph)
-        Log.d("StartFragment", "navigate is succeeded")
     }
-
-    companion object {
-        const val RC_SIGN_IN = 0
-    }
-
 }
 

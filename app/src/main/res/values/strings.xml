@@ -20,6 +20,7 @@
     <string name="verified">확인</string>
     <string name="account">계정</string>
     <string name="linked_email">연동된 이메일</string>
+    <string name="google_revoke">Google 계정 연동 해제</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile">프로필</string>
