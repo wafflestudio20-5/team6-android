@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todomateclone.databinding.FragmentFollowListBinding
+import com.example.todomateclone.ui.login.StartFragmentDirections
 import com.example.todomateclone.viewmodel.FollowViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -59,6 +60,8 @@ class FollowListFragment : Fragment() {
 
         forwardButton.setOnClickListener {
             // 팔로우 탐색하는 곳으로 가는 코드
+            val action = FollowListFragmentDirections.actionFollowListFragmentToCheckFollowFragment()
+            this.findNavController().navigate(action)
         }
 
     }

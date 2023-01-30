@@ -183,7 +183,16 @@
         android:id="@+id/followListFragment"
         android:name="com.example.todomateclone.ui.follow.FollowListFragment"
         android:label="fragment_follow_list"
-        tools:layout="@layout/fragment_follow_list" />
+        tools:layout="@layout/fragment_follow_list" >
+        <action
+            android:id="@+id/action_followListFragment_to_checkFollowFragment"
+            app:destination="@id/checkFollowFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkFollowFragment"
+        android:name="com.example.todomateclone.ui.follow.CheckFollowFragment"
+        android:label="CheckFollowFragment"
+        tools:layout="@layout/fragment_check_follow"/>
     <!-- end -->
 
 </navigation>
