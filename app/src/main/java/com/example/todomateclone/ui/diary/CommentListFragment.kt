@@ -2,18 +2,25 @@ package com.example.todomateclone.ui.diary
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import androidx.fragment.app.setFragmentResultListener
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.todomateclone.MainActivity
 import com.example.todomateclone.databinding.FragmentCommentListBinding
 import com.example.todomateclone.viewmodel.CommentViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,6 +32,16 @@ class CommentListFragment : Fragment() {
     private val navigationArgs: CommentListFragmentArgs by navArgs()
     private val commentViewModel: CommentViewModel by viewModel()
 
+    // 1. Context를 할당할 변수를 프로퍼티로 선언(어디서든 사용할 수 있게)
+    lateinit var mainActivity: MainActivity
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        // 2. Context를 액티비티로 형변환해서 할당
+        mainActivity = context as MainActivity
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,21 +52,25 @@ class CommentListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        // view in UI
         val upButton = binding.upButton
         val inputComment = binding.inputComment
+
         val adapter = CommentListAdapter(
             onItemClicked = {
 
             },
             onItemLongClicked = {
+                val bottomSheet = CommentBottomSheetFragment(it.id, navigationArgs.diaryId)
+                bottomSheet.show(childFragmentManager, bottomSheet.tag)
                 true
             }
         )
         binding.recyclerview.adapter = adapter
         binding.recyclerview.layoutManager = LinearLayoutManager(this.context)
 
-        lifecycleScope.launch {
+        // commentList 를 불러와서 보여줌
+        CoroutineScope(Dispatchers.Main).launch {
             commentViewModel.getCommentList(navigationArgs.diaryId)
             commentViewModel.commentList.collect {
                 adapter.submitList(it)
@@ -69,6 +90,8 @@ class CommentListFragment : Fragment() {
                 lifecycleScope.launch {
                     commentViewModel.createComment(inputComment.text.toString(), navigationArgs.diaryId)
                 }
+                // clear edit text
+                inputComment.text.clear()
                 // Hide keyboard
                 val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as
                         InputMethodManager
@@ -78,6 +101,16 @@ class CommentListFragment : Fragment() {
             handled
         }
 
+        // 다른 fragment 로부터 결과를 받아와 실행
+        childFragmentManager.setFragmentResultListener("requestKey", this.viewLifecycleOwner) { requestKey, bundle ->
+            // We use a String here, but any type that can be put in a Bundle is supported
+            val result = bundle.getBoolean("bundleKey")
+            // Do something with the result
+            if (result) {
+                lifecycleScope.launch {
+                    commentViewModel.getCommentList(navigationArgs.diaryId)
+                }
+            }
+        }
     }
-
 }

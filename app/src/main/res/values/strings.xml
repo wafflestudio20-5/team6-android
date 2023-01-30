@@ -52,6 +52,8 @@
     <string name="diary_comment_content">댓글 내용입니다.</string>
     <string name="edit_diary">수정하기</string>
     <string name="delete_diary">삭제하기</string>
+    <string name="edit_comment">수정하기</string>
+    <string name="delete_comment">삭제하기</string>
     <!-- task string resource-->
     <string name="write_name_hint">할 일을 입력하세요</string>
     <string name="write_date_hint">날짜를 입력하세요</string>

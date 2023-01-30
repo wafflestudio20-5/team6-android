@@ -1,5 +1,6 @@
 package com.example.todomateclone.ui
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -52,12 +53,15 @@ class MainFragment : Fragment() {
         }
 
         val logoutButton = binding.logoutButton
+        val toolbarTitle = binding.toolbarTitle
         val toolbar: Toolbar = binding.toolbar
         val navigationView: NavigationView = binding.navigationView
         val drawerLayout: DrawerLayout = binding.drawerLayout
 
         toolbar.inflateMenu(R.menu.appbar) // 여기서 appbar layout 확장
         navigationView.itemIconTintList = null
+
+        toolbarTitle.setTypeface(null, Typeface.ITALIC)
 
         // when click button, user logout
         logoutButton.setOnClickListener {

@@ -29,6 +29,7 @@ class CommentViewModel(
     suspend fun createComment(content: String, did: Int) {
         try {
             restService.createComment(CreateCommentRequest(content), did)
+            _commentList.value =  restService.getCommentList(did).results
             toaster.toast("댓글이 생성되었습니다.")
         } catch (e: Exception) {
             toaster.toastApiError(e)
@@ -46,14 +47,17 @@ class CommentViewModel(
     suspend fun updateIdComment(content: String, cid: Int) {
         try {
             restService.updateIdComment(UpdateCommentRequest(content), cid)
+            toaster.toast("댓글이 갱신되었습니다.")
         } catch (e: Exception) {
             toaster.toastApiError(e)
         }
     }
 
-    suspend fun deleteIdComment(cid: Int) {
+    suspend fun deleteIdComment(cid: Int, did: Int) {
         try {
             restService.deleteIdComment(cid)
+            toaster.toast("댓글이 삭제되었습니다.")
+            _commentList.value =  restService.getCommentList(did).results
         } catch (e: Exception) {
             toaster.toastApiError(e)
         }

@@ -44,6 +44,7 @@ class UserViewModel(
     suspend fun confirmCode(email: String, code: String) {
         try {
             restService.signupConfirm(SignUpConfirmRequest(email, code))
+            toaster.toast("이메일 인증이 완료되었습니다.")
         } catch (e: Exception) {
             toaster.toastApiError(e)
         }
