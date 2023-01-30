@@ -1,22 +1,15 @@
-package com.example.todomateclone.ui
+package com.example.todomateclone.ui.user
 
 import android.os.Bundle
-import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.todomateclone.R
-import com.example.todomateclone.databinding.FragmentChangeEmailBinding
 import com.example.todomateclone.databinding.FragmentProfileBinding
-import com.example.todomateclone.databinding.FragmentUserPageBinding
-import com.example.todomateclone.network.dto.UpdateUserRequest
 import com.example.todomateclone.network.dto.UserDTO
 import com.example.todomateclone.viewmodel.UserDetailViewModel
-import com.example.todomateclone.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -53,25 +46,31 @@ class ProfileFragment : Fragment() {
         val editDetailTextview = binding.textViewEditDetail
         val submitButton = binding.buttonSubmit
 
-        submitButton.setOnClickListener() {
+        submitButton.setOnClickListener {
             val newNickname = editNicknameTextview.text.toString()
             val newDetail = editDetailTextview.text.toString()
             val id = userDetailViewModel.user.value?.id!!.toInt()
             val email = userDetailViewModel.user.value?.email.toString()
             val userDTO : UserDTO = UserDTO(id= id , email= email, nickname = newNickname, detail = newDetail)
 
+//            CoroutineScope(Dispatchers.IO).launch {
+//                lifecycleScope.launchWhenStarted {
+//                    userDetailViewModel.user.collectLatest {
+//                        userDetailViewModel.updateUser(userDTO)
+//                    }
+//                }
+//            }
+//            this.findNavController().navigateUp()
+
             CoroutineScope(Dispatchers.IO).launch {
                 lifecycleScope.launchWhenStarted {
                     userDetailViewModel.user.collectLatest {
                         userDetailViewModel.updateUser(userDTO)
+                        launch(Dispatchers.Main){findNavController().navigateUp()}
                     }
                 }
             }
 
-            val action = ProfileFragmentDirections.actionProfileFragmentToUserPageFragment()
-            this.findNavController().navigate(action)
         }
-
     }
-
 }

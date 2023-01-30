@@ -5,7 +5,8 @@ import com.example.todomateclone.network.RestService
 import com.example.todomateclone.util.AuthStorage
 import com.example.todomateclone.util.LocalDateTimeConverter
 import com.example.todomateclone.util.Toaster
-//
+import com.example.todomateclone.viewmodel.DiaryViewModel
+import com.example.todomateclone.viewmodel.TodoViewModel
 import com.example.todomateclone.viewmodel.UserDetailViewModel
 import com.example.todomateclone.viewmodel.UserViewModel
 import com.squareup.moshi.Moshi
@@ -23,6 +24,7 @@ val appModule = module {
         val sharedPreference =
             context.getSharedPreferences(AuthStorage.SharedPreferenceName, Context.MODE_PRIVATE)
         Retrofit.Builder()
+//            .baseUrl("http://ec2-3-38-100-94.ap-northeast-2.compute.amazonaws.com:8000/")
             .baseUrl("http://3.38.100.94/")
             .addConverterFactory(MoshiConverterFactory.create(get()).asLenient())
             .client(
@@ -68,10 +70,11 @@ val appModule = module {
 
     single<Moshi> {
         Moshi.Builder()
-            .add(LocalDateTimeConverter())
             .add(KotlinJsonAdapterFactory())
             .build()
     }
-    viewModel { UserDetailViewModel(get(), get(),get())}
-    viewModel { UserViewModel(get(), get(), get())}
+    viewModel {TodoViewModel(get(), get())}
+    viewModel {UserViewModel(get(), get(), get())}
+    viewModel {DiaryViewModel(get(), get(), get())}
+    viewModel { UserDetailViewModel(get(), get(),get()) }
 }

@@ -1,18 +1,13 @@
-package com.example.todomateclone.ui
+package com.example.todomateclone.ui.user
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.todomateclone.R
-import com.example.todomateclone.databinding.FragmentStartBinding
 import com.example.todomateclone.databinding.FragmentUserPageBinding
-import com.example.todomateclone.network.dto.UserDTO
 import com.example.todomateclone.util.AuthStorage
 import com.example.todomateclone.viewmodel.UserDetailViewModel
 import com.example.todomateclone.viewmodel.UserViewModel

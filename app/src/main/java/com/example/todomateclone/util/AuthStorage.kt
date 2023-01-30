@@ -28,9 +28,8 @@ class AuthStorage(
                 )
             }
         )
-    val authInfo: StateFlow<AuthInfo?> = _authInfo
-    val loggedInUser = authInfo.value?.user
 
+    val authInfo: StateFlow<AuthInfo?> = _authInfo
 
     fun setAuthInfo(accessToken: String, refreshToken: String, user: AuthStorageUserDTO) {
         _authInfo.value = AuthInfo(accessToken, refreshToken, user)

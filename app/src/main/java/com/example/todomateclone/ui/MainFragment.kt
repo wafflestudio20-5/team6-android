@@ -1,23 +1,26 @@
 package com.example.todomateclone.ui
 
-
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
+import com.example.todomateclone.MainActivity
 import com.example.todomateclone.R
 import com.example.todomateclone.databinding.FragmentMainBinding
+import com.example.todomateclone.util.AuthStorage
 import com.example.todomateclone.viewmodel.UserViewModel
 import com.google.android.material.navigation.NavigationView
+import com.kakao.auth.StringSet.access_token
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.flow
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -26,10 +29,7 @@ class MainFragment : Fragment() {
     private val userViewModel: UserViewModel by viewModel()
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private val authStorage: AuthStorage by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,9 +42,17 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+       lifecycleScope.launch{
+            authStorage.authInfo.collect {
+                if (it == null) {
+                    Log.d("MainFragment", "navigate to login graph")
+                    findNavController().navigate(R.id.action_global_login_graph)
+                }
+            }
+        }
+
         val logoutButton = binding.logoutButton
-        val accountButton = binding.buttonAccount
-        val toolbar:Toolbar = binding.toolbar
+        val toolbar: Toolbar = binding.toolbar
         val navigationView: NavigationView = binding.navigationView
         val drawerLayout: DrawerLayout = binding.drawerLayout
 
@@ -55,15 +63,9 @@ class MainFragment : Fragment() {
         logoutButton.setOnClickListener {
             userViewModel.logout()
             // navigate to start fragment
-            val action = MainFragmentDirections.actionMainFragmentToStartFragment()
-            this.findNavController().navigate(action)
+            this.findNavController().navigate(R.id.action_global_login_graph)
         }
-
-        accountButton.setOnClickListener {
-            val action = MainFragmentDirections.actionMainFragmentToUserPageFragment()
-            this.findNavController().navigate(action)
-        }
-        
+        // toolbar menu selected action
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.menu_icon -> {
@@ -80,6 +82,30 @@ class MainFragment : Fragment() {
                 else -> true
             }
         }
+        // navigationView item selected action
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            val id = menuItem.itemId
+            //it's possible to do more actions on several items, if there is a large amount of items I prefer switch(){case} instead of if()
+            when (id) {
+                // navigate to user page
+                R.id.nav_user_page -> {
+                    val action = MainFragmentDirections.actionMainFragmentToUserPageFragment()
+                    this.findNavController().navigate(action)
+                }
+                R.id.nav_todo_page -> {
+                    val action = MainFragmentDirections.actionMainFragmentToTodoListFragment()
+                    this.findNavController().navigate(action)
+                }
+                R.id.nav_diary_page -> {
+                    val action = MainFragmentDirections.actionMainFragmentToDiaryListFragment()
+                    this.findNavController().navigate(action)
+                }
+            }
+            //This is for maintaining the behavior of the Navigation view
+            onNavDestinationSelected(menuItem, this.findNavController() )
+            //This is for closing the drawer after acting on it
+            drawerLayout.closeDrawer(GravityCompat.END)
+            true
+        }
     }
 }
-

@@ -1,10 +1,8 @@
 package com.example.todomateclone.viewmodel
 
-import android.annotation.SuppressLint
-import android.app.Application
+
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.example.todomateclone.MainApplication
 import com.example.todomateclone.network.RestService
 import com.example.todomateclone.network.dto.*
 import com.example.todomateclone.util.AuthStorage
@@ -24,6 +22,7 @@ class UserViewModel(
                 response.refresh_token,
                 AuthStorageUserDTO(response.user.id, response.user.email)
             )
+            Log.d("UserViewModel", "authInfo is valid")
         } catch (e: Exception) {
             toaster.toastApiError(e)
         }
@@ -37,6 +36,14 @@ class UserViewModel(
     suspend fun resendEmail(email: String) {
         try {
             restService.resendEmail(ResendEmailRequest(email))
+        } catch (e: Exception) {
+            toaster.toastApiError(e)
+        }
+    }
+
+    suspend fun confirmCode(email: String, code: String) {
+        try {
+            restService.signupConfirm(SignUpConfirmRequest(email, code))
         } catch (e: Exception) {
             toaster.toastApiError(e)
         }
