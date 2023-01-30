@@ -79,6 +79,7 @@
     <string name="fixed">완료</string>
     <string name="fix">수정하기</string>
     <string name="delay">하루 미루기</string>
+    <string name="today">오늘 하기</string>
 
 
 </resources>
