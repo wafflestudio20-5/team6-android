@@ -26,15 +26,21 @@ class CommentListAdapter(
         }
     }
 
+    private var _viewBinding: CommentListItemBinding? = null
+    private val viewBinding get() = _viewBinding!!
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentViewHolder {
-        return CommentViewHolder(
-            CommentListItemBinding.inflate(
-                LayoutInflater.from(
-                    parent.context
-                )
-            )
+        _viewBinding = CommentListItemBinding.inflate(LayoutInflater.from(parent.context))
+        setMatchParentToRecyclerView()
+        return CommentViewHolder(viewBinding)
+    }
+
+    private fun setMatchParentToRecyclerView() {
+        val layoutParams = RecyclerView.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
         )
+        viewBinding.root.layoutParams = layoutParams
     }
 
     override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
