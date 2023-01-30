@@ -21,9 +21,12 @@ data class AuthStorageUserDTO(
 
 data class CommentDTO(
     val id: Int,
-    val message: String,
-    val author: UserDTO,
-    val createdAt: LocalDateTime,
+    val context: String,
+    val diary: String,
+    val created_at: String,
+    val updated_at: String,
+    val created_by: Int,
+    val nickname: String
 )
 
 data class DiaryDTO(

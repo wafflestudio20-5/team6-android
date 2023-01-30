@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.StateFlow
 
 class DiaryViewModel(
     private val restService: RestService,
-    private val authStorage: AuthStorage,
     private val toaster: Toaster,
 ): ViewModel() {
 

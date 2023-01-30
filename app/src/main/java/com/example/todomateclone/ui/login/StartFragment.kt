@@ -177,9 +177,12 @@ class StartFragment : Fragment() {
         try {
             val account: GoogleSignInAccount = completedTask.getResult(ApiException::class.java)
             val idToken: String = account.idToken.toString()
+            val refreshToken = account.isExpired
+            val requestScope = account.requestedScopes
             val googleTokenAuth: String = account.serverAuthCode.toString()
             Log.d("GoogleLogin", "get idToken: ${account.idToken}")
             Log.d("GoogleLogin", "get authCode: ${account.serverAuthCode}")
+            Log.d("GoogleLogin", "is Expired: $refreshToken")
 
             // send ID Token to server and validate
             CoroutineScope(Dispatchers.IO).launch {

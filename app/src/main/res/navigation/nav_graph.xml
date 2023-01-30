@@ -127,6 +127,12 @@
         <argument
             android:name="diary_id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_diaryDetailFragment_to_commentListFragment"
+            app:destination="@id/commentListFragment" />
+        <action
+            android:id="@+id/action_diaryDetailFragment_to_diaryEditFragment"
+            app:destination="@id/diaryEditFragment" />
     </fragment>
     <fragment
         android:id="@+id/changeEmailFragment"
@@ -176,6 +182,22 @@
         app:destination="@id/mainFragment"
         app:popUpTo="@id/nav_graph"
         app:popUpToInclusive="true"/>
+    <fragment
+        android:id="@+id/commentListFragment"
+        android:name="com.example.todomateclone.ui.diary.CommentListFragment"
+        android:label="CommentListFragment" >
+        <argument
+            android:name="diary_id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/diaryEditFragment"
+        android:name="com.example.todomateclone.ui.diary.DiaryEditFragment"
+        android:label="DiaryEditFragment" >
+        <argument
+            android:name="diary_id"
+            app:argType="integer" />
+    </fragment>
     <!-- end -->
 
 </navigation>

@@ -91,4 +91,19 @@ interface RestService {
     // 해당 id의 일기 삭제하기
     @DELETE("/diary/watch/{did}/")
     suspend fun deleteIdDiary(@Path("did") did: Int): Response<Unit>
+    // 해당 일기 id의 댓글 불러오기
+    @GET("/diary/comment/{did}/")
+    suspend fun getCommentList(@Path("did") did: Int): GetCommentListResponse
+    // 해당 일기 id에 댓글 등록하기
+    @POST("/diary/comment/{did}/")
+    suspend fun createComment(@Body() request: CreateCommentRequest, @Path("did") did: Int): CommentDTO
+    // 해당 id의 댓글 불러오기
+    @GET("/diary/comment/detail/{cid}/")
+    suspend fun getIdComment(@Path("cid") cid: Int): CommentDTO
+    // 해당 id의 댓글 수정하기
+    @PATCH("/diary/comment/detail/{cid}/")
+    suspend fun updateIdComment(@Body request: UpdateCommentRequest ,@Path("cid") cid: Int): CommentDTO
+    // 해당 id의 댓글 삭제하기
+    @DELETE("/diary/comment/detail/{cid}/")
+    suspend fun deleteIdComment(@Path("cid") cid: Int): Response<Unit>
 }
