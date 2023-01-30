@@ -45,6 +45,14 @@ class TodoListFragment : Fragment(), OnDismissListener, OnDismissListenerAdder {
         refreshTask()
     }
 
+    override fun onDismissToday(task: TaskDTO) {
+        val today = LocalDate.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val todaysdate = today.format(formatter)
+        viewModel.changeTodo(task.name, todaysdate, task.start_time, task.end_time, task.id)
+        refreshTask()
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?

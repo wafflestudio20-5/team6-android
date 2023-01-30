@@ -50,6 +50,10 @@ class TodoFixerFragment(val task: TaskDTO) : BottomSheetDialogFragment() {
             dismiss()
             listener?.onDismissDelay(task)
         }
+        binding.todayButton.setOnClickListener {
+            dismiss()
+            listener?.onDismissToday(task)
+        }
     }
 
 
@@ -66,5 +70,7 @@ interface OnDismissListener {
     fun onDismissFix(task: TaskDTO)
     fun onDismissDelete(task: TaskDTO)
     fun onDismissDelay(task: TaskDTO)
+    fun onDismissToday(task: TaskDTO)
+
 
 }

@@ -44,10 +44,12 @@ interface RestService {
     @POST("/accounts/google/login/")
     suspend fun googleLogin(@Body() request: SocialLoginRequest): LoginResult
 
+
+    // Task API
+
     @POST("/task/list/{date}/")
     suspend fun createTask(@Body() request: CreateTaskRequest, @Path("date") date: String): TaskDTO
 
-    // Task API
     @GET("/task/list/{date}/")
     suspend fun getTasksByDateFirstPage(@Path("date") date: String): GetTasksByDateResponse
 
@@ -66,7 +68,7 @@ interface RestService {
     @GET("/task/detail/{tid}/delay/")
     suspend fun delayTask(@Path("tid") tid: Int): TaskDTO?
 
-    @PUT("/task/detail/{tid}/name/")
+    @PUT("/task/detail/{tid}/update/")
     suspend fun changeTask(@Body() request: ChangeTaskRequest, @Path("tid") tid: Int): TaskDTO?
 
     // Diary API

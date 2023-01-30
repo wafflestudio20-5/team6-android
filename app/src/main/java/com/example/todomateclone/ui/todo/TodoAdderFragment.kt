@@ -29,26 +29,30 @@ class TodoAdderFragment(val date: String, val task: TaskDTO?) : BottomSheetDialo
         super.onViewCreated(view, savedInstanceState)
         if(task==null) {
             binding.writeDate.setText(date)
+            binding.writeStarttime.setText("13시 0분")
+            binding.writeEndtime.setText("17시 0분")
         }
         else {
             binding.writeName.setText(task.name)
             binding.writeDate.setText(date)
-//            binding.writeStarttime.setText(task.start_time)
-//            binding.writeEndtime.setText(task.end_time)
-        }
-        binding.submitButton.setOnClickListener {
-            if(task==null) {
-                viewModel.createTodo(binding.writeName.text.toString(), date)
-            }
-            else  {
-                viewModel.changeTodo(binding.writeName.text.toString(), task.id)
-            }
-            dismiss()
-            listener?.onDismiss()
+            binding.writeStarttime.setText(task.start_time)
+            binding.writeEndtime.setText(task.end_time)
         }
         binding.writeDate.setOnClickListener{datetimeClick()}
         binding.writeStarttime.setOnClickListener{starttimeClick()}
         binding.writeEndtime.setOnClickListener{endtimeClick()}
+
+        binding.submitButton.setOnClickListener {
+            if(task==null) {
+                if(binding.writeName.text!=null) viewModel.createTodo(binding.writeName.text.toString(), binding.writeDate.text.toString(), binding.writeStarttime.text.toString(), binding.writeEndtime.text.toString())
+            }
+            else  {
+                viewModel.changeTodo(binding.writeName.text.toString(), binding.writeDate.text.toString(), binding.writeStarttime.text.toString(), binding.writeEndtime.text.toString(), task.id)
+            }
+            dismiss()
+            listener?.onDismiss()
+        }
+
     }
 
 
@@ -60,13 +64,22 @@ class TodoAdderFragment(val date: String, val task: TaskDTO?) : BottomSheetDialo
     }
 
     fun datetimeClick() {
-        val dates=date.split("-")
+        var dates=date.split("-")
         val datePickerDialog = this.context?.let {
             DatePickerDialog(
                 it,
-                OnDateSetListener { datePicker, i, i1, i2 -> binding.writeDate.setText(i.toString() + "-" + i1 + "-" + i2) },
+                OnDateSetListener { datePicker, year, month, dayOfMonth ->
+                    var monthstr=""
+                    var daystr=""
+                    var yearstr=""
+                    if(month<9) monthstr="0"+(month+1).toString()
+                    else monthstr=(month+1).toString()
+                    if(dayOfMonth<10) daystr="0"+dayOfMonth.toString()
+                    else daystr=dayOfMonth.toString()
+                    yearstr=year.toString()
+                    binding.writeDate.setText(yearstr + "-" + monthstr + "-" + daystr) },
                 dates[0].toInt(),
-                dates[1].toInt(),
+                dates[1].toInt()-1,
                 dates[2].toInt()
             )
         }
@@ -74,13 +87,15 @@ class TodoAdderFragment(val date: String, val task: TaskDTO?) : BottomSheetDialo
     }
 
     fun starttimeClick() {
-        val h=13
-        val m=0
+        var h=13
+        var m=0
         if(task==null) {
 
         }
         else {
-            //h=task.starttime...
+            val st=task.start_time.split("시 ", "분")
+            h=st[0].toInt()
+            m=st[1].toInt()
         }
         val timePickerDialog = TimePickerDialog(this.context,
             OnTimeSetListener { timePicker, i, i1 -> binding.writeStarttime.setText(i.toString() + "시 " + i1 + "분") },
@@ -92,18 +107,20 @@ class TodoAdderFragment(val date: String, val task: TaskDTO?) : BottomSheetDialo
     }
 
     fun endtimeClick() {
-        val h=17
-        val m=0
+        var h=17
+        var m=0
         if(task==null) {
 
         }
         else {
-            //h=task.endtime...
+            val et=task.end_time.split("시 ", "분")
+            h=et[0].toInt()
+            m=et[1].toInt()
         }
         val timePickerDialog = TimePickerDialog(this.context,
             OnTimeSetListener { timePicker, i, i1 -> binding.writeEndtime.setText(i.toString() + "시 " + i1 + "분") },
-            0,
-            0,
+            h,
+            m,
             true
         )
         timePickerDialog.show()
