@@ -41,6 +41,10 @@ interface RestService {
     @POST("/accounts/password/reset/")
     suspend fun sendResetEmail(@Body() request: SendResetEmailRequest): Response<Unit>
 
+    @POST("/accounts/password/reset/confirm/")
+    suspend fun confirmPasswordChange(@Body() request: ConfirmPasswordChangeRequest): Response<Unit>
+
+
     @POST("/accounts/kakao/login/")
     suspend fun kakaoLogin(@Body() request: SocialLoginRequest): LoginResult
 

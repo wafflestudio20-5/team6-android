@@ -6,6 +6,7 @@ data class SendResetEmailRequest(
 
 data class ConfirmPasswordChangeRequest(
     val code : String,
+    val email: String,
     val new_password1 : String,
     val new_password2 : String
 )
