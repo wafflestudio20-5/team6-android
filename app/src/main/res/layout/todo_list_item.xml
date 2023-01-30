@@ -63,7 +63,7 @@
 
     <TextView
         android:id="@+id/starttime_korean"
-        android:layout_width="wrap_content"
+        android:layout_width="70dp"
         android:layout_height="20dp"
         android:layout_marginTop="5dp"
         android:text="@string/starttime"
@@ -78,7 +78,7 @@
         android:layout_width="100dp"
         android:layout_height="20dp"
         android:layout_marginTop="5dp"
-        android:text="13:00"
+        android:text="13시 0분"
         android:textAlignment="textStart"
         android:textColor="@color/gray"
         android:textSize="14sp"
@@ -101,7 +101,7 @@
 
     <TextView
         android:id="@+id/endtime_korean"
-        android:layout_width="wrap_content"
+        android:layout_width="70dp"
         android:layout_height="20dp"
         android:text="@string/endtime"
         android:textAlignment="textStart"
@@ -114,24 +114,24 @@
         android:id="@+id/endtime_text_view"
         android:layout_width="100dp"
         android:layout_height="20dp"
-        android:text="17:00"
+        android:text="17시 0분"
         android:textAlignment="textStart"
         android:textColor="@color/gray"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/endtime_korean"
         app:layout_constraintTop_toBottomOf="@id/starttime_korean" />
 
-    <TextView
-        android:id="@+id/endtime_edit_text"
-        android:layout_width="100dp"
-        android:layout_height="20dp"
-        android:text="수정중"
-        android:textAlignment="textStart"
-        android:textColor="@color/gray"
-        android:textSize="14sp"
-        android:visibility="invisible"
-        app:layout_constraintStart_toEndOf="@id/endtime_korean"
-        app:layout_constraintTop_toBottomOf="@id/starttime_korean" />
+<!--    <TextView-->
+<!--        android:id="@+id/endtime_edit_text"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:text="수정중"-->
+<!--        android:textAlignment="textStart"-->
+<!--        android:textColor="@color/gray"-->
+<!--        android:textSize="14sp"-->
+<!--        android:visibility="invisible"-->
+<!--        app:layout_constraintStart_toEndOf="@id/endtime_korean"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/starttime_korean" />-->
 
 
     <!--    buttons-->

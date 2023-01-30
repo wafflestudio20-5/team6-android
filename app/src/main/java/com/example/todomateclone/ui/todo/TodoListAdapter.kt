@@ -54,34 +54,36 @@ class TodoListAdapter(private val onItemClicked: (TaskDTO) -> Unit, private val 
             binding.apply {
                 nameTextView.text = todo.name
                 doneSwitch.setChecked(todo.complete)
+                starttimeTextView.text = todo.start_time
+                endtimeTextView.text = todo.end_time
             }
 
         }
-        fun fix() {
-            binding.apply {
-                starttimeTextView.visibility= INVISIBLE
-                endtimeTextView.visibility= INVISIBLE
-                nameTextView.visibility= INVISIBLE
-                starttimeEditText.visibility= VISIBLE
-                starttimeEditText.setText(starttimeTextView.text)
-                endtimeEditText.visibility= VISIBLE
-                endtimeEditText.setText(endtimeTextView.text)
-                nameEditText.visibility= VISIBLE
-                nameEditText.setText(nameTextView.text)
-            }
-        }
-
-        fun fixdone(): Array<String> {
-            binding.apply {
-                starttimeTextView.visibility= VISIBLE
-                endtimeTextView.visibility= VISIBLE
-                nameTextView.visibility= VISIBLE
-                starttimeEditText.visibility= INVISIBLE
-                endtimeEditText.visibility= INVISIBLE
-                nameEditText.visibility= INVISIBLE
-                return arrayOf(nameEditText.text.toString(), starttimeEditText.text.toString(), endtimeEditText.text.toString())
-            }
-        }
+//        fun fix() {
+//            binding.apply {
+//                starttimeTextView.visibility= INVISIBLE
+//                endtimeTextView.visibility= INVISIBLE
+//                nameTextView.visibility= INVISIBLE
+//                starttimeEditText.visibility= VISIBLE
+//                starttimeEditText.setText(starttimeTextView.text)
+//                endtimeEditText.visibility= VISIBLE
+//                endtimeEditText.setText(endtimeTextView.text)
+//                nameEditText.visibility= VISIBLE
+//                nameEditText.setText(nameTextView.text)
+//            }
+//        }
+//
+//        fun fixdone(): Array<String> {
+//            binding.apply {
+//                starttimeTextView.visibility= VISIBLE
+//                endtimeTextView.visibility= VISIBLE
+//                nameTextView.visibility= VISIBLE
+//                starttimeEditText.visibility= INVISIBLE
+//                endtimeEditText.visibility= INVISIBLE
+//                nameEditText.visibility= INVISIBLE
+//                return arrayOf(nameEditText.text.toString(), starttimeEditText.text.toString(), endtimeEditText.text.toString())
+//            }
+//        }
     }
 
     companion object {

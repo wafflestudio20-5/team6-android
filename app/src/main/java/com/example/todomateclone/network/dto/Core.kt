@@ -41,6 +41,8 @@ data class TaskDTO(
     val name: String,
     val complete: Boolean,
     val created_by: Int,
+    val start_time: String,
+    val end_time: String,
 )
 
 data class PostDTO(

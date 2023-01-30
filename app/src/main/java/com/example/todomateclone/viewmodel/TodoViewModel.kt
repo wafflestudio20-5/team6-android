@@ -15,6 +15,7 @@ import com.kakao.usermgmt.StringSet
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 
 class TodoViewModel(
@@ -30,17 +31,21 @@ class TodoViewModel(
     }
 
 
-    fun createTodo(name: String, date: String) {
+    fun createTodo(name: String, date: String, start_time: String, end_time: String) {
         viewModelScope.launch(job) {
             try {
                 restService.createTask(
                     CreateTaskRequest(
-                        name = name
+                        name = name,
+                        start_time = start_time,
+                        end_time = end_time
                     ), date = date
                 )
                 toaster.toast("todo를 추가했습니다.")
-            } catch (e: Exception) {
+            } catch (e: HttpException) {
                 toaster.toastApiError(e)
+            } catch (e: Exception) {
+
             }
         }
     }
@@ -53,8 +58,10 @@ class TodoViewModel(
                 )
                 if(task.complete) toaster.toast("todo를 완료했습니다.")
                 else toaster.toast("todo를 다시 진행합니다.")
-            } catch (e: Exception) {
+            } catch (e: HttpException) {
                 toaster.toastApiError(e)
+            } catch (e: Exception) {
+
             }
         }
     }
@@ -68,8 +75,10 @@ class TodoViewModel(
                 toaster.toast("todo를 삭제했습니다.")
             } catch (e: NullPointerException) {
                 toaster.toast("todo를 삭제했습니다.")
-            } catch (e: Exception) {
+            } catch (e: HttpException) {
                 toaster.toastApiError(e)
+            } catch (e: Exception) {
+
             }
         }
     }
@@ -83,24 +92,31 @@ class TodoViewModel(
                 toaster.toast("todo를 하루 미뤘습니다.")
             } catch (e: NullPointerException) {
 
-            } catch (e: Exception) {
+            } catch (e: HttpException) {
                 toaster.toastApiError(e)
+            } catch (e: Exception) {
+
             }
         }
     }
 
-    fun changeTodo(name: String, tid: Int) {
+    fun changeTodo(name: String, date: String, start_time: String, end_time: String, tid: Int) {
         viewModelScope.launch {
             try {
                 restService.changeTask(
                     ChangeTaskRequest(
-                        name = name
+                        name = name,
+                        date = date,
+                        start_time = start_time,
+                        end_time = end_time
                     ),
                     tid = tid
                 )
                 toaster.toast("todo를 수정했습니다.")
-            } catch (e: Exception) {
+            } catch (e: HttpException) {
                 toaster.toastApiError(e)
+            } catch (e: Exception) {
+
             }
         }
     }
