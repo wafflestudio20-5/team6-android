@@ -42,4 +42,11 @@ class UserDetailViewModel (
         }
     }
 
+    suspend fun sendResetEmail(email: String){
+        try {
+            restService.sendResetEmail(SendResetEmailRequest(email))
+        } catch (e: Exception) {
+            toaster.toastApiError(e)
+        }
+    }
 }

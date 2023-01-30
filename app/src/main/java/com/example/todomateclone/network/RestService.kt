@@ -28,16 +28,22 @@ interface RestService {
         @Body() request: UpdateUserRequest
     ): UpdateUserResult
 
-    @DELETE("/accounts/user/{id}")
+    @DELETE("/accounts/user/{id}/")
     suspend fun deleteUser(
         @Path("id") id: Int
     ): Response<Unit>
 
-    @POST("/accounts/kakao/login")
-    suspend fun kakaoLogin(@Body() request: SocialLoginRequest): LoginResult
+    @POST("/accounts/password/reset/")
+    suspend fun sendResetEmail(@Body() request: SendResetEmailRequest): Response<Unit>
 
-    @POST("/accounts/google/login")
+    @POST("/accounts/password/reset/")
+    suspend fun confirmPasswordResetEmail(@Body() request: ConfirmPasswordChangeRequest): Response<Unit>
+
+    @POST("/accounts/google/login/")
     suspend fun googleLogin(@Body() request: SocialLoginRequest): LoginResult
+
+    @POST("/accounts/kakao/login/")
+    suspend fun kakaoLogin(@Body() request: SocialLoginRequest): LoginResult
 
 
     // Simple CMS 과제에서 사용되었던 API 입니다.
