@@ -39,12 +39,12 @@ class TodoListFragment : Fragment(), OnDismissListener, OnDismissListenerAdder {
     }
 
     override fun onDismissDelay(task: TaskDTO) {
-        viewModel.delayTodo(task.id)
+        lifecycleScope.launch {viewModel.delayTodo(task.id)}
         refreshTask()
     }
 
     override fun onDismissDelete(task: TaskDTO) {
-        viewModel.deleteTodo(task.id)
+        lifecycleScope.launch {viewModel.deleteTodo(task.id)}
         refreshTask()
     }
 
@@ -52,7 +52,7 @@ class TodoListFragment : Fragment(), OnDismissListener, OnDismissListenerAdder {
         val today = LocalDate.now()
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         val todaysdate = today.format(formatter)
-        viewModel.changeTodo(task.name, todaysdate, task.start_time, task.end_time, task.id)
+        lifecycleScope.launch {viewModel.changeTodo(task.name, todaysdate, task.start_time, task.end_time, task.id)}
         refreshTask()
     }
 
@@ -145,7 +145,7 @@ class TodoListFragment : Fragment(), OnDismissListener, OnDismissListenerAdder {
     }
 
     fun checkFinal(task: TaskDTO) {
-        viewModel.checkTodo(task.id)
+        lifecycleScope.launch {viewModel.checkTodo(task.id)}
         refreshTask()
     }
     //

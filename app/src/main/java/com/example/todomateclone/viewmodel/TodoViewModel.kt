@@ -38,7 +38,7 @@ class TodoViewModel(
     }
 
 
-    fun createTodo(name: String, date: String, start_time: String, end_time: String) {
+    suspend fun createTodo(name: String, date: String, start_time: String, end_time: String) {
         viewModelScope.launch(job) {
             try {
                 if(name=="") toaster.toast("이름이 비어있어 추가에 실패했습니다.")
@@ -60,7 +60,7 @@ class TodoViewModel(
         }
     }
 
-    fun checkTodo(tid: Int) {
+    suspend fun checkTodo(tid: Int) {
         viewModelScope.launch {
             try {
                 val task = restService.checkTask(
@@ -76,7 +76,7 @@ class TodoViewModel(
         }
     }
 
-    fun deleteTodo(tid: Int) {
+    suspend fun deleteTodo(tid: Int) {
         viewModelScope.launch {
             try {
                 restService.deleteTask(
@@ -93,7 +93,7 @@ class TodoViewModel(
         }
     }
 
-    fun delayTodo(tid: Int) {
+    suspend fun delayTodo(tid: Int) {
         viewModelScope.launch {
             try {
                 restService.delayTask(
@@ -110,7 +110,7 @@ class TodoViewModel(
         }
     }
 
-    fun changeTodo(name: String, date: String, start_time: String, end_time: String, tid: Int) {
+    suspend fun changeTodo(name: String, date: String, start_time: String, end_time: String, tid: Int) {
         viewModelScope.launch {
             try {
                 if(name=="") toaster.toast("이름이 비어있어 수정에 실패했습니다.")

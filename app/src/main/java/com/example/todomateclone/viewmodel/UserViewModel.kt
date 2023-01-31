@@ -9,6 +9,7 @@ import com.example.todomateclone.network.dto.*
 import com.example.todomateclone.util.AuthStorage
 import com.example.todomateclone.util.Toaster
 import com.kakao.usermgmt.StringSet.email
+import com.squareup.moshi.JsonDataException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -111,13 +112,16 @@ class UserViewModel(
 
     //search user
 
-    fun searchUser(email: String) {
+    suspend fun searchUser(email: String) {
         viewModelScope.launch {
             try {
                 _searcheduser.value = restService.searchUser(
                     email = email
                 )
-            } catch (e: Exception) {
+            } catch (e: JsonDataException) {
+                _searcheduser.value=null
+            }
+            catch (e: Exception) {
                 _searcheduser.value=null
                 toaster.toastApiError(e)
             }
@@ -125,7 +129,7 @@ class UserViewModel(
     }
 
     //follow user
-    fun followUser(followee: Int) {
+    suspend fun followUser(followee: Int) {
         viewModelScope.launch {
             try {
                 restService.followUser(
@@ -137,15 +141,15 @@ class UserViewModel(
         }
     }
 
-//    fun checkFollow(uid: Int) {
-//        viewModelScope.launch {
-//            try {
-//                _isfollowing.value = restService.checkFollow(uid = uid)
-//            } catch (e: Exception) {
-//                toaster.toastApiError(e)
-//            }
-//        }
-//    }
+    suspend fun checkFollow(uid: Int) {
+        viewModelScope.launch {
+            try {
+                _isfollowing.value = restService.checkFollow(uid = uid)
+            } catch (e: Exception) {
+                toaster.toastApiError(e)
+            }
+        }
+    }
 
 
 
