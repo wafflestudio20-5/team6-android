@@ -47,7 +47,7 @@ class TodoAdderFragment(val date: String, val task: TaskDTO?) : BottomSheetDialo
                 if(binding.writeName.text!=null) viewModel.createTodo(binding.writeName.text.toString(), binding.writeDate.text.toString(), binding.writeStarttime.text.toString(), binding.writeEndtime.text.toString())
             }
             else  {
-                viewModel.changeTodo(binding.writeName.text.toString(), binding.writeDate.text.toString(), binding.writeStarttime.text.toString(), binding.writeEndtime.text.toString(), task.id)
+                if(binding.writeName.text!=null) viewModel.changeTodo(binding.writeName.text.toString(), binding.writeDate.text.toString(), binding.writeStarttime.text.toString(), binding.writeEndtime.text.toString(), task.id)
             }
             dismiss()
             listener?.onDismiss()

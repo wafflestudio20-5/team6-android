@@ -33,9 +33,9 @@ class SearchUserFragment : Fragment() {
 //
     private var _binding: FragmentSearchUserBinding? = null
     private val binding get() = _binding!!
-//    private val viewModel: UserViewModel by viewModel()
-//
-//
+    private val viewModel: UserViewModel by viewModel()
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,28 +46,29 @@ class SearchUserFragment : Fragment() {
 //
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        binding.searchButton.setOnClickListener {
-//            var emailstr=binding.searchEditText.text.toString()
-//            lifecycleScope.launch {
-//                viewModel.searchUser(emailstr)
-//                viewModel.searcheduser.collect {
-//                    if(it==null) {
-//                        binding.apply {
-//                            nullTextView.visibility=VISIBLE
-//                            userView.visibility=INVISIBLE
-//                            willFollowButton.visibility = INVISIBLE
-//                            followingButton.visibility = INVISIBLE
-//                        }
-//                    }
-//                    else{
-//                        binding.apply {
-//                            nullTextView.visibility=INVISIBLE
-//                            userView.visibility=VISIBLE
-//                            emailTextView.setText(it?.email)
-//                            nicknameTextView.setText(it?.nickname)
-//                        }
-//                    }
-//                }
+        binding.searchButton.setOnClickListener {
+            var emailstr = binding.searchEditText.text.toString()
+            lifecycleScope.launch {
+                viewModel.searchUser(emailstr)
+                viewModel.searcheduser.collect {
+                    if (it == null) {
+                        binding.apply {
+                            nullTextView.visibility = VISIBLE
+                            userView.visibility = INVISIBLE
+                            willFollowButton.visibility = INVISIBLE
+                            followingButton.visibility = INVISIBLE
+                        }
+                    } else {
+                        binding.apply {
+                            nullTextView.visibility = INVISIBLE
+                            userView.visibility = VISIBLE
+                            emailTextView.setText(it?.email)
+                            nicknameTextView.setText(it?.nickname)
+                        }
+                    }
+                }
+            }
+        }
 //
 ////                if(viewModel.searcheduser.value!=null) {
 ////                    viewModel.checkFollow(viewModel.searcheduser.value!!.id)
@@ -98,24 +99,24 @@ class SearchUserFragment : Fragment() {
 //            }
 //        }
 //
-//        binding.willFollowButton.setOnClickListener {
-//            viewModel.followUser(viewModel.searcheduser.value!!.id)
-//            binding.willFollowButton.visibility = INVISIBLE
-//            binding.followingButton.visibility = VISIBLE
-//        }
-//
-//        binding.followingButton.setOnClickListener {
-//            //viewModel.unfollowUser(viewModel.searcheduser.value!!.id)
-//            binding.willFollowButton.visibility = INVISIBLE
-//            binding.followingButton.visibility = VISIBLE
-//        }
-//
-//        binding.userView.setOnClickListener {
-//            val sid = viewModel.searcheduser.value!!.id
-//            val action = SearchUserFragmentDirections.actionSearchUserFragmentToTodoListFragment(searchedId = sid)
-//            this.findNavController().navigate(action)
-//
-//        }
+        binding.willFollowButton.setOnClickListener {
+            viewModel.followUser(viewModel.searcheduser.value!!.id)
+            binding.willFollowButton.visibility = INVISIBLE
+            binding.followingButton.visibility = VISIBLE
+        }
+
+        binding.followingButton.setOnClickListener {
+            //viewModel.unfollowUser(viewModel.searcheduser.value!!.id)
+            binding.willFollowButton.visibility = INVISIBLE
+            binding.followingButton.visibility = VISIBLE
+        }
+
+        binding.userView.setOnClickListener {
+            val sid = viewModel.searcheduser.value!!.id
+            val action = SearchUserFragmentDirections.actionSearchUserFragmentToTodoListFragment(searchedId = sid)
+            this.findNavController().navigate(action)
+
+        }
 
     }
 }
