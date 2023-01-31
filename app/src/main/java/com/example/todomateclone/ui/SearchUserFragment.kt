@@ -116,6 +116,6 @@ class SearchUserFragment : Fragment() {
 //            this.findNavController().navigate(action)
 //
 //        }
-//
+
     }
 }
