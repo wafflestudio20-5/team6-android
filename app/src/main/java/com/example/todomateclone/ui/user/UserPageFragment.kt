@@ -63,7 +63,10 @@ class UserPageFragment : Fragment() {
         }
 
         changePasswordButton.setOnClickListener(){
-            // 비밀번호 변경을 위한 인증코드 이메일 전송
+            val email = userDetailViewModel.user.value?.email.toString()
+            CoroutineScope(Dispatchers.IO).launch{
+                userDetailViewModel.sendResetEmail(email)
+            }
             val action = UserPageFragmentDirections.actionUserPageFragmentToChangePasswordFragment()
             this.findNavController().navigate(action)
         }
@@ -74,9 +77,6 @@ class UserPageFragment : Fragment() {
                 userViewModel.deleteUser()
                 userViewModel.logout()
             }
-            val action = UserPageFragmentDirections.actionUserPageFragmentToStartFragment()
-            this.findNavController().navigate(action)
-
         }
 
     }

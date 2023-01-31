@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.user.ProfileFragment">
+
+    <EditText
+        android:id="@+id/textview_search_email"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="60dp"
+        android:background="@drawable/edittext_rounded_corner_rectangle"
+        android:hint="검색할 이메일을 입력하세요"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/button_search"
+        android:layout_width="52dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="88dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_baseline_search_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.977"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="355dp"
+        android:layout_height="68dp"
+        android:layout_marginBottom="416dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_search_email"
+        app:layout_constraintVertical_bias="0.273">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circleImageView"
+            android:layout_width="71dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_baseline_photo_camera_24"
+            app:civ_border_color="#000000"
+            app:civ_border_overlay="true"
+            app:civ_border_width="2dp" />
+
+        <TextView
+            android:id="@+id/textView_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/black"
+            android:text="nickname" />
+
+        <Button
+            android:id="@+id/button_follow"
+            android:layout_width="98dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="10dp"
+            android:text="팔로잉"
+            tools:layout_editor_absoluteX="215dp"
+            tools:layout_editor_absoluteY="211dp" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,6 +15,7 @@ import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import com.example.todomateclone.MainActivity
 import com.example.todomateclone.R
 import com.example.todomateclone.databinding.FragmentMainBinding
+import com.example.todomateclone.ui.user.UserPageFragmentDirections
 import com.example.todomateclone.util.AuthStorage
 import com.example.todomateclone.viewmodel.UserViewModel
 import com.google.android.material.navigation.NavigationView
@@ -54,6 +55,7 @@ class MainFragment : Fragment() {
 
         val logoutButton = binding.logoutButton
         val toolbarTitle = binding.toolbarTitle
+        val followListButton = binding.followListButton
         val toolbar: Toolbar = binding.toolbar
         val navigationView: NavigationView = binding.navigationView
         val drawerLayout: DrawerLayout = binding.drawerLayout
@@ -69,6 +71,12 @@ class MainFragment : Fragment() {
             // navigate to start fragment
             this.findNavController().navigate(R.id.action_global_login_graph)
         }
+
+        followListButton.setOnClickListener {
+            val action = MainFragmentDirections.actionMainFragmentToFollowListFragment()
+            this.findNavController().navigate(action)
+        }
+
         // toolbar menu selected action
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {

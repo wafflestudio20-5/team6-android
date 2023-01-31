@@ -77,6 +77,9 @@
         <action
             android:id="@+id/action_mainFragment_to_userPageFragment"
             app:destination="@id/userPageFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_followListFragment"
+            app:destination="@id/followListFragment" />
     </fragment>
     <fragment
         android:id="@+id/todoListFragment"
@@ -198,6 +201,20 @@
             android:name="diary_id"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/followListFragment"
+        android:name="com.example.todomateclone.ui.follow.FollowListFragment"
+        android:label="fragment_follow_list"
+        tools:layout="@layout/fragment_follow_list" >
+        <action
+            android:id="@+id/action_followListFragment_to_checkFollowFragment"
+            app:destination="@id/checkFollowFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkFollowFragment"
+        android:name="com.example.todomateclone.ui.follow.CheckFollowFragment"
+        android:label="CheckFollowFragment"
+        tools:layout="@layout/fragment_check_follow"/>
     <!-- end -->
 
 </navigation>
