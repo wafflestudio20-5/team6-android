@@ -101,22 +101,18 @@ class SearchUserFragment : Fragment() {
 
         binding.userView.setOnClickListener {
             val sid = viewModel.searcheduser.value!!.id
-            lifecycleScope.launch {
-                viewModel.checkFollow(viewModel.searcheduser.value!!.id)
-                viewModel.isfollowing.collect {
-                    if(it!!.is_following) {
-                        val action = SearchUserFragmentDirections.actionSearchUserFragmentToTodoListFragment(searchedId = sid)
-                        this@SearchUserFragment.findNavController().navigate(action)
-                    }
-                    else {
-                        val myToast: Toast = Toast.makeText(
-                            this@SearchUserFragment.context,
-                            "팔로우하지 않아 열람할 수 없습니다.",
-                            Toast.LENGTH_SHORT
-                        )
-                        myToast.show()
-                    }
-                }
+            Log.d("userView.click", sid.toString()+" "+viewModel.isfollowing.value!!.is_following.toString())
+            if(viewModel.isfollowing.value!!.is_following) {
+                val action = SearchUserFragmentDirections.actionSearchUserFragmentToTodoListFragment(searchedId = sid)
+                this@SearchUserFragment.findNavController().navigate(action)
+            }
+            else {
+                val myToast: Toast = Toast.makeText(
+                    this@SearchUserFragment.context,
+                    "팔로우하지 않아 열람할 수 없습니다.",
+                    Toast.LENGTH_SHORT
+                )
+                myToast.show()
             }
         }
 
