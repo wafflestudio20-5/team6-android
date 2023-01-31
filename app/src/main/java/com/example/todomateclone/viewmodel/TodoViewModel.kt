@@ -9,6 +9,7 @@ import com.example.todomateclone.network.RestService
 import com.example.todomateclone.network.dto.ChangeTaskRequest
 import com.example.todomateclone.network.dto.CreateTaskRequest
 import com.example.todomateclone.network.dto.TaskDTO
+import com.example.todomateclone.ui.todo.SearchedTaskPagingSource
 import com.example.todomateclone.ui.todo.TaskPagingSource
 import com.example.todomateclone.util.Toaster
 import com.kakao.usermgmt.StringSet
@@ -21,7 +22,7 @@ import retrofit2.HttpException
 class TodoViewModel(
     private val restService: RestService,
     private val toaster: Toaster
-    ) : ViewModel() {
+) : ViewModel() {
     val job = Job()
 
     fun createPager(date: String): Flow<PagingData<TaskDTO>> {
@@ -30,18 +31,27 @@ class TodoViewModel(
         }.flow.cachedIn(viewModelScope)
     }
 
+    fun createSearchedPager(date: String, uid: Int): Flow<PagingData<TaskDTO>> {
+        return Pager(PagingConfig(pageSize = 10)) {
+            SearchedTaskPagingSource(restService, date, uid)
+        }.flow.cachedIn(viewModelScope)
+    }
+
 
     fun createTodo(name: String, date: String, start_time: String, end_time: String) {
         viewModelScope.launch(job) {
             try {
-                restService.createTask(
-                    CreateTaskRequest(
-                        name = name,
-                        start_time = start_time,
-                        end_time = end_time
-                    ), date = date
-                )
-                toaster.toast("todo를 추가했습니다.")
+                if(name=="") toaster.toast("이름이 비어있어 추가에 실패했습니다.")
+                else {
+                    restService.createTask(
+                        CreateTaskRequest(
+                            name = name,
+                            start_time = start_time,
+                            end_time = end_time
+                        ), date = date
+                    )
+                    toaster.toast("todo를 추가했습니다.")
+                }
             } catch (e: HttpException) {
                 toaster.toastApiError(e)
             } catch (e: Exception) {
@@ -103,16 +113,19 @@ class TodoViewModel(
     fun changeTodo(name: String, date: String, start_time: String, end_time: String, tid: Int) {
         viewModelScope.launch {
             try {
-                restService.changeTask(
-                    ChangeTaskRequest(
-                        name = name,
-                        date = date,
-                        start_time = start_time,
-                        end_time = end_time
-                    ),
-                    tid = tid
-                )
-                toaster.toast("todo를 수정했습니다.")
+                if(name=="") toaster.toast("이름이 비어있어 수정에 실패했습니다.")
+                else {
+                    restService.changeTask(
+                        ChangeTaskRequest(
+                            name = name,
+                            date = date,
+                            start_time = start_time,
+                            end_time = end_time
+                        ),
+                        tid = tid
+                    )
+                    toaster.toast("todo를 수정했습니다.")
+                }
             } catch (e: HttpException) {
                 toaster.toastApiError(e)
             } catch (e: Exception) {

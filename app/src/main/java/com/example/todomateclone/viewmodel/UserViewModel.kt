@@ -3,16 +3,28 @@ package com.example.todomateclone.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.todomateclone.network.RestService
 import com.example.todomateclone.network.dto.*
 import com.example.todomateclone.util.AuthStorage
 import com.example.todomateclone.util.Toaster
+import com.kakao.usermgmt.StringSet.email
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 class UserViewModel(
     private val restService: RestService,
     private val authStorage: AuthStorage,
     private val toaster: Toaster,
 ) : ViewModel() {
+
+    private val _searcheduser = MutableStateFlow<UserDTO?>(null)
+    val searcheduser: StateFlow<UserDTO?> = _searcheduser
+
+    private val _isfollowing = MutableStateFlow<CheckFollowResponse?>(null)
+    val isfollowing: StateFlow<CheckFollowResponse?> = _isfollowing
+
 
     suspend fun login(email: String, password: String) {
         try {
@@ -96,4 +108,47 @@ class UserViewModel(
             toaster.toastApiError(e)
         }
     }
+
+    //search user
+
+    fun searchUser(email: String) {
+        viewModelScope.launch {
+            try {
+                _searcheduser.value = restService.searchUser(
+                    email = email
+                )
+            } catch (e: Exception) {
+                _searcheduser.value=null
+                toaster.toastApiError(e)
+            }
+        }
+    }
+
+    //follow user
+    fun followUser(followee: Int) {
+        viewModelScope.launch {
+            try {
+                restService.followUser(
+                    FollowRequest(followee = followee)
+                )
+            } catch (e: Exception) {
+                toaster.toastApiError(e)
+            }
+        }
+    }
+
+//    fun checkFollow(uid: Int) {
+//        viewModelScope.launch {
+//            try {
+//                _isfollowing.value = restService.checkFollow(uid = uid)
+//            } catch (e: Exception) {
+//                toaster.toastApiError(e)
+//            }
+//        }
+//    }
+
+
+
+
+
 }
