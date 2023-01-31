@@ -2,10 +2,16 @@ package com.example.todomateclone.network.dto
 
 data class CreateTaskRequest(
     val name: String,
+    val start_time: String,
+    val end_time: String
 )
 
-data class CheckTaskRequest(
-    val uid: String,
+
+data class ChangeTaskRequest(
+    val name: String,
+    val date: String,
+    val start_time: String,
+    val end_time: String
 )
 
 //data class CreateTaskResponse(

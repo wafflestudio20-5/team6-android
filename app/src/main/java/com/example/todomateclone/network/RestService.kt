@@ -44,10 +44,12 @@ interface RestService {
     @POST("/accounts/google/login/")
     suspend fun googleLogin(@Body() request: GoogleLoginRequest): LoginResult
 
+
+    // Task API
+
     @POST("/task/list/{date}/")
     suspend fun createTask(@Body() request: CreateTaskRequest, @Path("date") date: String): TaskDTO
 
-    // Task API
     @GET("/task/list/{date}/")
     suspend fun getTasksByDateFirstPage(@Path("date") date: String): GetTasksByDateResponse
 
@@ -63,8 +65,11 @@ interface RestService {
     @DELETE("/task/detail/{tid}/")
     suspend fun deleteTask(@Path("tid") tid: Int): TaskDTO?
 
-    @GET("/task/detail/{tid}/delay")
+    @GET("/task/detail/{tid}/delay/")
     suspend fun delayTask(@Path("tid") tid: Int): TaskDTO?
+
+    @PUT("/task/detail/{tid}/update/")
+    suspend fun changeTask(@Body() request: ChangeTaskRequest, @Path("tid") tid: Int): TaskDTO?
 
     // Diary API
     // 해당 사용자의 모든 일기 불러오기
