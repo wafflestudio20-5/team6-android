@@ -77,6 +77,8 @@ class MainFragment : Fragment() {
                     true
                 }
                 R.id.follow_icon -> {
+                    val action = MainFragmentDirections.actionMainFragmentToSearchUserFragment()
+                    this.findNavController().navigate(action)
                     true
                 }
                 else -> true
