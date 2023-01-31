@@ -47,9 +47,6 @@ interface RestService {
     @POST("/accounts/password/reset/confirm/")
     suspend fun confirmPasswordChange(@Body() request: ConfirmPasswordChangeRequest): Response<Unit>
 
-    @POST("/accounts/kakao/login/")
-    suspend fun kakaoLogin(@Body() request: SocialLoginRequest): LoginResult
-
     @POST("/accounts/google/login/")
     suspend fun googleLogin(@Body() request: GoogleLoginRequest): LoginResult
 
