@@ -8,10 +8,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import com.example.todomateclone.databinding.FragmentTodoAdderBinding
 import com.example.todomateclone.network.dto.TaskDTO
 import com.example.todomateclone.viewmodel.TodoViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -44,10 +46,10 @@ class TodoAdderFragment(val date: String, val task: TaskDTO?) : BottomSheetDialo
 
         binding.submitButton.setOnClickListener {
             if(task==null) {
-                if(binding.writeName.text!=null) viewModel.createTodo(binding.writeName.text.toString(), binding.writeDate.text.toString(), binding.writeStarttime.text.toString(), binding.writeEndtime.text.toString())
+                if(binding.writeName.text!=null) lifecycleScope.launch {viewModel.createTodo(binding.writeName.text.toString(), binding.writeDate.text.toString(), binding.writeStarttime.text.toString(), binding.writeEndtime.text.toString())}
             }
             else  {
-                viewModel.changeTodo(binding.writeName.text.toString(), binding.writeDate.text.toString(), binding.writeStarttime.text.toString(), binding.writeEndtime.text.toString(), task.id)
+                if(binding.writeName.text!=null) lifecycleScope.launch {viewModel.changeTodo(binding.writeName.text.toString(), binding.writeDate.text.toString(), binding.writeStarttime.text.toString(), binding.writeEndtime.text.toString(), task.id)}
             }
             dismiss()
             listener?.onDismiss()

@@ -85,6 +85,9 @@ interface RestService {
     @POST("/follow/")
     suspend fun followUser(@Body() request: FollowRequest): FollowResponse?
 
+    @POST("/follow/unfollow/")
+    suspend fun unfollowUser(@Body() request: FollowRequest): FollowResponse?
+
     @POST("/follow/followee/{uid}")
     suspend fun checkFollow(@Path("uid") uid: Int): CheckFollowResponse
 

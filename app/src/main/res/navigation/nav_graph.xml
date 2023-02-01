@@ -89,6 +89,10 @@
         <action
             android:id="@+id/action_todoListFragment_to_diaryjcyFragment"
             app:destination="@id/diaryjcyFragment" />
+        <argument
+            android:name="searchedId"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
     <fragment
         android:id="@+id/diaryjcyFragment"
