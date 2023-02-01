@@ -45,7 +45,32 @@
             android:layout_gravity="center_horizontal"
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
+        <Button
+            android:id="@+id/followingListButton"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="팔로잉 목록 바로가기"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/teal_700"
+            android:layout_gravity="center_horizontal"
+            app:layout_constraintTop_toBottomOf="@id/logoutButton" />
+
+        <Button
+            android:id="@+id/followerListButton"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="팔로워 목록 바로가기"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/teal_700"
+            android:layout_gravity="center_horizontal"
+            app:layout_constraintTop_toBottomOf="@id/followingListButton" />
+
     </LinearLayout>
+
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"

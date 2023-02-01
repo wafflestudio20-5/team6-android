@@ -2,6 +2,7 @@ package com.example.todomateclone.ui
 
 import android.annotation.SuppressLint
 import android.content.ClipData
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
@@ -26,7 +27,7 @@ class TodoListAdapter(private val onItemClicked: (TaskDTO) -> Unit, private val 
             TodoListItemBinding.inflate(
                 LayoutInflater.from(
                     parent.context
-                )
+                ), parent, false
             )
         )
     }
@@ -47,6 +48,7 @@ class TodoListAdapter(private val onItemClicked: (TaskDTO) -> Unit, private val 
                 holder.donebutton.setFocusable(false);
             } //다른 사람의 것은 수정이나 완료체크 불가
             holder.bind(it)
+            Log.d("helleeeeeeo", "binding followeeviewholder")
         }
     }
 
@@ -64,31 +66,6 @@ class TodoListAdapter(private val onItemClicked: (TaskDTO) -> Unit, private val 
                 endtimeTextView.text = todo.end_time
             }
         }
-//        fun fix() {
-//            binding.apply {
-//                starttimeTextView.visibility= INVISIBLE
-//                endtimeTextView.visibility= INVISIBLE
-//                nameTextView.visibility= INVISIBLE
-//                starttimeEditText.visibility= VISIBLE
-//                starttimeEditText.setText(starttimeTextView.text)
-//                endtimeEditText.visibility= VISIBLE
-//                endtimeEditText.setText(endtimeTextView.text)
-//                nameEditText.visibility= VISIBLE
-//                nameEditText.setText(nameTextView.text)
-//            }
-//        }
-//
-//        fun fixdone(): Array<String> {
-//            binding.apply {
-//                starttimeTextView.visibility= VISIBLE
-//                endtimeTextView.visibility= VISIBLE
-//                nameTextView.visibility= VISIBLE
-//                starttimeEditText.visibility= INVISIBLE
-//                endtimeEditText.visibility= INVISIBLE
-//                nameEditText.visibility= INVISIBLE
-//                return arrayOf(nameEditText.text.toString(), starttimeEditText.text.toString(), endtimeEditText.text.toString())
-//            }
-//        }
     }
 
     companion object {

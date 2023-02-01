@@ -65,6 +65,17 @@ class MainFragment : Fragment() {
             // navigate to start fragment
             this.findNavController().navigate(R.id.action_global_login_graph)
         }
+
+        binding.followingListButton.setOnClickListener{
+            val action = MainFragmentDirections.actionMainFragmentToFollowingListFragment()
+            this.findNavController().navigate(action)
+        }
+
+        binding.followerListButton.setOnClickListener{
+            val action = MainFragmentDirections.actionMainFragmentToFollowerListFragment()
+            this.findNavController().navigate(action)
+        }
+
         // toolbar menu selected action
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {

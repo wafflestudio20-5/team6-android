@@ -4,12 +4,20 @@ package com.example.todomateclone.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.todomateclone.network.RestService
 import com.example.todomateclone.network.dto.*
+import com.example.todomateclone.ui.todo.TaskPagingSource
+import com.example.todomateclone.ui.user.FolloweePagingSource
+import com.example.todomateclone.ui.user.FollowerPagingSource
 import com.example.todomateclone.util.AuthStorage
 import com.example.todomateclone.util.Toaster
 import com.kakao.usermgmt.StringSet.email
 import com.squareup.moshi.JsonDataException
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -27,6 +35,17 @@ class UserViewModel(
     private val _isfollowing = MutableStateFlow<CheckFollowResponse?>(null)
     val isfollowing: StateFlow<CheckFollowResponse?> = _isfollowing
 
+    fun createFolloweePager(): Flow<PagingData<FolloweeDTO>> {
+        return Pager(PagingConfig(pageSize = 10)) {
+            FolloweePagingSource(restService)
+        }.flow.cachedIn(viewModelScope)
+    }
+
+    fun createFollowerPager(): Flow<PagingData<FollowerDTO>> {
+        return Pager(PagingConfig(pageSize = 10)) {
+            FollowerPagingSource(restService)
+        }.flow.cachedIn(viewModelScope)
+    }
 
     suspend fun login(email: String, password: String) {
         try {

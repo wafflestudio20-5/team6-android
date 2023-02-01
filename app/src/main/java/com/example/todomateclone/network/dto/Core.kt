@@ -53,10 +53,12 @@ data class ErrorDTO(
 
 data class FolloweeDTO(
     val to_user_email: String,
-    val to_user_id: String,
+    val to_user_id: Int,
+    val to_user_nickname: String,
 )
 
 data class FollowerDTO(
     val from_user_email: String,
-    val from_user_id: String,
+    val from_user_id: Int,
+    val from_user_nickname: String,
 )

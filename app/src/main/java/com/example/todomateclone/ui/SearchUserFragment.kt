@@ -50,7 +50,7 @@ class SearchUserFragment : Fragment() {
                             nullTextView.visibility = INVISIBLE
                             userView.visibility = VISIBLE
                             emailTextView.setText(it?.email)
-                            nicknameTextView.setText(it?.nickname)
+                            nicknameTextView.setText("닉네임: "+it?.nickname)
                         }
                         lifecycleScope.launch {
                             if(viewModel.searcheduser.value!=null) {
