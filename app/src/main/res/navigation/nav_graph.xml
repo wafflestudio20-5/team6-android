@@ -80,6 +80,12 @@
         <action
             android:id="@+id/action_mainFragment_to_searchUserFragment"
             app:destination="@id/searchUserFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_followingListFragment"
+            app:destination="@id/followingListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_followerListFragment"
+            app:destination="@id/followerListFragment" />
     </fragment>
     <fragment
         android:id="@+id/todoListFragment"
@@ -180,6 +186,23 @@
         <action
             android:id="@+id/action_searchUserFragment_to_todoListFragment"
             app:destination="@id/todoListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/followingListFragment"
+        android:name="com.example.todomateclone.ui.user.FollowingListFragment"
+        android:label="FollowingListFragment"
+        tools:layout="@layout/fragment_following_list">
+        <action
+            android:id="@+id/action_followingListFragment_to_todoListFragment"
+            app:destination="@id/todoListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/followerListFragment"
+        android:name="com.example.todomateclone.ui.user.FollowerListFragment"
+        android:label="FollowerListFragment"
+        tools:layout="@layout/fragment_follower_list">
     </fragment>
 
     <!-- global action-->

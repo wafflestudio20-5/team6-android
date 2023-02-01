@@ -18,8 +18,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="400dp"
-    android:layout_height="100dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     android:descendantFocusability="blocksDescendants">
 
@@ -37,7 +37,7 @@
 
     <TextView
         android:id="@+id/name_text_view"
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="hi"
@@ -103,10 +103,12 @@
         android:id="@+id/endtime_korean"
         android:layout_width="70dp"
         android:layout_height="20dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/endtime"
         android:textAlignment="textStart"
         android:textColor="@color/teal_700"
         android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/done_switch"
         app:layout_constraintTop_toBottomOf="@id/starttime_korean" />
 
@@ -121,43 +123,6 @@
         app:layout_constraintStart_toEndOf="@id/endtime_korean"
         app:layout_constraintTop_toBottomOf="@id/starttime_korean" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/endtime_edit_text"-->
-<!--        android:layout_width="100dp"-->
-<!--        android:layout_height="20dp"-->
-<!--        android:text="수정중"-->
-<!--        android:textAlignment="textStart"-->
-<!--        android:textColor="@color/gray"-->
-<!--        android:textSize="14sp"-->
-<!--        android:visibility="invisible"-->
-<!--        app:layout_constraintStart_toEndOf="@id/endtime_korean"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/starttime_korean" />-->
-
-
-    <!--    buttons-->
-
-<!--    <ImageButton-->
-<!--        android:id="@+id/delete_button"-->
-<!--        android:layout_width="20dp"-->
-<!--        android:layout_height="20dp"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:background="@android:color/transparent"-->
-<!--        android:src="@drawable/ic_delete"-->
-<!--        app:layout_constraintStart_toEndOf="@id/name_text_view"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:tint="#B4B4B4" />-->
-
-<!--    <ImageButton-->
-<!--        android:id="@+id/delay_button"-->
-<!--        android:layout_width="30dp"-->
-<!--        android:layout_height="20dp"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:background="@android:color/transparent"-->
-<!--        android:src="@drawable/ic_delay"-->
-<!--        app:layout_constraintStart_toEndOf="@id/delete_button"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:tint="#B4B4B4" />-->
-
     <ImageButton
         android:id="@+id/menu_button"
         android:layout_width="30dp"
@@ -166,7 +131,7 @@
         android:layout_marginEnd="10dp"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_dots"
-        app:layout_constraintStart_toEndOf="@id/name_text_view"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="#B4B4B4" />
 
