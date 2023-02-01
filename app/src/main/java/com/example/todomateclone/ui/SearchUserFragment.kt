@@ -94,7 +94,7 @@ class SearchUserFragment : Fragment() {
         }
 
         binding.followingButton.setOnClickListener {
-            //viewModel.unfollowUser(viewModel.searcheduser.value!!.id)
+            lifecycleScope.launch {viewModel.unfollowUser(viewModel.searcheduser.value!!.id)}
             binding.willFollowButton.visibility = VISIBLE
             binding.followingButton.visibility = INVISIBLE
         }
@@ -102,7 +102,7 @@ class SearchUserFragment : Fragment() {
         binding.userView.setOnClickListener {
             val sid = viewModel.searcheduser.value!!.id
             Log.d("userView.click", sid.toString()+" "+viewModel.isfollowing.value!!.is_following.toString())
-            if(viewModel.isfollowing.value!!.is_following) {
+            if(binding.followingButton.visibility == VISIBLE) {
                 val action = SearchUserFragmentDirections.actionSearchUserFragmentToTodoListFragment(searchedId = sid)
                 this@SearchUserFragment.findNavController().navigate(action)
             }
@@ -118,6 +118,7 @@ class SearchUserFragment : Fragment() {
 
     }
 
-    //TODO: 자기 자신 팔로우 처리해야 함
+    //TODO: 자기 자신 팔로우-> toast는 처리했는데 button visibility가 다름.
+    //만약에 button 기준이 아니라 collect로 checkfollow를 더해야 하는데..
 
 }

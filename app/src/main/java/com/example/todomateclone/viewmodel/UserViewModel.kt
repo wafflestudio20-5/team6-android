@@ -13,6 +13,7 @@ import com.squareup.moshi.JsonDataException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class UserViewModel(
     private val restService: RestService,
@@ -133,6 +134,25 @@ class UserViewModel(
         viewModelScope.launch {
             try {
                 restService.followUser(
+                    FollowRequest(followee = followee)
+                )
+            } catch (e: HttpException) {
+                if (e.code() == 400) {
+                    toaster.toast("자기 자신은 팔로우할 수 없습니다.")
+                } else {
+                    toaster.toastApiError(e)
+                }
+            } catch (e: Exception) {
+                toaster.toastApiError(e)
+            }
+
+        }
+    }
+
+    suspend fun unfollowUser(followee: Int) {
+        viewModelScope.launch {
+            try {
+                restService.unfollowUser(
                     FollowRequest(followee = followee)
                 )
             } catch (e: Exception) {
