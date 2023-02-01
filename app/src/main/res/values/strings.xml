@@ -89,6 +89,12 @@
     <string name="fix">수정하기</string>
     <string name="delay">하루 미루기</string>
     <string name="today">오늘 하기</string>
+    <string name="mailexample">hello@gmail.com</string>
+    <string name="searchforuser">찾고 싶은 이메일을 입력하세요</string>
+    <string name="nouser">해당 사용자가 존재하지 않습니다.</string>
+    <string name="following">팔로잉</string>
+    <string name="will_follow">팔로우</string>
+
 
 
 </resources>

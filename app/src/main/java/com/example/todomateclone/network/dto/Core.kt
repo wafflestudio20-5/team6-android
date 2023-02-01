@@ -54,16 +54,18 @@ data class TaskDTO(
     val end_time: String,
 )
 
-data class PostDTO(
-    val id: Int,
-    val content: String,
-    val title: String,
-    val author: UserDTO,
-    val comments: List<CommentDTO>,
-    val createdAt: LocalDateTime,
-)
 
 data class ErrorDTO(
     val statusCode: Int?,
     val message: String?,
+)
+
+data class FolloweeDTO(
+    val to_user_email: String,
+    val to_user_id: String,
+)
+
+data class FollowerDTO(
+    val from_user_email: String,
+    val from_user_id: String,
 )

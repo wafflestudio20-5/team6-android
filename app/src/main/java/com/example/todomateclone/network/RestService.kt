@@ -63,8 +63,14 @@ interface RestService {
     @GET("/task/list/{date}/")
     suspend fun getTasksByDatePaged(@Path("date") date: String, @Query("page") page: Int): GetTasksByDateResponse
 
-    @GET("/task/list/")
-    suspend fun getAllTasksPaged(): GetAllTasksResponse
+    @GET("/task/search/{uid}/list/{date}/")
+    suspend fun getSearchedTasksByDateFirstPage(@Path("date") date: String, @Path("uid") uid: Int): GetTasksByDateResponse
+
+    @GET("/task/search/{uid}/list/{date}/")
+    suspend fun getSearchedTasksByDatePaged(@Path("date") date: String, @Path("uid") uid: Int, @Query("page") page: Int): GetTasksByDateResponse
+
+//    @GET("/task/list/")
+//    suspend fun getAllTasksPaged(): GetAllTasksResponse
 
     @GET("/task/detail/{tid}/check/")
     suspend fun checkTask(@Path("tid") tid: Int): TaskDTO
@@ -77,6 +83,34 @@ interface RestService {
 
     @PUT("/task/detail/{tid}/update/")
     suspend fun changeTask(@Body() request: ChangeTaskRequest, @Path("tid") tid: Int): TaskDTO?
+
+    //Search API
+    @GET("/search/{email}")
+    suspend fun searchUser(@Path("email") email: String): UserDTO?
+
+    //Follow API
+    @POST("/follow/")
+    suspend fun followUser(@Body() request: FollowRequest): FollowResponse?
+
+    @POST("/follow/unfollow/")
+    suspend fun unfollowUser(@Body() request: FollowRequest): FollowResponse?
+
+    @POST("/follow/followee/{uid}")
+    suspend fun checkFollow(@Path("uid") uid: Int): CheckFollowResponse
+
+    @GET("/follow/followee/")
+    suspend fun getFolloweeFirstPage(): GetFolloweeListResponse
+
+    @GET("/follow/followee/")
+    suspend fun getFolloweePaged(@Query("page") page: Int): GetFolloweeListResponse
+
+    @GET("/follow/follower/")
+    suspend fun getFollowerFirstPage(): GetFollowerListResponse
+
+    @GET("/follow/follower/")
+    suspend fun getFollowerPaged(@Query("page") page: Int): GetFollowerListResponse
+
+
 
     // Diary API
     // 해당 사용자의 모든 일기 불러오기

@@ -80,6 +80,9 @@
         <action
             android:id="@+id/action_mainFragment_to_followListFragment"
             app:destination="@id/followListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_searchUserFragment"
+            app:destination="@id/searchUserFragment" />
     </fragment>
     <fragment
         android:id="@+id/todoListFragment"
@@ -89,6 +92,10 @@
         <action
             android:id="@+id/action_todoListFragment_to_diaryjcyFragment"
             app:destination="@id/diaryjcyFragment" />
+        <argument
+            android:name="searchedId"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
     <fragment
         android:id="@+id/diaryjcyFragment"
@@ -176,6 +183,16 @@
         <action
             android:id="@+id/action_userPageFragment_to_changePasswordFragment"
             app:destination="@id/changePasswordFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchUserFragment"
+        android:name="com.example.todomateclone.ui.SearchUserFragment"
+        android:label="SearchUserFragment"
+        tools:layout="@layout/fragment_search_user" >
+        <action
+            android:id="@+id/action_searchUserFragment_to_todoListFragment"
+            app:destination="@id/todoListFragment" />
     </fragment>
 
     <!-- global action-->

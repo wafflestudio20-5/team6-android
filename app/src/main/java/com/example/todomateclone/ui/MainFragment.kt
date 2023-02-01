@@ -44,7 +44,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-       lifecycleScope.launch{
+        lifecycleScope.launch{
             authStorage.authInfo.collect {
                 if (it == null) {
                     Log.d("MainFragment", "navigate to login graph")
@@ -89,6 +89,8 @@ class MainFragment : Fragment() {
                     true
                 }
                 R.id.follow_icon -> {
+                    val action = MainFragmentDirections.actionMainFragmentToSearchUserFragment()
+                    this.findNavController().navigate(action)
                     true
                 }
                 else -> true
