@@ -136,6 +136,10 @@
         <action
             android:id="@+id/action_diaryDetailFragment_to_diaryEditFragment"
             app:destination="@id/diaryEditFragment" />
+        <argument
+            android:name="search_did"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
     <fragment
         android:id="@+id/changeEmailFragment"
