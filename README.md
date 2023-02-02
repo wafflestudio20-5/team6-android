@@ -7,8 +7,7 @@ TodoMate 어플을 참고하여 Wafflemate 어플을 제작했습니다.
 
 ---
 
-
-<center><img src = "https://user-images.githubusercontent.com/40379446/216366298-ff3544b2-bca3-4fb6-80fb-0c8fe9ebfdba.png"></center>
+<center><img src = "https://user-images.githubusercontent.com/40379446/216377971-6cd45f39-484d-4ad9-9451-973dae12fdea.png"></center>
 
 
 ## 👭"와플메이트" 는 어떤 앱인가요?
