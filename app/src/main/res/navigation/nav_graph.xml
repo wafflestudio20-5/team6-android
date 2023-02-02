@@ -77,6 +77,21 @@
         <action
             android:id="@+id/action_mainFragment_to_userPageFragment"
             app:destination="@id/userPageFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_followListFragment"
+            app:destination="@id/followListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_searchUserFragment"
+            app:destination="@id/searchUserFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_followingListFragment"
+            app:destination="@id/followingListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_followerListFragment"
+            app:destination="@id/followerListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_blockingListFragment"
+            app:destination="@id/blockingListFragment" />
     </fragment>
     <fragment
         android:id="@+id/todoListFragment"
@@ -84,29 +99,38 @@
         android:label="TodoListFragment"
         tools:layout="@layout/fragment_todo_list">
         <action
-            android:id="@+id/action_todoListFragment_to_diaryjcyFragment"
-            app:destination="@id/diaryjcyFragment" />
+            android:id="@+id/action_todoListFragment_to_diaryCalendarFragment"
+            app:destination="@id/diaryCalendarFragment" />
+        <argument
+            android:name="searchedId"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
     <fragment
-        android:id="@+id/diaryjcyFragment"
-        android:name="com.example.todomateclone.ui.DiaryJCYFragment"
+        android:id="@+id/diaryCalendarFragment"
+        android:name="com.example.todomateclone.ui.diary.DiaryCalendarFragment"
         android:label="TodoListFragment"
         tools:layout="@layout/fragment_todo_list">
+        <argument
+            android:name="searchedId"
+            app:argType="integer"
+            android:defaultValue="-1" />
         <action
-            android:id="@+id/action_diaryjcyFragment_to_todoListFragment"
-            app:destination="@id/todoListFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/todoAdderFragment"
-        android:name="com.example.todomateclone.ui.todo.TodoAdderFragment"
-        android:label="TodoAdderFragment"
-        tools:layout="@layout/fragment_todo_adder">
+            android:id="@+id/action_diaryCalendarFragment_to_diaryDetailFragment"
+            app:destination="@id/diaryDetailFragment" />
+        <action
+            android:id="@+id/action_diaryCalendarFragment_to_diaryAdderFragment"
+            app:destination="@id/diaryAdderFragment" />
     </fragment>
     <fragment
         android:id="@+id/diaryAdderFragment"
         android:name="com.example.todomateclone.ui.diary.DiaryAdderFragment"
         android:label="fragment_diary_adder"
-        tools:layout="@layout/fragment_diary_adder" />
+        tools:layout="@layout/fragment_diary_adder" >
+        <argument
+            android:name="date"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/diaryListFragment"
         android:name="com.example.todomateclone.ui.diary.DiaryListFragment"
@@ -127,6 +151,16 @@
         <argument
             android:name="diary_id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_diaryDetailFragment_to_commentListFragment"
+            app:destination="@id/commentListFragment" />
+        <action
+            android:id="@+id/action_diaryDetailFragment_to_diaryEditFragment"
+            app:destination="@id/diaryEditFragment" />
+        <argument
+            android:name="search_did"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
     <fragment
         android:id="@+id/changeEmailFragment"
@@ -165,6 +199,40 @@
             app:destination="@id/changePasswordFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/searchUserFragment"
+        android:name="com.example.todomateclone.ui.SearchUserFragment"
+        android:label="SearchUserFragment"
+        tools:layout="@layout/fragment_search_user" >
+        <action
+            android:id="@+id/action_searchUserFragment_to_todoListFragment"
+            app:destination="@id/todoListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/followingListFragment"
+        android:name="com.example.todomateclone.ui.user.FollowingListFragment"
+        android:label="FollowingListFragment"
+        tools:layout="@layout/fragment_following_list">
+        <action
+            android:id="@+id/action_followingListFragment_to_todoListFragment"
+            app:destination="@id/todoListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/followerListFragment"
+        android:name="com.example.todomateclone.ui.user.FollowerListFragment"
+        android:label="FollowerListFragment"
+        tools:layout="@layout/fragment_follower_list">
+    </fragment>
+
+    <fragment
+        android:id="@+id/blockingListFragment"
+        android:name="com.example.todomateclone.ui.user.BlockingListFragment"
+        android:label="BlockingListFragment"
+        tools:layout="@layout/fragment_blocking_list">
+    </fragment>
+
     <!-- global action-->
     <action
         android:id="@+id/action_global_login_graph"
@@ -176,6 +244,36 @@
         app:destination="@id/mainFragment"
         app:popUpTo="@id/nav_graph"
         app:popUpToInclusive="true"/>
+    <fragment
+        android:id="@+id/commentListFragment"
+        android:name="com.example.todomateclone.ui.diary.CommentListFragment"
+        android:label="CommentListFragment" >
+        <argument
+            android:name="diary_id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/diaryEditFragment"
+        android:name="com.example.todomateclone.ui.diary.DiaryEditFragment"
+        android:label="DiaryEditFragment" >
+        <argument
+            android:name="diary_id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/followListFragment"
+        android:name="com.example.todomateclone.ui.follow.FollowListFragment"
+        android:label="fragment_follow_list"
+        tools:layout="@layout/fragment_follow_list" >
+        <action
+            android:id="@+id/action_followListFragment_to_checkFollowFragment"
+            app:destination="@id/checkFollowFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkFollowFragment"
+        android:name="com.example.todomateclone.ui.follow.CheckFollowFragment"
+        android:label="CheckFollowFragment"
+        tools:layout="@layout/fragment_check_follow"/>
     <!-- end -->
 
 </navigation>

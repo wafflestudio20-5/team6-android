@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <CalendarView
         android:id="@+id/calendarView"
@@ -19,11 +18,27 @@
         android:id="@+id/dateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:textAlignment="viewStart"
         android:textSize="14sp"
-        android:text="yyyy-MM-dd"
+        tools:text="yyyy-MM-dd"
         app:layout_constraintStart_toStartOf="@id/calendarView"
         app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="@color/teal_200"
+        android:contentDescription="@string/add_new_todo"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        android:src="@android:drawable/ic_input_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@android:color/white" />
 
 
     <Button
@@ -38,6 +53,19 @@
         app:layout_constraintBottom_toBottomOf="@id/dateTextView"
         app:layout_constraintEnd_toEndOf="@id/calendarView"
         app:layout_constraintTop_toTopOf="@id/dateTextView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateTextView"
+        app:layout_constraintVertical_bias="1.0"
+        tools:listitem="@layout/diary_list_item"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

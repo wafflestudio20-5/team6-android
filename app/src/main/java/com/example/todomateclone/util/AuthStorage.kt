@@ -41,6 +41,16 @@ class AuthStorage(
         }
     }
 
+    fun refreshAuthInfo(accessToken: String, refreshToken: String, user: AuthStorageUserDTO) {
+        _authInfo.value = AuthInfo(accessToken, refreshToken, user)
+        sharedPref.edit {
+            putString(AccessTokenKey, accessToken)
+            putString(RefreshTokenKey, refreshToken)
+            putInt(UserIdKey, user.id)
+            putString(EmailKey, user.email)
+        }
+    }
+
     data class AuthInfo(
         val accessToken: String,
         val refreshToken: String,

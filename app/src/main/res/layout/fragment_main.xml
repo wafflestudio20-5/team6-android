@@ -17,35 +17,71 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
             android:background="?attr/colorOnPrimary"
             android:fitsSystemWindows="true"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/toolbar_title"
-                android:text="@string/app_name"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title" />
+                android:text="@string/app_name" />
 
         </androidx.appcompat.widget.Toolbar>
 
         <!-- The main content view where fragments are loaded -->
         <Button
-            android:id="@+id/logoutButton"
+            android:id="@+id/follow_list_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Go to Follow List"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="0.344" />
+
+        <Button
+            android:id="@+id/followingListButton"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:text="@string/logout"
+            android:text="팔로잉 목록 바로가기"
             android:textColor="@color/white"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="@color/teal_700"
             android:layout_gravity="center_horizontal"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+            app:layout_constraintTop_toBottomOf="@id/logoutButton" />
+
+        <Button
+            android:id="@+id/followerListButton"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="팔로워 목록 바로가기"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/teal_700"
+            android:layout_gravity="center_horizontal"
+            app:layout_constraintTop_toBottomOf="@id/followingListButton" />
+
+        <Button
+            android:id="@+id/blockingListButton"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="차단 목록 바로가기"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/teal_700"
+            android:layout_gravity="center_horizontal"
+            app:layout_constraintTop_toBottomOf="@id/followingListButton" />
 
     </LinearLayout>
+
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"
@@ -53,7 +89,17 @@
         android:layout_height="match_parent"
         android:layout_gravity="end"
         app:headerLayout="@layout/layout_navigation_header"
-        app:menu="@menu/navigation_menu" />
+        app:menu="@menu/navigation_menu" >
+        <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_gravity="bottom"
+            android:backgroundTint="@color/black"
+            android:text="@string/logout"
+            android:textColor="@color/white"/>
+    </com.google.android.material.navigation.NavigationView>
 
 
 

@@ -1,14 +1,8 @@
 package com.example.todomateclone.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
 import com.example.todomateclone.network.RestService
-
-import com.example.todomateclone.network.dto.SignupRequest
-import com.example.todomateclone.network.dto.UpdateUserRequest
-import com.example.todomateclone.network.dto.UserDTO
+import com.example.todomateclone.network.dto.*
 import com.example.todomateclone.util.AuthStorage
 import com.example.todomateclone.util.Toaster
 import kotlinx.coroutines.flow.*
@@ -26,7 +20,6 @@ class UserDetailViewModel (
     suspend fun getUser() {
         try {
             _user.value = restService.getUser().user
-
         } catch (e: Exception) {
             toaster.toastApiError(e)
         }
@@ -42,4 +35,20 @@ class UserDetailViewModel (
         }
     }
 
+    suspend fun sendResetEmail(email: String){
+        try {
+            restService.sendResetEmail(SendResetEmailRequest(email))
+        } catch (e: Exception) {
+            toaster.toastApiError(e)
+        }
+    }
+
+    suspend fun confirmPasswordChangeRequest(code : String, email: String,
+                                             new_password1 : String,new_password2 : String){
+        try {
+            restService.confirmPasswordChange(ConfirmPasswordChangeRequest(code,email,new_password1,new_password2))
+        } catch (e: Exception) {
+            toaster.toastApiError(e)
+        }
+    }
 }

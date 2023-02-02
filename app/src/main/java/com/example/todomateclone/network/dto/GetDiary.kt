@@ -13,3 +13,10 @@ data class GetDateDiaryResponse(
     val previous: String? = null,
     val results: List<DiaryDTO>
 )
+
+data class GetSearchedDiaryResponse(
+    val count: Int = 1,
+    val next: String? = null,
+    val previous: String? = null,
+    val results: List<DiaryDTO>
+)

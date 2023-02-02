@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.todomateclone.databinding.FragmentDiaryAdderBinding
 import com.example.todomateclone.viewmodel.DiaryViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -15,17 +16,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class DiaryAdderFragment : Fragment() {
 
     private var _binding: FragmentDiaryAdderBinding? = null
     private val binding get() = _binding!!
+    private val navArgs: DiaryAdderFragmentArgs by navArgs()
     private val diaryViewModel: DiaryViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentDiaryAdderBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -46,7 +47,7 @@ class DiaryAdderFragment : Fragment() {
             CoroutineScope(Dispatchers.IO).launch {
 
                 // create new diary
-                diaryViewModel.createDiary(diaryTitle.text.toString(), diaryContent.text.toString())
+                diaryViewModel.createDiary(diaryTitle.text.toString(), diaryContent.text.toString(), navArgs.date)
                 launch(Dispatchers.Main) {
                     findNavController().navigateUp()
                 }

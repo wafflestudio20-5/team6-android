@@ -18,59 +18,134 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="400dp"
-    android:layout_height="40dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    android:descendantFocusability="blocksDescendants"
-    >
+    android:descendantFocusability="blocksDescendants">
 
     <CheckBox
         android:id="@+id/done_switch"
         android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="20dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:buttonTint="#009688"
         android:checked="false"
-
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
         android:id="@+id/name_text_view"
-        android:layout_width="270dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="hi"
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@id/done_switch"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/delete_button"
-        android:layout_width="20dp"
-        android:layout_height="30dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_delete"
+    <EditText
+        android:id="@+id/name_edit_text"
+        android:layout_width="320dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:text="helloo"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/name_text_view"
+        app:layout_constraintStart_toEndOf="@id/done_switch"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/starttime_korean"
+        android:layout_width="70dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/starttime"
+        android:textAlignment="textStart"
+        android:textColor="@color/teal_700"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/done_switch"
+        app:layout_constraintTop_toBottomOf="@+id/name_text_view" />
+
+    <TextView
+        android:id="@+id/starttime_text_view"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="5dp"
+        android:text="13시 0분"
+        android:textAlignment="textStart"
+        android:textColor="@color/gray"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/starttime_korean"
+        app:layout_constraintTop_toBottomOf="@+id/name_text_view" />
+
+    <EditText
+        android:id="@+id/starttime_edit_text"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="5dp"
+        android:text="수정중"
+        android:textAlignment="textStart"
+        android:textColor="@color/gray"
+        android:textSize="14sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@id/starttime_korean"
+        app:layout_constraintTop_toBottomOf="@+id/name_text_view" />
+
+
+    <TextView
+        android:id="@+id/endtime_korean"
+        android:layout_width="70dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/endtime"
+        android:textAlignment="textStart"
+        android:textColor="@color/teal_700"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/name_text_view"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="#B4B4B4" />
+        app:layout_constraintStart_toEndOf="@id/done_switch"
+        app:layout_constraintTop_toBottomOf="@id/starttime_korean" />
+
+    <TextView
+        android:id="@+id/endtime_text_view"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:text="17시 0분"
+        android:textAlignment="textStart"
+        android:textColor="@color/gray"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/endtime_korean"
+        app:layout_constraintTop_toBottomOf="@id/starttime_korean" />
 
     <ImageButton
-        android:id="@+id/delay_button"
+        android:id="@+id/menu_button"
         android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_delay"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/delete_button"
+        android:src="@drawable/ic_dots"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="#B4B4B4" />
 
+    <Button
+        android:id="@+id/fixed_button"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="15dp"
+        android:background="@color/teal_200"
+        android:text="@string/fixed"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/endtime_text_view"
+        app:layout_constraintEnd_toEndOf="@id/menu_button"
+        app:tint="#B4B4B4" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

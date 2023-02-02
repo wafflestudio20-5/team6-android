@@ -14,6 +14,14 @@ data class UserDTO(
 //    val image: String
 )
 
+data class SearchedUserDTO(
+    val is_following: Boolean,
+    val id: Int,
+    val email: String,
+    val nickname: String,
+    val detail: String,
+)
+
 data class AuthStorageUserDTO(
     val id: Int,
     val email: String,
@@ -21,9 +29,12 @@ data class AuthStorageUserDTO(
 
 data class CommentDTO(
     val id: Int,
-    val message: String,
-    val author: UserDTO,
-    val createdAt: LocalDateTime,
+    val context: String,
+    val diary: Int,
+    val created_at: String,
+    val updated_at: String,
+    val created_by: Int,
+    val nickname: String
 )
 
 data class DiaryDTO(
@@ -41,18 +52,31 @@ data class TaskDTO(
     val name: String,
     val complete: Boolean,
     val created_by: Int,
+    val start_time: String,
+    val end_time: String,
 )
 
-data class PostDTO(
-    val id: Int,
-    val content: String,
-    val title: String,
-    val author: UserDTO,
-    val comments: List<CommentDTO>,
-    val createdAt: LocalDateTime,
-)
 
 data class ErrorDTO(
     val statusCode: Int?,
     val message: String?,
+)
+
+data class FolloweeDTO(
+    val to_user_email: String,
+    val to_user_id: Int,
+    val to_user_nickname: String,
+)
+
+data class BlockingDTO(
+    val to_user_email: String,
+    val to_user_id: Int,
+    val to_user_nickname: String,
+)
+
+data class FollowerDTO(
+    val from_user_email: String,
+    val from_user_id: Int,
+    val from_user_nickname: String,
+    val is_following: Boolean,
 )
