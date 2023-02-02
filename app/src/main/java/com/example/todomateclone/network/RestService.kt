@@ -65,7 +65,7 @@ interface RestService {
     @GET("/task/search/{uid}/list/{date}")
     suspend fun getSearchedTasksByDatePaged(@Path("date") date: String, @Path("uid") uid: Int, @Query("page") page: Int): GetTasksByDateResponse
 
-//    @GET("/task/list/")
+//    @GET("/task/list")
 //    suspend fun getAllTasksPaged(): GetAllTasksResponse
 
     @GET("/task/detail/{tid}/check")
