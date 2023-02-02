@@ -14,6 +14,14 @@ data class UserDTO(
 //    val image: String
 )
 
+data class SearchedUserDTO(
+    val is_following: Boolean,
+    val id: Int,
+    val email: String,
+    val nickname: String,
+    val detail: String,
+)
+
 data class AuthStorageUserDTO(
     val id: Int,
     val email: String,
@@ -56,10 +64,19 @@ data class ErrorDTO(
 
 data class FolloweeDTO(
     val to_user_email: String,
-    val to_user_id: String,
+    val to_user_id: Int,
+    val to_user_nickname: String,
+)
+
+data class BlockingDTO(
+    val to_user_email: String,
+    val to_user_id: Int,
+    val to_user_nickname: String,
 )
 
 data class FollowerDTO(
     val from_user_email: String,
-    val from_user_id: String,
+    val from_user_id: Int,
+    val from_user_nickname: String,
+    val is_following: Boolean,
 )

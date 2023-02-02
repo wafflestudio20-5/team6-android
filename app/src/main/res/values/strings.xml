@@ -90,9 +90,12 @@
     <string name="today">오늘 하기</string>
     <string name="mailexample">hello@gmail.com</string>
     <string name="searchforuser">찾고 싶은 이메일을 입력하세요</string>
-    <string name="nouser">해당 사용자가 존재하지 않습니다.</string>
+    <string name="nouser">해당 사용자가 존재하지 않거나\n자기 자신입니다.</string>
     <string name="following">팔로잉</string>
     <string name="will_follow">팔로우</string>
+
+    <string name="followinglist">팔로잉 목록</string>
+    <string name="followerlist">팔로워 목록</string>
 
 
 

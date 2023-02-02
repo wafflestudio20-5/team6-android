@@ -1,31 +1,30 @@
 package com.example.todomateclone.ui.user
 
 import android.net.Uri
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.todomateclone.network.RestService
 import com.example.todomateclone.network.dto.FolloweeDTO
+import com.example.todomateclone.network.dto.FollowerDTO
 import com.example.todomateclone.network.dto.TaskDTO
 import com.kakao.auth.StringSet.api
 
-class FolloweePagingSource(
+class FollowerPagingSource(
     private val restService: RestService,
-) : PagingSource<Int, FolloweeDTO>() {
+) : PagingSource<Int, FollowerDTO>() {
 
-    override fun getRefreshKey(state: PagingState<Int, FolloweeDTO>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, FollowerDTO>): Int? {
         return null
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, FolloweeDTO> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, FollowerDTO> {
         val page = params.key ?: 1
-        val response = if(page==1) restService.getFolloweeFirstPage() else restService.getFolloweePaged(page)
+        val response = if(page==1) restService.getFollowerFirstPage() else restService.getFollowerPaged(page)
         val nextPage = if(response.next==null) null else page + 1
         val prevPage = if(response.previous==null || page==1) null else page-1
-        val followeeList = response.results
-//        Log.d("followeepagingsource", followeeList.size.toString())
+        val followerList = response.results
         return LoadResult.Page(
-            data = followeeList,
+            data = followerList,
             prevKey = prevPage,
             nextKey = nextPage
         )

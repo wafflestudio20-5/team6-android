@@ -1,17 +1,21 @@
 package com.example.todomateclone.network.dto
 
-data class FollowRequest(
+data class FolloweeRequest(
     val followee: Int,
 )
 
+data class FollowerRequest(
+    val follower: Int,
+)
 
 data class FollowResponse(
-    val detail: String,
+    val detail: String?,
 )
 
 data class CheckFollowResponse(
     val is_following: Boolean,
 )
+
 
 data class GetFolloweeListResponse(
     val count: Int,
@@ -25,6 +29,13 @@ data class GetFollowerListResponse(
     val next: String?,
     val previous: String?,
     val results: List<FollowerDTO>
+)
+
+data class GetBlockingListResponse(
+    val count: Int,
+    val next: String?,
+    val previous: String?,
+    val results: List<BlockingDTO>
 )
 
 //data class CreateTaskResponse(
