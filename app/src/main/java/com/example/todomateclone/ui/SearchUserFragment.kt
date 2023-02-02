@@ -53,32 +53,28 @@ class SearchUserFragment : Fragment() {
                             nicknameTextView.setText("닉네임: "+it?.nickname)
                         }
                         lifecycleScope.launch {
-                            if(viewModel.searcheduser.value!=null) {
-                                Log.d("SearchFrag", "not null")
-                                viewModel.checkFollow(viewModel.searcheduser.value!!.id)
-                                viewModel.isfollowing.collect {
-                                    if(it==null) {
-                                        binding.apply {
-                                            willFollowButton.visibility = INVISIBLE
-                                            followingButton.visibility = INVISIBLE
-                                        }
+                            viewModel.checkFollow(viewModel.searcheduser.value!!.id)
+                            viewModel.isfollowing.collect {
+                                if(it==null) {
+                                    binding.apply {
+                                        willFollowButton.visibility = INVISIBLE
+                                        followingButton.visibility = INVISIBLE
                                     }
-                                    else{
-                                        binding.apply {
-                                            //if not yet following
-                                            if(it!!.is_following) {
-                                                willFollowButton.visibility = INVISIBLE
-                                                followingButton.visibility = VISIBLE
-                                            }
-                                            else {
-                                                willFollowButton.visibility = VISIBLE
-                                                followingButton.visibility = INVISIBLE
-                                            }
+                                }
+                                else{
+                                    binding.apply {
+                                        //if not yet following
+                                        if(it!!.is_following) {
+                                            willFollowButton.visibility = INVISIBLE
+                                            followingButton.visibility = VISIBLE
+                                        }
+                                        else {
+                                            willFollowButton.visibility = VISIBLE
+                                            followingButton.visibility = INVISIBLE
                                         }
                                     }
                                 }
                             }
-                            else Log.d("SearchFrag", "null")
                         }
                     }
                 }
@@ -117,8 +113,5 @@ class SearchUserFragment : Fragment() {
         }
 
     }
-
-    //TODO: 자기 자신 팔로우-> toast는 처리했는데 button visibility가 다름.
-    //만약에 button 기준이 아니라 collect로 checkfollow를 더해야 하는데..
 
 }

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todomateclone.databinding.FragmentFollowerListBinding
 import com.example.todomateclone.databinding.FragmentFollowingListBinding
 import com.example.todomateclone.databinding.FragmentTodoListBinding
+import com.example.todomateclone.network.dto.FollowerDTO
 import com.example.todomateclone.network.dto.TaskDTO
 import com.example.todomateclone.ui.FolloweeListAdapter
 import com.example.todomateclone.ui.FollowerListAdapter
@@ -44,7 +45,12 @@ class FollowerListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = FollowerListAdapter()
+        adapter = FollowerListAdapter(
+            {follower -> deleteFinal(follower)},
+            {follower -> blockFinal(follower)},
+            {follower -> followupFinal(follower)},
+            {follower -> cancelfollowupFinal(follower)}
+        )
         binding.recyclerView.adapter = adapter
         val layoutManager = LinearLayoutManager(this.context)
         binding.recyclerView.layoutManager = layoutManager
@@ -62,6 +68,24 @@ class FollowerListFragment : Fragment() {
                 adapter.submitData(pagingData)
             }
         }
+    }
+
+    fun deleteFinal(follower: FollowerDTO) {
+        lifecycleScope.launch {viewModel.deleteFollower(follower.from_user_id)}
+        refreshFollower()
+    }
+
+    fun blockFinal(follower: FollowerDTO) {
+        lifecycleScope.launch {viewModel.blockUser(follower.from_user_id)}
+        refreshFollower()
+    }
+
+    fun followupFinal(follower: FollowerDTO) {
+        lifecycleScope.launch {viewModel.followUser(follower.from_user_id)}
+    }
+
+    fun cancelfollowupFinal(follower: FollowerDTO) {
+        lifecycleScope.launch {viewModel.unfollowUser(follower.from_user_id)}
     }
 
 }

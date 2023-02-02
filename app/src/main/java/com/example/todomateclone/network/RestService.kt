@@ -79,29 +79,45 @@ interface RestService {
 
     //Search API
     @GET("/search/{email}")
-    suspend fun searchUser(@Path("email") email: String): UserDTO?
+    suspend fun searchUser(@Path("email") email: String): SearchedUserDTO?
 
     //Follow API
     @POST("/follow/")
-    suspend fun followUser(@Body() request: FollowRequest): FollowResponse?
+    suspend fun followUser(@Body() request: FolloweeRequest): FollowResponse?
 
-    @POST("/follow/unfollow/")
-    suspend fun unfollowUser(@Body() request: FollowRequest): FollowResponse?
+    @DELETE("/follow/followee/detail/{fid}/")
+    suspend fun unfollowUser(@Path("fid") fid: Int): FollowResponse?
 
-    @POST("/follow/followee/{uid}")
-    suspend fun checkFollow(@Path("uid") uid: Int): CheckFollowResponse
+    @DELETE("/follow/follower/detail/{fid}/")
+    suspend fun deleteFollower(@Path("fid") fid: Int): FollowResponse?
 
-    @GET("/follow/followee/")
+    @DELETE("/follow/block/detail/{fid}/")
+    suspend fun deleteBlock(@Path("fid") fid: Int): FollowResponse?
+
+    @POST("/follow/block/")
+    suspend fun blockUser(@Body() request: FollowerRequest): FollowResponse?
+
+    @GET("/follow/followee/detail/{fid}/")
+    suspend fun checkFollow(@Path("fid") fid: Int): CheckFollowResponse
+
+    @GET("/follow/followee/list/")
     suspend fun getFolloweeFirstPage(): GetFolloweeListResponse
 
-    @GET("/follow/followee/")
+    @GET("/follow/followee/list/")
     suspend fun getFolloweePaged(@Query("page") page: Int): GetFolloweeListResponse
 
-    @GET("/follow/follower/")
+    @GET("/follow/follower/list/")
     suspend fun getFollowerFirstPage(): GetFollowerListResponse
 
-    @GET("/follow/follower/")
+    @GET("/follow/follower/list/")
     suspend fun getFollowerPaged(@Query("page") page: Int): GetFollowerListResponse
+
+    //Block
+    @GET("/follow/block/list/")
+    suspend fun getBlockingFirstPage(): GetBlockingListResponse
+
+    @GET("/follow/block/list/")
+    suspend fun getBlockingPaged(@Query("page") page: Int): GetBlockingListResponse
 
 
 

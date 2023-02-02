@@ -3,6 +3,7 @@ package com.example.todomateclone.ui
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -14,7 +15,7 @@ import com.example.todomateclone.network.dto.FollowerDTO
 import com.example.todomateclone.network.dto.TaskDTO
 
 
-class FollowerListAdapter() : PagingDataAdapter<FollowerDTO, FollowerListAdapter.FollowerViewHolder>(DiffCallback) {
+class FollowerListAdapter(private val onItemClicked1: (FollowerDTO) -> Unit, private val onItemClicked2: (FollowerDTO) -> Unit, private val onItemClicked3: (FollowerDTO) -> Unit, private val onItemClicked4: (FollowerDTO) -> Unit) : PagingDataAdapter<FollowerDTO, FollowerListAdapter.FollowerViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowerViewHolder {
         return FollowerViewHolder(
@@ -28,7 +29,20 @@ class FollowerListAdapter() : PagingDataAdapter<FollowerDTO, FollowerListAdapter
 
     override fun onBindViewHolder(holder: FollowerViewHolder, position: Int) {
         val current = getItem(position)
+
         current?.let {
+            holder.deleteButton.setOnClickListener {
+                onItemClicked1(current)
+            }
+            holder.blockButton.setOnClickListener {
+                onItemClicked2(current)
+            }
+            holder.followupButton.setOnClickListener {
+                onItemClicked3(current)
+            }
+            holder.cancelfollowupButton.setOnClickListener {
+                onItemClicked4(current)
+            }
             holder.bind(it)
         }
     }
@@ -37,10 +51,19 @@ class FollowerListAdapter() : PagingDataAdapter<FollowerDTO, FollowerListAdapter
 
     class FollowerViewHolder(private var binding: FollowListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        val visitButton = binding.visitButton
+        val deleteButton = binding.deleteButton
+        val blockButton = binding.blockButton
+        val followupButton = binding.followupButton
+        val cancelfollowupButton = binding.cancelfollowupButton
         fun bind(follower: FollowerDTO) {
             binding.apply {
+                followupButton.visibility = VISIBLE
+                unfollowButton.visibility = INVISIBLE
+                cancelfollowupButton.visibility = INVISIBLE
                 visitButton.visibility = INVISIBLE
+                deleteButton.visibility = VISIBLE
+                blockButton.visibility = VISIBLE
+                unblockButton.visibility = INVISIBLE
                 emailTextView.setText(follower.from_user_email)
                 nicknameTextView.setText("닉네임: "+follower.from_user_nickname)
             }

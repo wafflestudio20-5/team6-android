@@ -11,6 +11,7 @@ import androidx.paging.cachedIn
 import com.example.todomateclone.network.RestService
 import com.example.todomateclone.network.dto.*
 import com.example.todomateclone.ui.todo.TaskPagingSource
+import com.example.todomateclone.ui.user.BlockingPagingSource
 import com.example.todomateclone.ui.user.FolloweePagingSource
 import com.example.todomateclone.ui.user.FollowerPagingSource
 import com.example.todomateclone.util.AuthStorage
@@ -29,8 +30,8 @@ class UserViewModel(
     private val toaster: Toaster,
 ) : ViewModel() {
 
-    private val _searcheduser = MutableStateFlow<UserDTO?>(null)
-    val searcheduser: StateFlow<UserDTO?> = _searcheduser
+    private val _searcheduser = MutableStateFlow<SearchedUserDTO?>(null)
+    val searcheduser: StateFlow<SearchedUserDTO?> = _searcheduser
 
     private val _isfollowing = MutableStateFlow<CheckFollowResponse?>(null)
     val isfollowing: StateFlow<CheckFollowResponse?> = _isfollowing
@@ -44,6 +45,12 @@ class UserViewModel(
     fun createFollowerPager(): Flow<PagingData<FollowerDTO>> {
         return Pager(PagingConfig(pageSize = 10)) {
             FollowerPagingSource(restService)
+        }.flow.cachedIn(viewModelScope)
+    }
+
+    fun createBlockingPager(): Flow<PagingData<BlockingDTO>> {
+        return Pager(PagingConfig(pageSize = 10)) {
+            BlockingPagingSource(restService)
         }.flow.cachedIn(viewModelScope)
     }
 
@@ -153,8 +160,9 @@ class UserViewModel(
         viewModelScope.launch {
             try {
                 restService.followUser(
-                    FollowRequest(followee = followee)
+                    FolloweeRequest(followee = followee)
                 )
+                toaster.toast("팔로우하였습니다.")
             } catch (e: HttpException) {
                 if (e.code() == 400) {
                     toaster.toast("자기 자신은 팔로우할 수 없습니다.")
@@ -168,22 +176,60 @@ class UserViewModel(
         }
     }
 
-    suspend fun unfollowUser(followee: Int) {
+    suspend fun unfollowUser(fid: Int) {
         viewModelScope.launch {
             try {
                 restService.unfollowUser(
-                    FollowRequest(followee = followee)
+                    fid = fid
                 )
+                toaster.toast("언팔로우하였습니다.")
             } catch (e: Exception) {
                 toaster.toastApiError(e)
             }
         }
     }
 
-    suspend fun checkFollow(uid: Int) {
+    suspend fun deleteFollower(fid: Int) {
         viewModelScope.launch {
             try {
-                _isfollowing.value = restService.checkFollow(uid = uid)
+                restService.deleteFollower(
+                    fid = fid
+                )
+                toaster.toast("팔로워를 삭제했습니다.")
+            } catch (e: Exception) {
+                toaster.toastApiError(e)
+            }
+        }
+    }
+
+    suspend fun blockUser(follower: Int) {
+        viewModelScope.launch {
+            try {
+                restService.blockUser(
+                    FollowerRequest(follower = follower)
+                )
+                toaster.toast("차단했습니다.")
+            } catch (e: Exception) {
+                toaster.toastApiError(e)
+            }
+        }
+    }
+
+    suspend fun checkFollow(fid: Int) {
+        viewModelScope.launch {
+            try {
+                _isfollowing.value = restService.checkFollow(fid = fid)
+            } catch (e: Exception) {
+                toaster.toastApiError(e)
+            }
+        }
+    }
+
+    suspend fun unblockUser(fid: Int) {
+        viewModelScope.launch {
+            try {
+                restService.deleteBlock(fid = fid)
+                toaster.toast("차단을 해제했습니다.")
             } catch (e: Exception) {
                 toaster.toastApiError(e)
             }

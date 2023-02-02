@@ -86,6 +86,9 @@
         <action
             android:id="@+id/action_mainFragment_to_followerListFragment"
             app:destination="@id/followerListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_blockingListFragment"
+            app:destination="@id/blockingListFragment" />
     </fragment>
     <fragment
         android:id="@+id/todoListFragment"
@@ -203,6 +206,13 @@
         android:name="com.example.todomateclone.ui.user.FollowerListFragment"
         android:label="FollowerListFragment"
         tools:layout="@layout/fragment_follower_list">
+    </fragment>
+
+    <fragment
+        android:id="@+id/blockingListFragment"
+        android:name="com.example.todomateclone.ui.user.BlockingListFragment"
+        android:label="BlockingListFragment"
+        tools:layout="@layout/fragment_blocking_list">
     </fragment>
 
     <!-- global action-->
