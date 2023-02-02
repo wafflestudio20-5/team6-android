@@ -28,7 +28,8 @@ class UserPageFragment : Fragment() {
     private var _binding: FragmentUserPageBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentUserPageBinding.inflate(inflater, container, false)
@@ -42,8 +43,8 @@ class UserPageFragment : Fragment() {
                 }
             }
         }
-            return binding.root
-        }
+        return binding.root
+    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,28 +59,21 @@ class UserPageFragment : Fragment() {
             this.findNavController().navigate(action)
         }
 
-        changePasswordButton.setOnClickListener(){
+        changePasswordButton.setOnClickListener() {
             val email = userDetailViewModel.user.value?.email.toString()
-            CoroutineScope(Dispatchers.IO).launch{
+            CoroutineScope(Dispatchers.IO).launch {
                 userDetailViewModel.sendResetEmail(email)
             }
             val action = UserPageFragmentDirections.actionUserPageFragmentToChangePasswordFragment()
             this.findNavController().navigate(action)
         }
-        deleteAccountButton.setOnClickListener(){
-            val builder = AlertDialog.Builder(activity)
-            builder.setTitle("계정삭제")
-                .setMessage("정말로 계정을 삭제할까요?")
-                .setPositiveButton("확인",
-                DialogInterface.OnClickListener{ dialog, which ->
-                    CoroutineScope(Dispatchers.IO).launch{
-                        userViewModel.deleteUser()
-                        userViewModel.logout()
-                    }
-                })
-                .setNegativeButton("취소",
-                DialogInterface.OnClickListener{dialog, which -> Unit  })
+        deleteAccountButton.setOnClickListener() {
+            CoroutineScope(Dispatchers.IO).launch {
+                userViewModel.deleteUser()
+                userViewModel.logout()
             }
+
             this.findNavController().navigate(R.id.action_global_login_graph)
         }
+    }
 }
