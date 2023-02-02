@@ -12,7 +12,6 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todomateclone.databinding.FragmentTodoListBinding
 import com.example.todomateclone.network.dto.TaskDTO
-import com.example.todomateclone.ui.todo.TodoFixerFragment
 import com.example.todomateclone.ui.TodoListAdapter
 import com.example.todomateclone.viewmodel.TodoViewModel
 import kotlinx.coroutines.launch

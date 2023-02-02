@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.todomateclone.databinding.FragmentLoginBinding
 import com.example.todomateclone.util.AuthStorage
@@ -46,10 +47,11 @@ class LoginFragment : Fragment() {
             loadingProgressBar.visibility = View.VISIBLE
             Log.d("userViewModel", "Start Login")
 
-            CoroutineScope(Dispatchers.IO).launch {
+            lifecycleScope.launch {
 
                 // request server user login with email and password
-                userViewModel.login(email.text.toString(), password.text.toString())
+                val response = async(Dispatchers.IO) { userViewModel.login(email.text.toString(), password.text.toString()) }
+                response.await()
                 authStorage.authInfo.collect {
                     if (it == null){
                         Log.d("LoginFragment", "Unauthorized error")
@@ -57,10 +59,10 @@ class LoginFragment : Fragment() {
                     } else {
                         Log.d("LoginFragment", "Login Succeeded")
                         loadingProgressBar.visibility = View.INVISIBLE
-                        launch(Dispatchers.Main) {
-                            val action = LoginFragmentDirections.actionLoginFragmentToMainFragment()
-                            findNavController().navigate(action)
-                        }
+
+                        val action = LoginFragmentDirections.actionLoginFragmentToMainFragment()
+                        findNavController().navigate(action)
+
                     }
                 }
             }

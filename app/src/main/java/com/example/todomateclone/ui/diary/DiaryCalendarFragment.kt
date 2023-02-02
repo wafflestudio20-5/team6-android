@@ -1,4 +1,4 @@
-package com.example.todomateclone.ui
+package com.example.todomateclone.ui.diary
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,8 +10,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todomateclone.databinding.FragmentDiaryCalendarBinding
-import com.example.todomateclone.ui.diary.DiaryListAdapter
-import com.example.todomateclone.ui.diary.DiaryListFragmentDirections
 import com.example.todomateclone.viewmodel.DiaryViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -43,7 +41,7 @@ class DiaryCalendarFragment : Fragment() {
 
         adapter = DiaryListAdapter(
             onItemClicked = {
-                val action = DiaryListFragmentDirections.actionDiaryListFragmentToDiaryDetailFragment(it.id)
+                val action = DiaryCalendarFragmentDirections.actionDiaryCalendarFragmentToDiaryDetailFragment(it.id)
                 this.findNavController().navigate(action)
             }
         )
@@ -75,10 +73,10 @@ class DiaryCalendarFragment : Fragment() {
 
             calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
                 dateTextView.visibility = View.VISIBLE
-                if(month<9) monthstr="0"+(month+1).toString()
-                else monthstr=(month+1).toString()
-                if(dayOfMonth<10) daystr="0"+dayOfMonth.toString()
-                else daystr=dayOfMonth.toString()
+                monthstr = if(month<9) "0"+(month+1).toString()
+                else (month+1).toString()
+                daystr = if(dayOfMonth<10) "0$dayOfMonth"
+                else dayOfMonth.toString()
                 yearstr=year.toString()
 
                 dateTextView.text = String.format("%s-%s-%s", yearstr, monthstr, daystr)

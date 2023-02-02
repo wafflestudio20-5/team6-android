@@ -99,7 +99,7 @@
     </fragment>
     <fragment
         android:id="@+id/diaryCalendarFragment"
-        android:name="com.example.todomateclone.ui.DiaryCalendarFragment"
+        android:name="com.example.todomateclone.ui.diary.DiaryCalendarFragment"
         android:label="TodoListFragment"
         tools:layout="@layout/fragment_todo_list">
         <argument

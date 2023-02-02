@@ -70,6 +70,7 @@ class UserPageFragment : Fragment() {
             val action = UserPageFragmentDirections.actionUserPageFragmentToChangePasswordFragment()
             this.findNavController().navigate(action)
         }
+
         deleteAccountButton.setOnClickListener(){
             // 확인을 위한 팝업창 출력
             

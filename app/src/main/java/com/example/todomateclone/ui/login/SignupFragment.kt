@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.todomateclone.databinding.FragmentSignupBinding
 import com.example.todomateclone.viewmodel.UserViewModel
@@ -23,7 +24,7 @@ class SignupFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSignupBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -40,13 +41,12 @@ class SignupFragment : Fragment() {
 
         signUpButton.setOnClickListener {
             loadingProgressBar.visibility = View.VISIBLE
-            CoroutineScope(Dispatchers.IO).launch{
+            lifecycleScope.launch{
                 userViewModel.signup(email.text.toString(), password1.text.toString(), password2.text.toString())
                 loadingProgressBar.visibility = View.INVISIBLE
+                val action = SignupFragmentDirections.actionSignUpFragmentToEmailAuthenticateFragment(email.text.toString())
+                findNavController().navigate(action)
             }
-
-            val action = SignupFragmentDirections.actionSignUpFragmentToEmailAuthenticateFragment(email.text.toString())
-            this.findNavController().navigate(action)
         }
         // navigate up action
         upButton.setOnClickListener {
