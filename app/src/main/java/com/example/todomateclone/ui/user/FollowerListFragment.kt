@@ -1,5 +1,7 @@
 package com.example.todomateclone.ui.user
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -35,6 +37,7 @@ class FollowerListFragment : Fragment() {
 
     private val viewModel: UserViewModel by viewModel()
     lateinit var adapter: FollowerListAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -76,8 +79,17 @@ class FollowerListFragment : Fragment() {
     }
 
     fun blockFinal(follower: FollowerDTO) {
-        lifecycleScope.launch {viewModel.blockUser(follower.from_user_id)}
-        refreshFollower()
+        val builder = AlertDialog.Builder(requireActivity())
+        builder.setMessage("정말로 차단하시겠습니까?")
+            .setPositiveButton("네") { _, _ ->
+                lifecycleScope.launch {viewModel.blockUser(follower.from_user_id)}
+                refreshFollower()
+            }
+            .setNegativeButton("아니요") { _, _ ->
+                // Perform the action for "No"
+            }
+        val dialog = builder.create()
+        dialog.show()
     }
 
     fun followupFinal(follower: FollowerDTO) {
