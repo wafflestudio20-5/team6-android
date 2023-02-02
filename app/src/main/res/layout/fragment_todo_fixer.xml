@@ -94,7 +94,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="205dp"
+        app:layout_constraintGuide_percent="0.5"
         tools:visibility="invisible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
