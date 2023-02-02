@@ -39,9 +39,13 @@ class FollowerListAdapter(private val onItemClicked1: (FollowerDTO) -> Unit, pri
             }
             holder.followupButton.setOnClickListener {
                 onItemClicked3(current)
+                holder.followupButton.visibility = INVISIBLE
+                holder.cancelfollowupButton.visibility = VISIBLE
             }
             holder.cancelfollowupButton.setOnClickListener {
                 onItemClicked4(current)
+                holder.followupButton.visibility = VISIBLE
+                holder.cancelfollowupButton.visibility = INVISIBLE
             }
             holder.bind(it)
         }
@@ -57,9 +61,15 @@ class FollowerListAdapter(private val onItemClicked1: (FollowerDTO) -> Unit, pri
         val cancelfollowupButton = binding.cancelfollowupButton
         fun bind(follower: FollowerDTO) {
             binding.apply {
-                followupButton.visibility = VISIBLE
+                if(follower.is_following) {
+                    followupButton.visibility = INVISIBLE
+                    cancelfollowupButton.visibility = VISIBLE
+                }
+                else {
+                    followupButton.visibility = VISIBLE
+                    cancelfollowupButton.visibility = INVISIBLE
+                }
                 unfollowButton.visibility = INVISIBLE
-                cancelfollowupButton.visibility = INVISIBLE
                 visitButton.visibility = INVISIBLE
                 deleteButton.visibility = VISIBLE
                 blockButton.visibility = VISIBLE

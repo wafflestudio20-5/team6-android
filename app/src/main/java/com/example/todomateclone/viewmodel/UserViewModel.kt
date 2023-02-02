@@ -215,15 +215,15 @@ class UserViewModel(
         }
     }
 
-    suspend fun checkFollow(fid: Int) {
-        viewModelScope.launch {
-            try {
-                _isfollowing.value = restService.checkFollow(fid = fid)
-            } catch (e: Exception) {
-                toaster.toastApiError(e)
-            }
-        }
-    }
+//    suspend fun checkFollow(fid: Int) {
+//        viewModelScope.launch {
+//            try {
+//                _isfollowing.value = restService.checkFollow(fid = fid)
+//            } catch (e: Exception) {
+//                toaster.toastApiError(e)
+//            }
+//        }
+//    }
 
     suspend fun unblockUser(fid: Int) {
         viewModelScope.launch {

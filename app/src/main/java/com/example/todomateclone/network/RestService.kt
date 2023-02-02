@@ -8,27 +8,27 @@ import java.time.LocalDate
 
 interface RestService {
     // Login, SignUp, Social Login API
-    @POST("/accounts/login/")
+    @POST("/accounts/login")
     suspend fun login(@Body() request: LoginRequest): LoginResult
 
-    @POST("/accounts/logout/")
+    @POST("/accounts/logout")
     suspend fun logout(
         @Header("authorization") accessToken: String,
     ): Response<Unit>
 
-    @POST("/accounts/registration/")
+    @POST("/accounts/registration")
     suspend fun signup(@Body() request: SignupRequest): SignupResult
 
-    @POST("/accounts/registration/confirm/")
+    @POST("/accounts/registration/confirm")
     suspend fun signupConfirm(@Body() request: SignUpConfirmRequest): SignUpConfirmResult
 
-    @POST("/accounts/resend-email/")
+    @POST("/accounts/resend-email")
     suspend fun resendEmail(@Body() request: ResendEmailRequest): ResendEmailResult
 
-    @GET("/accounts/user/")
+    @GET("/accounts/user")
     suspend fun getUser(): GetUserResult
 
-    @PUT("/accounts/user/")
+    @PUT("/accounts/user")
     suspend fun updateUser(
         @Body() request: UpdateUserRequest
     ): UpdateUserResult
@@ -41,7 +41,7 @@ interface RestService {
     @POST("/accounts/kakao/login")
     suspend fun kakaoLogin(@Body() request: SocialLoginRequest): LoginResult
 
-    @POST("/accounts/google/login/")
+    @POST("/accounts/google/login")
     suspend fun googleLogin(@Body() request: SocialLoginRequest): LoginResult
 
 
@@ -78,45 +78,45 @@ interface RestService {
     suspend fun changeTask(@Body() request: ChangeTaskRequest, @Path("tid") tid: Int): TaskDTO?
 
     //Search API
-    @GET("/search/{email}")
+    @GET("/search/{email}/")
     suspend fun searchUser(@Path("email") email: String): SearchedUserDTO?
 
     //Follow API
-    @POST("/follow/")
+    @POST("/follow/follow")
     suspend fun followUser(@Body() request: FolloweeRequest): FollowResponse?
 
-    @DELETE("/follow/followee/detail/{fid}/")
+    @DELETE("/follow/followee/detail/{fid}")
     suspend fun unfollowUser(@Path("fid") fid: Int): FollowResponse?
 
-    @DELETE("/follow/follower/detail/{fid}/")
+    @DELETE("/follow/follower/detail/{fid}")
     suspend fun deleteFollower(@Path("fid") fid: Int): FollowResponse?
 
-    @DELETE("/follow/block/detail/{fid}/")
+    @DELETE("/follow/block/detail/{fid}")
     suspend fun deleteBlock(@Path("fid") fid: Int): FollowResponse?
 
-    @POST("/follow/block/")
+    @POST("/follow/block")
     suspend fun blockUser(@Body() request: FollowerRequest): FollowResponse?
 
-    @GET("/follow/followee/detail/{fid}/")
+    @GET("/follow/followee/detail/{fid}")
     suspend fun checkFollow(@Path("fid") fid: Int): CheckFollowResponse
 
-    @GET("/follow/followee/list/")
+    @GET("/follow/followee/list")
     suspend fun getFolloweeFirstPage(): GetFolloweeListResponse
 
-    @GET("/follow/followee/list/")
+    @GET("/follow/followee/list")
     suspend fun getFolloweePaged(@Query("page") page: Int): GetFolloweeListResponse
 
-    @GET("/follow/follower/list/")
+    @GET("/follow/follower/list")
     suspend fun getFollowerFirstPage(): GetFollowerListResponse
 
-    @GET("/follow/follower/list/")
+    @GET("/follow/follower/list")
     suspend fun getFollowerPaged(@Query("page") page: Int): GetFollowerListResponse
 
     //Block
-    @GET("/follow/block/list/")
+    @GET("/follow/block/list")
     suspend fun getBlockingFirstPage(): GetBlockingListResponse
 
-    @GET("/follow/block/list/")
+    @GET("/follow/block/list")
     suspend fun getBlockingPaged(@Query("page") page: Int): GetBlockingListResponse
 
 

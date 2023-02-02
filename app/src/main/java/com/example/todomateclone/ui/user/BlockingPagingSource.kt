@@ -24,7 +24,6 @@ class BlockingPagingSource(
         val nextPage = if(response.next==null) null else page + 1
         val prevPage = if(response.previous==null || page==1) null else page-1
         val blockingList = response.results
-//        Log.d("followeepagingsource", followeeList.size.toString())
         return LoadResult.Page(
             data = blockingList,
             prevKey = prevPage,

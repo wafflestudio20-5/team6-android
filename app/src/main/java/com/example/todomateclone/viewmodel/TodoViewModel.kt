@@ -105,7 +105,7 @@ class TodoViewModel(
             } catch (e: HttpException) {
                 toaster.toastApiError(e)
             } catch (e: Exception) {
-
+                toaster.toast("todo를 하루 미뤘습니다.")
             }
         }
     }
@@ -135,7 +135,7 @@ class TodoViewModel(
             } catch (e: HttpException) {
                 toaster.toastApiError(e)
             } catch (e: Exception) {
-
+                toaster.toast("todo를 수정했습니다.")
             }
         }
     }
