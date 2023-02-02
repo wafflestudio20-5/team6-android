@@ -77,9 +77,6 @@
         <action
             android:id="@+id/action_mainFragment_to_userPageFragment"
             app:destination="@id/userPageFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_followListFragment"
-            app:destination="@id/followListFragment" />
     </fragment>
     <fragment
         android:id="@+id/todoListFragment"
@@ -132,12 +129,6 @@
             app:argType="integer" />
     </fragment>
     <fragment
-        android:id="@+id/changeEmailFragment"
-        android:name="com.example.todomateclone.ui.user.ChangeEmailFragment"
-        android:label="ChangeEmailFragment"
-        tools:layout="@layout/fragment_change_email" >
-    </fragment>
-    <fragment
         android:id="@+id/changePasswordFragment"
         android:name="com.example.todomateclone.ui.user.ChangePasswordFragment"
         android:label="ChangePasswordFragment"
@@ -158,9 +149,6 @@
             android:id="@+id/action_userPageFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
         <action
-            android:id="@+id/action_userPageFragment_to_changeEmailFragment"
-            app:destination="@id/changeEmailFragment" />
-        <action
             android:id="@+id/action_userPageFragment_to_startFragment"
             app:destination="@id/startFragment" />
         <action
@@ -179,20 +167,4 @@
         app:destination="@id/mainFragment"
         app:popUpTo="@id/nav_graph"
         app:popUpToInclusive="true"/>
-    <fragment
-        android:id="@+id/followListFragment"
-        android:name="com.example.todomateclone.ui.follow.FollowListFragment"
-        android:label="fragment_follow_list"
-        tools:layout="@layout/fragment_follow_list" >
-        <action
-            android:id="@+id/action_followListFragment_to_checkFollowFragment"
-            app:destination="@id/checkFollowFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/checkFollowFragment"
-        android:name="com.example.todomateclone.ui.follow.CheckFollowFragment"
-        android:label="CheckFollowFragment"
-        tools:layout="@layout/fragment_check_follow"/>
-    <!-- end -->
-
 </navigation>

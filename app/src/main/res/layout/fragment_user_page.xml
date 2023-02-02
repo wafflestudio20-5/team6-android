@@ -4,33 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.user.UserPageFragment">
+    tools:context=".ui.user.UserPageFragment"
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="-20dp">
 
     <LinearLayout
         android:id="@+id/linearLayout_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
         android:layout_marginBottom="24dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/button_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginHorizontal="15dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView_linked_email"
             android:layout_width="match_parent"
             android:layout_height="98dp"
+            android:layout_marginTop="50dp"
             android:gravity="bottom"
             android:text="@string/linked_email" />
 
         <TextView
             android:id="@+id/textView_email"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="98dp"
+            android:layout_marginTop="10dp"
             android:text="@string/prompt_email"
             android:textColor="@color/teal_700"
             android:textSize="20sp" />
@@ -41,56 +44,48 @@
         android:id="@+id/button_profile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="12dp"
+        android:background="#00ff0000"
+        android:gravity="start"
         android:text="@string/profile"
         android:textColor="@color/black"
-        android:gravity="start"
-        android:layout_margin="10dp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout_email"
-        android:background="#00ff0000"
-        android:textSize="16sp"/>
-
-    <Button
-        android:id="@+id/button_change_email"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="#00ff0000"
-        android:gravity="start"
-        android:text="@string/change_email"
-        android:layout_margin="10dp"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_profile"
-        android:textSize="16sp"/>
-
-    <Button
-        android:id="@+id/button_change_password"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="#00ff0000"
-        android:gravity="start"
-        android:text="@string/change_password"
-        android:layout_margin="10dp"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_change_email"
-        android:textSize="16sp"/>
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout_email" />
 
     <Button
         android:id="@+id/button_delete_account"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
         android:background="#00ff0000"
         android:gravity="start"
         android:text="@string/delete_account"
-        android:layout_margin="10dp"
         android:textColor="@color/black"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_change_password"
-        android:textSize="16sp"/>
+        app:layout_constraintTop_toBottomOf="@+id/button_change_password" />
+
+    <Button
+        android:id="@+id/button_change_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="16dp"
+        android:background="#00ff0000"
+        android:gravity="start"
+        android:text="@string/change_password"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_profile" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

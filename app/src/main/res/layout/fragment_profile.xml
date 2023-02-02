@@ -12,7 +12,7 @@
         android:layout_height="140dp"
         android:layout_gravity="center"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_baseline_photo_camera_24"
+        android:src="@drawable/ic_baseline_cruelty_free_24"
         app:civ_border_color="#000000"
         app:civ_border_overlay="true"
         app:civ_border_width="5dp"

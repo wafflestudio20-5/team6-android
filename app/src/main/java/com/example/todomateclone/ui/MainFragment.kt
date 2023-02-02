@@ -68,11 +68,6 @@ class MainFragment : Fragment() {
             this.findNavController().navigate(R.id.action_global_login_graph)
         }
 
-        followListButton.setOnClickListener {
-            val action = MainFragmentDirections.actionMainFragmentToFollowListFragment()
-            this.findNavController().navigate(action)
-        }
-
         // toolbar menu selected action
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
