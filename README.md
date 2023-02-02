@@ -40,12 +40,17 @@ git merge 되면 navigation 그래프
 ### 1. 계정페이지
 
 <center><img src = "https://user-images.githubusercontent.com/40379446/216373140-d8f9574a-352a-4942-947e-b583ae421040.png"></center>
+<br/>
+<br/>
 
 ### 2. 프로필 페이지
 
 <center><img src = "https://user-images.githubusercontent.com/40379446/216373319-51b24d26-4984-4236-ac0f-eeabe9327989.png"></center>
+<br/>
+<br/>
 
 ### 3. 비밀번호변경 페이지
 
 <center><img src = "https://user-images.githubusercontent.com/40379446/216373540-6e3fdef8-32e9-4d3d-8ddd-72c6c17a101d.png"></center>
-
+<br/>
+<br/>
