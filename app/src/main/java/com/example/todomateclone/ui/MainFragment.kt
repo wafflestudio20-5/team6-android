@@ -76,6 +76,11 @@ class MainFragment : Fragment() {
             this.findNavController().navigate(action)
         }
 
+        binding.blockingListButton.setOnClickListener{
+            val action = MainFragmentDirections.actionMainFragmentToBlockingListFragment()
+            this.findNavController().navigate(action)
+        }
+
         // toolbar menu selected action
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {

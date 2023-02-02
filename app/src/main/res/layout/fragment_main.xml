@@ -69,6 +69,18 @@
             android:layout_gravity="center_horizontal"
             app:layout_constraintTop_toBottomOf="@id/followingListButton" />
 
+        <Button
+            android:id="@+id/blockingListButton"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="차단 목록 바로가기"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/teal_700"
+            android:layout_gravity="center_horizontal"
+            app:layout_constraintTop_toBottomOf="@id/followingListButton" />
+
     </LinearLayout>
 
 

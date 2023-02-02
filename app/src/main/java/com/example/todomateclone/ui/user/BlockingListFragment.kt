@@ -11,11 +11,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.todomateclone.databinding.FragmentBlockingListBinding
 import com.example.todomateclone.databinding.FragmentFollowingListBinding
 import com.example.todomateclone.databinding.FragmentTodoListBinding
+import com.example.todomateclone.network.dto.BlockingDTO
 import com.example.todomateclone.network.dto.FolloweeDTO
 import com.example.todomateclone.network.dto.FollowerDTO
 import com.example.todomateclone.network.dto.TaskDTO
+import com.example.todomateclone.ui.BlockingListAdapter
 import com.example.todomateclone.ui.FolloweeListAdapter
 import com.example.todomateclone.ui.SearchUserFragmentDirections
 import com.example.todomateclone.ui.todo.TodoFixerFragment
@@ -29,49 +32,44 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class FollowingListFragment : Fragment() {
-    private lateinit var binding: FragmentFollowingListBinding
+class BlockingListFragment : Fragment() {
+    private lateinit var binding: FragmentBlockingListBinding
 
     private val viewModel: UserViewModel by viewModel()
-    lateinit var adapter: FolloweeListAdapter
+    lateinit var adapter: BlockingListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFollowingListBinding.inflate(inflater, container, false)
+        binding = FragmentBlockingListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = FolloweeListAdapter({followee -> navigateTask(followee.to_user_id)}, {followee -> unfollowFinal(followee)})
+        adapter = BlockingListAdapter({blocking -> unblockFinal(blocking)})
         binding.recyclerView.adapter = adapter
         val layoutManager = LinearLayoutManager(this.context)
         binding.recyclerView.layoutManager = layoutManager
-        refreshFollowee()
+        refreshBlocking()
 
         binding.refreshButton.setOnClickListener {
-            refreshFollowee()
+            refreshBlocking()
         }
     }
 
-    fun refreshFollowee() {
+    fun refreshBlocking() {
         viewLifecycleOwner.lifecycleScope.launch {
-            val pager = viewModel.createFolloweePager()
+            val pager = viewModel.createBlockingPager()
             pager.collect { pagingData ->
                 adapter.submitData(pagingData)
             }
         }
     }
 
-    fun navigateTask(sid: Int) {
-        val action = FollowingListFragmentDirections.actionFollowingListFragmentToTodoListFragment(searchedId = sid)
-        this.findNavController().navigate(action)
-    }
-
-    fun unfollowFinal(followee: FolloweeDTO) {
-        lifecycleScope.launch {viewModel.unfollowUser(followee.to_user_id)}
-        refreshFollowee()
+    fun unblockFinal(blocking: BlockingDTO) {
+        lifecycleScope.launch {viewModel.unblockUser(blocking.to_user_id)}
+        refreshBlocking()
     }
 
 }

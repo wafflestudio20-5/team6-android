@@ -1,5 +1,7 @@
 package com.example.todomateclone.ui.user
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todomateclone.databinding.FragmentFollowerListBinding
 import com.example.todomateclone.databinding.FragmentFollowingListBinding
 import com.example.todomateclone.databinding.FragmentTodoListBinding
+import com.example.todomateclone.network.dto.FollowerDTO
 import com.example.todomateclone.network.dto.TaskDTO
 import com.example.todomateclone.ui.FolloweeListAdapter
 import com.example.todomateclone.ui.FollowerListAdapter
@@ -35,6 +38,7 @@ class FollowerListFragment : Fragment() {
     private val viewModel: UserViewModel by viewModel()
     lateinit var adapter: FollowerListAdapter
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -44,7 +48,12 @@ class FollowerListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = FollowerListAdapter()
+        adapter = FollowerListAdapter(
+            {follower -> deleteFinal(follower)},
+            {follower -> blockFinal(follower)},
+            {follower -> followupFinal(follower)},
+            {follower -> cancelfollowupFinal(follower)}
+        )
         binding.recyclerView.adapter = adapter
         val layoutManager = LinearLayoutManager(this.context)
         binding.recyclerView.layoutManager = layoutManager
@@ -62,6 +71,33 @@ class FollowerListFragment : Fragment() {
                 adapter.submitData(pagingData)
             }
         }
+    }
+
+    fun deleteFinal(follower: FollowerDTO) {
+        lifecycleScope.launch {viewModel.deleteFollower(follower.from_user_id)}
+        refreshFollower()
+    }
+
+    fun blockFinal(follower: FollowerDTO) {
+        val builder = AlertDialog.Builder(requireActivity())
+        builder.setMessage("정말로 차단하시겠습니까?")
+            .setPositiveButton("네") { _, _ ->
+                lifecycleScope.launch {viewModel.blockUser(follower.from_user_id)}
+                refreshFollower()
+            }
+            .setNegativeButton("아니요") { _, _ ->
+                // Perform the action for "No"
+            }
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    fun followupFinal(follower: FollowerDTO) {
+        lifecycleScope.launch {viewModel.followUser(follower.from_user_id)}
+    }
+
+    fun cancelfollowupFinal(follower: FollowerDTO) {
+        lifecycleScope.launch {viewModel.unfollowUser(follower.from_user_id)}
     }
 
 }
