@@ -1,12 +1,8 @@
 package com.example.todomateclone.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
 import com.example.todomateclone.network.RestService
 import com.example.todomateclone.network.dto.*
-
 import com.example.todomateclone.util.AuthStorage
 import com.example.todomateclone.util.Toaster
 import kotlinx.coroutines.flow.*
@@ -24,7 +20,6 @@ class UserDetailViewModel (
     suspend fun getUser() {
         try {
             _user.value = restService.getUser().user
-
         } catch (e: Exception) {
             toaster.toastApiError(e)
         }

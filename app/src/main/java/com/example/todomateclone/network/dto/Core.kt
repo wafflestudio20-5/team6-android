@@ -14,12 +14,6 @@ data class UserDTO(
 //    val image: String
 )
 
-data class FollowDTO(
-    val id: Int,
-    val nickname: String,
-//    val image: String
-)
-
 data class AuthStorageUserDTO(
     val id: Int,
     val email: String,

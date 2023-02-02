@@ -2,6 +2,7 @@ package com.example.todomateclone.ui.user
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -28,7 +29,6 @@ import kotlin.system.exitProcess
 
 class UserPageFragment : Fragment() {
 
-    private val authStorage: AuthStorage by inject()
     private val userDetailViewModel: UserDetailViewModel by viewModel()
     private val userViewModel: UserViewModel by viewModel()
     private var _binding: FragmentUserPageBinding? = null
@@ -65,7 +65,6 @@ class UserPageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val profileButton = binding.buttonProfile
-        val changeEmailButton = binding.buttonChangeEmail
         val changePasswordButton = binding.buttonChangePassword
         val deleteAccountButton = binding.buttonDeleteAccount
         val googleRevokeAccessButton = binding.buttonGoogleRevokeAccess
@@ -76,27 +75,21 @@ class UserPageFragment : Fragment() {
             this.findNavController().navigate(action)
         }
 
-        changeEmailButton.setOnClickListener(){
-            val action = UserPageFragmentDirections.actionUserPageFragmentToChangeEmailFragment()
-            this.findNavController().navigate(action)
-        }
-
-        changePasswordButton.setOnClickListener(){
+        changePasswordButton.setOnClickListener() {
             val email = userDetailViewModel.user.value?.email.toString()
-            CoroutineScope(Dispatchers.IO).launch{
+            CoroutineScope(Dispatchers.IO).launch {
                 userDetailViewModel.sendResetEmail(email)
             }
             val action = UserPageFragmentDirections.actionUserPageFragmentToChangePasswordFragment()
             this.findNavController().navigate(action)
         }
 
-        deleteAccountButton.setOnClickListener(){
-            // 확인을 위한 팝업창 출력
-            
-            CoroutineScope(Dispatchers.IO).launch{
+        deleteAccountButton.setOnClickListener() {
+            CoroutineScope(Dispatchers.IO).launch {
                 userViewModel.deleteUser()
                 userViewModel.logout()
             }
+            this.findNavController().navigate(R.id.action_global_login_graph)
         }
 
         // 구글 계정 연동 해제
@@ -141,6 +134,8 @@ class UserPageFragment : Fragment() {
             mainActivity.finishAffinity()
             System.runFinalization()
             exitProcess(0)
+        }
+            this.findNavController().navigate(R.id.action_global_login_graph)
         }
     }
 
