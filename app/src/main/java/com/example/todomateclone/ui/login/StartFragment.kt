@@ -22,9 +22,6 @@ import com.google.android.gms.common.Scopes
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.Scope
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.gms.tasks.Task
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
@@ -68,8 +65,7 @@ class StartFragment : Fragment() {
         val signUpText = binding.signUpText
         val kakaoButton = binding.kakaoButton
         val googleButton = binding.googleLoginButton
-        val googleLogoutButton = binding.googleLogoutButton
-        
+
         googleButton.setSize(SignInButton.SIZE_WIDE)
 
         loginButton.setOnClickListener {
@@ -92,10 +88,6 @@ class StartFragment : Fragment() {
 
         googleButton.setOnClickListener {
             googleLogin()
-        }
-
-        googleLogoutButton.setOnClickListener {
-            googleRevokeAccess()
         }
     }
 
@@ -211,23 +203,6 @@ class StartFragment : Fragment() {
             Log.d("GoogleLogin", "already logged in")
         } else {
             Log.d("GoogleLogin", "not yet logged in")
-        }
-    }
-
-    // 구글 계정 연동 해제
-    private fun googleRevokeAccess() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.google_server_client_id))
-                .requestEmail()
-                .build()
-
-            val googleSignInClient = GoogleSignIn.getClient(mainActivity, gso)
-
-            googleSignInClient.revokeAccess()
-                .addOnCompleteListener(mainActivity) {
-                    Log.d("GoogleLogin", "Revoked")
-                }
         }
     }
 

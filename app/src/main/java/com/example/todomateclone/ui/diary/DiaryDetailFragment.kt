@@ -26,7 +26,7 @@ class DiaryDetailFragment : Fragment() {
     private val navigationArgs: DiaryDetailFragmentArgs by navArgs()
     private val diaryViewModel: DiaryViewModel by viewModel()
 
-    lateinit var mainActivity: MainActivity
+    private lateinit var mainActivity: MainActivity
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

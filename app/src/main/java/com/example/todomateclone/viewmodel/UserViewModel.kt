@@ -1,6 +1,7 @@
 package com.example.todomateclone.viewmodel
 
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,7 +11,6 @@ import com.example.todomateclone.util.AuthStorage
 import com.example.todomateclone.util.Toaster
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import com.kakao.usermgmt.StringSet.email
 import com.squareup.moshi.JsonDataException
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
