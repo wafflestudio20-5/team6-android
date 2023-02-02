@@ -118,7 +118,7 @@ class TodoListFragment : Fragment(), OnDismissListener, OnDismissListenerAdder {
         }
 
         binding.goDiary.setOnClickListener{
-            val action = TodoListFragmentDirections.actionTodoListFragmentToDiaryCalendarFragment()
+            val action = TodoListFragmentDirections.actionTodoListFragmentToDiaryCalendarFragment(args.searchedId)
             this.findNavController().navigate(action)
         }
 

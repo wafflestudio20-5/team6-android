@@ -16,7 +16,6 @@ data class CheckFollowResponse(
     val is_following: Boolean,
 )
 
-
 data class GetFolloweeListResponse(
     val count: Int,
     val next: String?,

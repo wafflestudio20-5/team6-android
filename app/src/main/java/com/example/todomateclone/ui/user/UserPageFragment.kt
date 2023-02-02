@@ -136,8 +136,6 @@ class UserPageFragment : Fragment() {
             exitProcess(0)
         }
             this.findNavController().navigate(R.id.action_global_login_graph)
-        }
     }
-
 
 }

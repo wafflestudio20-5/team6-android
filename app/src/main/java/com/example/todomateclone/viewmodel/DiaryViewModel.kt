@@ -24,8 +24,8 @@ class DiaryViewModel(
     val dateDiaryList: StateFlow<List<DiaryDTO>?> = _dateDiaryList
     private val _searchedDiaryList = MutableStateFlow<List<DiaryDTO>?>(null)
     val searchedDiaryList: StateFlow<List<DiaryDTO>?> = _searchedDiaryList
-    private val _searchedDateDiary = MutableStateFlow<DiaryDTO?>(null)
-    val searchedDateDiary: StateFlow<DiaryDTO?> = _searchedDateDiary
+    private val _searchedDateDiary = MutableStateFlow<List<DiaryDTO>?>(null)
+    val searchedDateDiary: StateFlow<List<DiaryDTO>?> = _searchedDateDiary
 
     suspend fun getDiaryList() {
         try {
@@ -97,7 +97,8 @@ class DiaryViewModel(
 
     suspend fun getSearchedDateDiary(uid: Int, date: String) {
         try {
-            _searchedDateDiary.value = restService.getSearchedDateDiary(uid, date)
+            val response = restService.getSearchedDateDiary(uid, date)
+            _searchedDateDiary.value = response.results
         } catch (e: Exception) {
             toaster.toastApiError(e)
         }

@@ -59,7 +59,7 @@ class DiaryCalendarFragment : Fragment() {
                 true -> viewLifecycleOwner.lifecycleScope.launch {
                     diaryViewModel.getSearchedDateDiary(navArgs.searchedId, binding.dateTextView.text.toString())
                     diaryViewModel.searchedDateDiary.collect {
-                        adapter.submitList(listOf(it))
+                        adapter.submitList(it)
                     }
                 }
 
@@ -85,7 +85,7 @@ class DiaryCalendarFragment : Fragment() {
                     true -> viewLifecycleOwner.lifecycleScope.launch {
                         diaryViewModel.getSearchedDateDiary(navArgs.searchedId, binding.dateTextView.text.toString())
                         diaryViewModel.searchedDateDiary.collect {
-                            adapter.submitList(listOf(it))
+                            adapter.submitList(it)
                         }
                     }
 
