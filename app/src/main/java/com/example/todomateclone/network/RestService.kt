@@ -8,46 +8,46 @@ import java.time.LocalDate
 
 interface RestService {
     // Login, SignUp, Social Login API
-    @POST("/accounts/login/")
+    @POST("/accounts/login")
     suspend fun login(@Body() request: LoginRequest): LoginResult
 
-    @POST("/accounts/logout/")
+    @POST("/accounts/logout")
     suspend fun logout(
         @Header("authorization") accessToken: String,
     ): Response<Unit>
 
-    @POST("/accounts/registration/")
+    @POST("/accounts/registration")
     suspend fun signup(@Body() request: SignupRequest): SignupResult
 
-    @POST("/accounts/registration/confirm/")
+    @POST("/accounts/registration/confirm")
     suspend fun signupConfirm(@Body() request: SignUpConfirmRequest): SignUpConfirmResult
 
-    @POST("/accounts/resend-email/")
+    @POST("/accounts/resend-email")
     suspend fun resendEmail(@Body() request: ResendEmailRequest): ResendEmailResult
 
-    @GET("/accounts/user/")
+    @GET("/accounts/user")
     suspend fun getUser(): GetUserResult
 
-    @PUT("/accounts/user/")
+    @PUT("/accounts/user")
     suspend fun updateUser(
         @Body() request: UpdateUserRequest
     ): UpdateUserResult
 
-    @DELETE("/accounts/user/{id}/")
+    @DELETE("/accounts/user/{id}")
     suspend fun deleteUser(
         @Path("id") id: Int
     ): Response<Unit>
 
-    @POST("/accounts/kakao/login/")
+    @POST("/accounts/kakao/login")
     suspend fun kakaoLogin(@Body() request: KakaoLoginRequest): LoginResult
 
-    @POST("/accounts/password/reset/")
+    @POST("/accounts/password/reset")
     suspend fun sendResetEmail(@Body() request: SendResetEmailRequest): Response<Unit>
 
-    @POST("/accounts/password/reset/confirm/")
+    @POST("/accounts/password/reset/confirm")
     suspend fun confirmPasswordChange(@Body() request: ConfirmPasswordChangeRequest): Response<Unit>
 
-    @POST("/accounts/google/login/")
+    @POST("/accounts/google/login")
     suspend fun googleLogin(@Body() request: GoogleLoginRequest): LoginResult
 
 
@@ -152,4 +152,14 @@ interface RestService {
     // 해당 id의 댓글 삭제하기
     @DELETE("/diary/comment/detail/{cid}/")
     suspend fun deleteIdComment(@Path("cid") cid: Int): Response<Unit>
+    // 검색한 유저의 일기 목록 불러오기
+    @GET("/diary/search/{uid}/")
+    suspend fun getSearchedDiary(@Path("uid") uid: Int): GetSearchedDiaryResponse
+    // 검색한 유저의 날짜별 일기 불러오기
+    @GET("/diary/search/{uid}/{date}/")
+    suspend fun getSearchedDateDiary(@Path("uid") uid: Int, @Path("date") date: String): DiaryDTO
+
+    // token
+    @POST("/accounts/token/verify")
+    suspend fun verifyToken(@Body request: VerifyTokenRequest): Response<Unit>
 }

@@ -20,6 +20,7 @@ import com.example.todomateclone.util.AuthStorage
 import com.example.todomateclone.viewmodel.UserViewModel
 import com.google.android.material.navigation.NavigationView
 import com.kakao.auth.StringSet.access_token
+import com.kakao.auth.StringSet.refresh_token
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.flow
 import org.koin.android.ext.android.inject
@@ -44,10 +45,23 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launch{
+        // 최초 앱 실행 시 로그인 화면(startFragment)으로 이동
+        lifecycleScope.launch {
             authStorage.authInfo.collect {
                 if (it == null) {
                     Log.d("MainFragment", "navigate to login graph")
+                    findNavController().navigate(R.id.action_global_login_graph)
+                }
+            }
+        }
+
+        //refresh_token 만료 시 재로그인 요청
+        lifecycleScope.launchWhenStarted {
+            Log.d("MainFragment", "Check refreshToken")
+            userViewModel.verifyToken(authStorage.authInfo.value!!.refreshToken)
+            userViewModel.refreshTokenValid.collect {
+                if (it != true) {
+                    userViewModel.logout()
                     findNavController().navigate(R.id.action_global_login_graph)
                 }
             }
@@ -63,7 +77,8 @@ class MainFragment : Fragment() {
         toolbar.inflateMenu(R.menu.appbar) // 여기서 appbar layout 확장
         navigationView.itemIconTintList = null
 
-        toolbarTitle.setTypeface(null, Typeface.ITALIC)
+        // 툴바 타이틀 글꼴 기울이기, 굵게
+        toolbarTitle.setTypeface(null, Typeface.BOLD_ITALIC)
 
         // when click button, user logout
         logoutButton.setOnClickListener {
@@ -100,7 +115,7 @@ class MainFragment : Fragment() {
         navigationView.setNavigationItemSelectedListener { menuItem ->
             val id = menuItem.itemId
             //it's possible to do more actions on several items, if there is a large amount of items I prefer switch(){case} instead of if()
-            when (id) {
+            when (menuItem.itemId) {
                 // navigate to user page
                 R.id.nav_user_page -> {
                     val action = MainFragmentDirections.actionMainFragmentToUserPageFragment()
@@ -116,7 +131,7 @@ class MainFragment : Fragment() {
                 }
             }
             //This is for maintaining the behavior of the Navigation view
-            onNavDestinationSelected(menuItem, this.findNavController() )
+            onNavDestinationSelected(menuItem, this.findNavController())
             //This is for closing the drawer after acting on it
             drawerLayout.closeDrawer(GravityCompat.END)
             true

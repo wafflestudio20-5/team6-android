@@ -167,6 +167,7 @@
         android:background="@android:color/transparent"
         android:src="@drawable/ic_dots"
         app:layout_constraintStart_toEndOf="@id/name_text_view"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="#B4B4B4" />
 

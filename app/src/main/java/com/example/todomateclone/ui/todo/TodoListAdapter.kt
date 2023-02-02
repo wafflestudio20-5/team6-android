@@ -19,7 +19,11 @@ import com.example.todomateclone.ui.todo.TodoFixerFragment
 import java.text.SimpleDateFormat
 
 
-class TodoListAdapter(private val onItemClicked: (TaskDTO) -> Unit, private val onItemClickedMenu: (TaskDTO) -> Unit, private val isSearched: Boolean) : PagingDataAdapter<TaskDTO, TodoListAdapter.TodoViewHolder>(DiffCallback) {
+class TodoListAdapter(
+    private val onItemClicked: (TaskDTO) -> Unit,
+    private val onItemClickedMenu: (TaskDTO) -> Unit,
+    private val isSearched: Boolean
+    ) : PagingDataAdapter<TaskDTO, TodoListAdapter.TodoViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         return TodoViewHolder(
@@ -43,8 +47,8 @@ class TodoListAdapter(private val onItemClicked: (TaskDTO) -> Unit, private val 
 
             if(isSearched) {
                 holder.menubutton.visibility = INVISIBLE
-                holder.donebutton.setClickable(false);
-                holder.donebutton.setFocusable(false);
+                holder.donebutton.isClickable = false
+                holder.donebutton.isFocusable = false
             } //다른 사람의 것은 수정이나 완료체크 불가
             holder.bind(it)
         }
@@ -59,7 +63,7 @@ class TodoListAdapter(private val onItemClicked: (TaskDTO) -> Unit, private val 
         fun bind(todo: TaskDTO) {
             binding.apply {
                 nameTextView.text = todo.name
-                doneSwitch.setChecked(todo.complete)
+                doneSwitch.isChecked = todo.complete
                 starttimeTextView.text = todo.start_time
                 endtimeTextView.text = todo.end_time
             }

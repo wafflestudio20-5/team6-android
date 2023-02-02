@@ -90,33 +90,38 @@
         android:label="TodoListFragment"
         tools:layout="@layout/fragment_todo_list">
         <action
-            android:id="@+id/action_todoListFragment_to_diaryjcyFragment"
-            app:destination="@id/diaryjcyFragment" />
+            android:id="@+id/action_todoListFragment_to_diaryCalendarFragment"
+            app:destination="@id/diaryCalendarFragment" />
         <argument
             android:name="searchedId"
             app:argType="integer"
             android:defaultValue="-1" />
     </fragment>
     <fragment
-        android:id="@+id/diaryjcyFragment"
-        android:name="com.example.todomateclone.ui.DiaryJCYFragment"
+        android:id="@+id/diaryCalendarFragment"
+        android:name="com.example.todomateclone.ui.DiaryCalendarFragment"
         android:label="TodoListFragment"
         tools:layout="@layout/fragment_todo_list">
+        <argument
+            android:name="searchedId"
+            app:argType="integer"
+            android:defaultValue="-1" />
         <action
-            android:id="@+id/action_diaryjcyFragment_to_todoListFragment"
-            app:destination="@id/todoListFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/todoAdderFragment"
-        android:name="com.example.todomateclone.ui.todo.TodoAdderFragment"
-        android:label="TodoAdderFragment"
-        tools:layout="@layout/fragment_todo_adder">
+            android:id="@+id/action_diaryCalendarFragment_to_diaryDetailFragment"
+            app:destination="@id/diaryDetailFragment" />
+        <action
+            android:id="@+id/action_diaryCalendarFragment_to_diaryAdderFragment"
+            app:destination="@id/diaryAdderFragment" />
     </fragment>
     <fragment
         android:id="@+id/diaryAdderFragment"
         android:name="com.example.todomateclone.ui.diary.DiaryAdderFragment"
         android:label="fragment_diary_adder"
-        tools:layout="@layout/fragment_diary_adder" />
+        tools:layout="@layout/fragment_diary_adder" >
+        <argument
+            android:name="date"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/diaryListFragment"
         android:name="com.example.todomateclone.ui.diary.DiaryListFragment"

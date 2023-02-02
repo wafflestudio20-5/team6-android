@@ -12,6 +12,8 @@ import com.example.todomateclone.databinding.FragmentDiaryListBinding
 import com.example.todomateclone.viewmodel.DiaryViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class DiaryListFragment : Fragment() {
 
@@ -22,7 +24,7 @@ class DiaryListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentDiaryListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -32,6 +34,8 @@ class DiaryListFragment : Fragment() {
 
         val floatingActionButton = binding.floatingActionButton
         val upButton = binding.upButton
+        val dateText = binding.dateText
+        val todayDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         val adapter = DiaryListAdapter(
             onItemClicked = {
                 val action = DiaryListFragmentDirections.actionDiaryListFragmentToDiaryDetailFragment(it.id)
@@ -40,6 +44,8 @@ class DiaryListFragment : Fragment() {
         )
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
+
+        dateText.text = todayDate
 
         // show entire diaryList
         lifecycleScope.launch {
@@ -54,7 +60,7 @@ class DiaryListFragment : Fragment() {
         }
 
         floatingActionButton.setOnClickListener {
-            val action = DiaryListFragmentDirections.actionDiaryListFragmentToDiaryAdderFragment()
+            val action = DiaryListFragmentDirections.actionDiaryListFragmentToDiaryAdderFragment(todayDate)
             this.findNavController().navigate(action)
         }
     }

@@ -31,13 +31,14 @@ val appModule = module {
         val sharedPreference =
             context.getSharedPreferences(AuthStorage.SharedPreferenceName, Context.MODE_PRIVATE)
         Retrofit.Builder()
-            .baseUrl("http://ec2-3-38-100-94.ap-northeast-2.compute.amazonaws.com:8000/")
-//            .baseUrl("http://3.38.100.94/")
+//            .baseUrl("http://ec2-3-38-100-94.ap-northeast-2.compute.amazonaws.com:8000/")
+            .baseUrl("http://3.38.100.94/")
             .addConverterFactory(MoshiConverterFactory.create(get()).asLenient())
             .client(
                 OkHttpClient.Builder()
                     .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                     .addInterceptor {
+                        // 사용자 최초 로그인 또는 로그아웃 후 재로그인 시 헤더에 토큰을 안넘겨줌
                         if((sharedPreference.getString(AuthStorage.AccessTokenKey, "") ?: "").isEmpty()) {
                             val newRequest = it.request().newBuilder()
                                 .addHeader(
@@ -50,6 +51,7 @@ val appModule = module {
                                 .build()
                             it.proceed(newRequest)
                         } else {
+                            // 사용자가 토큰을 가지고 있을 때, 자동으로 헤더에 토큰을 넘겨줌
                             val newRequest = it.request().newBuilder()
                                 .addHeader(
                                     "Authorization",
@@ -62,6 +64,7 @@ val appModule = module {
                             var response = it.proceed(newRequest)
                             when (response.code) {
                                 401 -> {
+                                    // 토큰 사용 중 401 에러 즉 사용자가 Unauthorized 되었을 때, 자동으로 토큰을 재발급받음
                                     Log.d("Token", "token is invalid, please refresh token")
                                     val refreshTokenJSON = JSONObject()
                                     refreshTokenJSON.put("refresh", sharedPreference.getString(AuthStorage.RefreshTokenKey, "")!!)
@@ -86,7 +89,7 @@ val appModule = module {
 
                                     Log.d("Token", "token is refreshed")
 
-                                    // chain 의 Request 객체를 복사해 재발급한 토큰을 Header 에 넣고 요청을 보낸다.
+                                    // chain 의 Request 객체를 복사해 재발급한 토큰을 헤더에 넣고 요청을 보낸다.
                                     val refreshedTokenRequest = it.request().newBuilder()
                                         .addHeader("Authorization",
                                             "Bearer " + sharedPreference.getString(

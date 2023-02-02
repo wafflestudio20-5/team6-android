@@ -18,8 +18,10 @@ import com.example.todomateclone.viewmodel.UserViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.Scopes
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.Scope
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
@@ -161,8 +163,10 @@ class StartFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             //사용자의 ID, 이메일 주소 및 기본정보를 요청하도록 로그인 구성
             //프로파일링 합니다. ID 및 기본 프로파일은 DEFAULT_SIGN_IN에 포함됩니다.
-            //추가로 요청해야하는 정보는 requestScopes를 지정하여 요청함. 꼭 필요한 것들만 요청하도록 한다.
+            //추가로 요청해야하는 정보는 requestScopes 를 지정하여 요청함. 꼭 필요한 것들만 요청하도록 한다.
             val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestScopes(Scope(Scopes.DRIVE_APPFOLDER))
+                .requestServerAuthCode(getString(R.string.google_server_client_id))
                 .requestIdToken(getString(R.string.google_server_client_id))
                 .requestEmail()
                 .build()
@@ -176,14 +180,14 @@ class StartFragment : Fragment() {
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account: GoogleSignInAccount = completedTask.getResult(ApiException::class.java)
-            val idToken: String = account.idToken.toString()
+            val code: String = account.serverAuthCode.toString()
             Log.d("GoogleLogin", "get idToken: ${account.idToken}")
             Log.d("GoogleLogin", "get authCode: ${account.serverAuthCode}")
             Log.d("GoogleLogin", "is Expired: ${account.isExpired}")
 
             // send ID Token to server and validate
             CoroutineScope(Dispatchers.IO).launch {
-                userViewModel.googleLogin(idToken)
+                userViewModel.googleLogin(code)
                 Log.d("GoogleLogin", "googleLogin process is succeeded")
                 launch(Dispatchers.Main) {
                     navigateToMain()

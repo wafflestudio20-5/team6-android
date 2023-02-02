@@ -118,10 +118,10 @@ class TodoListFragment : Fragment(), OnDismissListener, OnDismissListenerAdder {
             else refreshTask() //나의 task
         }
 
-//        binding.goDiary.setOnClickListener{
-//            val action = TodoListFragmentDirections.actionTodoListFragmentToDiaryjcyFragment()
-//            this.findNavController().navigate(action)
-//        } TODO: Diary - Todo 연결
+        binding.goDiary.setOnClickListener{
+            val action = TodoListFragmentDirections.actionTodoListFragmentToDiaryCalendarFragment()
+            this.findNavController().navigate(action)
+        }
 
 
     }

@@ -8,10 +8,10 @@ import com.example.todomateclone.network.RestService
 import com.example.todomateclone.network.dto.*
 import com.example.todomateclone.util.AuthStorage
 import com.example.todomateclone.util.Toaster
-import com.kakao.usermgmt.StringSet.email
-import com.squareup.moshi.JsonDataException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import com.kakao.usermgmt.StringSet.email
+import com.squareup.moshi.JsonDataException
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
@@ -20,6 +20,9 @@ class UserViewModel(
     private val authStorage: AuthStorage,
     private val toaster: Toaster,
 ) : ViewModel() {
+
+    private val _refreshTokenValid = MutableStateFlow<Boolean?>(null)
+    val refreshTokenValid: StateFlow<Boolean?> = _refreshTokenValid
 
     private val _searcheduser = MutableStateFlow<UserDTO?>(null)
     val searcheduser: StateFlow<UserDTO?> = _searcheduser
@@ -98,10 +101,10 @@ class UserViewModel(
     }
 
     // login with google account
-    suspend fun googleLogin(idToken: String) {
+    suspend fun googleLogin(code: String) {
         try {
             Log.d("GoogleLogin", "send idToken to server")
-            val response = restService.googleLogin(GoogleLoginRequest(access_token = idToken))
+            val response = restService.googleLogin(GoogleLoginRequest(code = code))
             authStorage.setAuthInfo(
                 response.access_token,
                 response.refresh_token,
@@ -110,6 +113,18 @@ class UserViewModel(
         } catch(e: Exception) {
             toaster.toastApiError(e)
         }
+    }
+
+    suspend fun verifyToken(refreshToken: String) {
+        try {
+            Log.d("VerifyToken", "Token verification is started")
+            val response = restService.verifyToken(VerifyTokenRequest(refreshToken))
+            _refreshTokenValid.value = response.code() == 200
+            Log.d("VerifyToken", "Token verification is completed")
+        } catch(e: Exception) {
+            toaster.toastApiError(e)
+        }
+
     }
 
     //search user
