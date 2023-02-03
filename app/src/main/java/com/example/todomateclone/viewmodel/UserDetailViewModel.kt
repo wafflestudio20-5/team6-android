@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.*
 
 class UserDetailViewModel (
     private val restService: RestService,
-    private val authStorage: AuthStorage,
     private val toaster: Toaster,
 ) : ViewModel() {
 

@@ -126,6 +126,6 @@ val appModule = module {
     viewModel {TodoViewModel(get(), get())}
     viewModel {UserViewModel(get(), get(), get())}
     viewModel {DiaryViewModel(get(), get())}
-    viewModel {UserDetailViewModel(get(), get(),get())}
+    viewModel {UserDetailViewModel(get(), get())}
     viewModel {CommentViewModel(get(), get())}
 }
