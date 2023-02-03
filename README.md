@@ -22,7 +22,8 @@ TodoMate 어플을 참고하여 Wafflemate 어플을 제작했습니다.
 <br/>
 
 ## 🔀 워크플로우
-<center><img src = "https://user-images.githubusercontent.com/40379446/216498612-e5160a0e-19a6-496a-94c4-2b16dbae6359.png"></center>
+<center><img src = "https://user-images.githubusercontent.com/40379446/216498612-e5160a0e-19a6-496a-94c4-2b16dbae6359.png"></center>### 1. 메
+
 
 ## 🔨 만든 사람
 | [송건우(Gitsgwoo)](https://github.com/Gitsgwoo) | [진채연(hzlcodus)](https://github.com/hzlcodus) | [오동건(ho2921ho)](https://github.com/ho2921ho) |
@@ -36,20 +37,75 @@ TodoMate 어플을 참고하여 Wafflemate 어플을 제작했습니다.
 
 ## 📄 페이지 설명
 
-### 1. 계정페이지
+---
+[송건우(Gitsgwoo)](https://github.com/Gitsgwoo)
+<br>
 
-<center><img src = "https://user-images.githubusercontent.com/40379446/216373140-d8f9574a-352a-4942-947e-b583ae421040.png"></center>
-<br/>
-<br/>
+### 1. 시작 페이지
+![슬라이드1](https://user-images.githubusercontent.com/40379446/216535340-2e228756-c734-481d-898e-cc727be07a8c.PNG)
 
-### 2. 프로필 페이지
+### 2. 회원가입 페이지
+![슬라이드2](https://user-images.githubusercontent.com/40379446/216535414-54ad9bab-3639-4b87-bcfd-cb038c9b9d12.PNG)
 
-<center><img src = "https://user-images.githubusercontent.com/40379446/216373319-51b24d26-4984-4236-ac0f-eeabe9327989.png"></center>
-<br/>
-<br/>
+### 3. 로그인 페이지
+![슬라이드3](https://user-images.githubusercontent.com/40379446/216535525-acfeb262-b179-434f-bbf8-df7a0bc09cae.PNG)
 
-### 3. 비밀번호변경 페이지
+### 4. 메인 페이지
+![슬라이드4](https://user-images.githubusercontent.com/40379446/216535577-ad701af2-4985-4de1-b85b-a8b7e7271ee5.PNG)
 
-<center><img src = "https://user-images.githubusercontent.com/40379446/216373540-6e3fdef8-32e9-4d3d-8ddd-72c6c17a101d.png"></center>
-<br/>
-<br/>
+---
+[진채연(hzlcodus)](https://github.com/hzlcodus)
+<br>
+
+### 5. 탐색 페이지
+![슬라이드5](https://user-images.githubusercontent.com/40379446/216535629-971d28e8-85fc-49c4-8563-d850112d8325.PNG)
+
+### 6. 팔로잉 목록 페이지
+![슬라이드6](https://user-images.githubusercontent.com/40379446/216535689-eddf39a0-7966-4bed-a932-e7ba05aaec88.PNG)
+
+### 7. 팔로워 목록 페이지
+![슬라이드7](https://user-images.githubusercontent.com/40379446/216537383-73d01006-29c1-4d4b-b3ea-5ac955cd4688.PNG)
+
+### 8. 차단 목록 페이지
+![슬라이드8](https://user-images.githubusercontent.com/40379446/216535769-d0becca9-87c1-446e-ac1e-4f2f103fca11.PNG)
+
+### 9. 슬라이드 메뉴
+![슬라이드9](https://user-images.githubusercontent.com/40379446/216535876-77571136-0ad9-4f05-8d2e-b6c1d299ae3b.PNG)
+
+---
+[오동건(ho2921ho)](https://github.com/ho2921ho)
+<br>
+
+### 10. 계정 페이지
+![슬라이드10](https://user-images.githubusercontent.com/40379446/216536452-b8e7a745-e50f-447f-9779-bb37bdef9716.PNG)
+
+### 11. 프로필 페이지
+![슬라이드11](https://user-images.githubusercontent.com/40379446/216536466-4e30d4cc-0c98-458b-8be9-39ec4095f4c1.PNG)
+
+### 12. 비밀번호변경 페이지
+![슬라이드12](https://user-images.githubusercontent.com/40379446/216536476-7096c20e-bfaa-426b-b0af-7c80ceee0ee6.PNG)
+
+---
+[진채연(hzlcodus)](https://github.com/hzlcodus)
+<br>
+
+### 13. 할일 목록 페이지
+![슬라이드13](https://user-images.githubusercontent.com/40379446/216537276-ac246b57-6eef-4efd-a7ba-787be1306e57.PNG)
+
+### 14. 할일 편집 페이지
+![슬라이드14](https://user-images.githubusercontent.com/40379446/216536263-cca55a24-85ec-4826-9065-4884b1633867.PNG)
+
+---
+[송건우(Gitsgwoo)](https://github.com/Gitsgwoo)
+<br>
+
+### 15. 일기 목록 페이지
+![슬라이드15](https://user-images.githubusercontent.com/40379446/216536275-e22c8243-2685-4bfb-b645-cb8244671ed1.PNG)
+
+### 16. 일기 작성 페이지
+![슬라이드16](https://user-images.githubusercontent.com/40379446/216536282-93a700d1-99b1-41a3-b03f-51be30a498cb.PNG)
+
+### 17. 댓글 작성 페이지
+![슬라이드17](https://user-images.githubusercontent.com/40379446/216536292-35de565d-c9ee-4553-8ddc-1b3b3131bdd5.PNG)
+
+
