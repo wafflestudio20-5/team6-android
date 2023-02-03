@@ -17,13 +17,12 @@ TodoMate 어플을 참고하여 Wafflemate 어플을 제작했습니다.
 <br/>
 일정관리와 더불어 팔로우 팔로잉이 가능한 SNS 기능을 제공합니다.
 <br/>
-일정/일기 공유를 통해 효과적인 일정관리를 경험하세요.
+일정/일기 공유를 통해 효과적인 일정관리를 경험하세요.!
 <br/>
 <br/>
 
 ## 🔀 워크플로우
-
-git merge 되면 navigation 그래프
+<center><img src = "https://user-images.githubusercontent.com/40379446/216498612-e5160a0e-19a6-496a-94c4-2b16dbae6359.png"></center>
 
 ## 🔨 만든 사람
 | [송건우(Gitsgwoo)](https://github.com/Gitsgwoo) | [진채연(hzlcodus)](https://github.com/hzlcodus) | [오동건(ho2921ho)](https://github.com/ho2921ho) |
