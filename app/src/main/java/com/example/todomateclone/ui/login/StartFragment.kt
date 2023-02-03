@@ -157,9 +157,9 @@ class StartFragment : Fragment() {
             //프로파일링 합니다. ID 및 기본 프로파일은 DEFAULT_SIGN_IN에 포함됩니다.
             //추가로 요청해야하는 정보는 requestScopes 를 지정하여 요청함. 꼭 필요한 것들만 요청하도록 한다.
             val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestScopes(Scope(Scopes.DRIVE_APPFOLDER))
+//                .requestScopes(Scope(Scopes.DRIVE_APPFOLDER))
                 .requestServerAuthCode(getString(R.string.google_server_client_id))
-                .requestIdToken(getString(R.string.google_server_client_id))
+//                .requestIdToken(getString(R.string.google_server_client_id))
                 .requestEmail()
                 .build()
             val googleSignInClient = GoogleSignIn.getClient(mainActivity, gso)
@@ -173,7 +173,7 @@ class StartFragment : Fragment() {
         try {
             val account: GoogleSignInAccount = completedTask.getResult(ApiException::class.java)
             val code: String = account.serverAuthCode.toString()
-            Log.d("GoogleLogin", "get idToken: ${account.idToken}")
+//            Log.d("GoogleLogin", "get idToken: ${account.idToken}")
             Log.d("GoogleLogin", "get authCode: ${account.serverAuthCode}")
             Log.d("GoogleLogin", "is Expired: ${account.isExpired}")
 

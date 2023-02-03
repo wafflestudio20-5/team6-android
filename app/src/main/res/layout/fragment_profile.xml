@@ -13,7 +13,7 @@
         android:layout_gravity="center"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_baseline_cruelty_free_24"
-        app:civ_border_color="#000000"
+        app:civ_border_color="@color/teal_200"
         app:civ_border_overlay="true"
         app:civ_border_width="5dp"
         android:layout_marginTop="150dp"
@@ -38,16 +38,16 @@
             android:id="@+id/textView_nickname"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:text="이름"
+            android:text="@string/user_name"
             android:textColor="@color/black"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/textView_edit_nickname"
-            android:layout_width="140dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="17dp" />
+            android:textSize="17sp" />
 
 
     </LinearLayout>
@@ -67,17 +67,17 @@
             android:id="@+id/textView_detail"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:text="자기소개"
+            android:text="@string/user_detail"
             android:textColor="@color/black"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/textView_edit_detail"
-            android:layout_width="140dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:hint="자기소개 입력 (최대 50글자)"
-            android:textSize="17dp" />
+            android:hint="@string/user_detail_hint"
+            android:textSize="17sp" />
 
     </LinearLayout>
 
@@ -86,7 +86,9 @@
         android:layout_width="258dp"
         android:layout_height="57dp"
         android:layout_marginBottom="152dp"
-        android:text="확인"
+        android:backgroundTint="@color/teal_700"
+        android:textColor="@color/white"
+        android:text="@string/check"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"

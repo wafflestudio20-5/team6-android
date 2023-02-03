@@ -32,18 +32,6 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-        <!-- The main content view where fragments are loaded -->
-        <Button
-            android:id="@+id/follow_list_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Go to Follow List"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="0.344" />
-
         <Button
             android:id="@+id/followingListButton"
             android:layout_width="320dp"
@@ -96,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:layout_gravity="bottom"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="@color/teal_700"
             android:text="@string/logout"
             android:textColor="@color/white"/>
     </com.google.android.material.navigation.NavigationView>

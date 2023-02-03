@@ -96,7 +96,10 @@
 
     <string name="followinglist">팔로잉 목록</string>
     <string name="followerlist">팔로워 목록</string>
-
+    <string name="check">확인</string>
+    <string name="user_name">이름</string>
+    <string name="user_detail">자기소개</string>
+    <string name="user_detail_hint">자기소개 입력 (최대 50글자)</string>
 
 
 </resources>

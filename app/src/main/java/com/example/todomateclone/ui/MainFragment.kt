@@ -69,7 +69,6 @@ class MainFragment : Fragment() {
 
         val logoutButton = binding.logoutButton
         val toolbarTitle = binding.toolbarTitle
-        val followListButton = binding.followListButton
         val toolbar: Toolbar = binding.toolbar
         val navigationView: NavigationView = binding.navigationView
         val drawerLayout: DrawerLayout = binding.drawerLayout

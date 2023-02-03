@@ -89,7 +89,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/email_resend"
         android:textColor="@color/white"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/teal_700"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/auth_code" />
 
@@ -101,7 +101,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/verified"
         android:textColor="@color/white"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/teal_700"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/auth_code" />
 

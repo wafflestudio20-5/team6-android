@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:hint="@string/searchforuser"
+        android:background="@drawable/edittext_rounded_corner_rectangle"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@id/searchButton"

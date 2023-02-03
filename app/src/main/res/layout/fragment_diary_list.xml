@@ -78,7 +78,7 @@
         android:layout_marginBottom="16dp"
         android:src="@drawable/ic_baseline_edit_24"
         android:contentDescription="@string/add_new_diary"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/teal_200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@android:color/white" />
