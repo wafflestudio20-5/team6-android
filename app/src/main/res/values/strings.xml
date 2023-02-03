@@ -35,7 +35,7 @@
     <!-- navigation menu string resource -->
     <string name="user_page">계정페이지</string>
     <string name="todo_page">할일 목록</string>
-    <string name="diary_page">일기</string>
+    <string name="diary_page">일기 목록</string>
     <!-- diary string resource-->
     <string name="diary_title">일기 제목입니다</string>
     <string name="diary_user">사용자</string>
@@ -100,6 +100,11 @@
     <string name="user_name">이름</string>
     <string name="user_detail">자기소개</string>
     <string name="user_detail_hint">자기소개 입력 (최대 50글자)</string>
+    <string name="following_text">팔로잉</string>
+    <string name="follower_text">팔로워</string>
+    <string name="block_list">차단 목록</string>
+    <string name="go_to_todoCalendar">할일 보러가기</string>
+    <string name="go_to_diaryCalendar">일기 보러가기</string>
 
 
 </resources>

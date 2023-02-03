@@ -53,10 +53,6 @@ class DiaryAdderFragment : Fragment() {
         val diaryContent = binding.diaryContent
 
         upButton.setOnClickListener {
-            this.findNavController().navigateUp()
-        }
-
-        saveButton.setOnClickListener {
             AlertDialog.Builder(mainActivity)
                 .setMessage("일기를 저장하시겠습니까?")
                 .setPositiveButton("예"
@@ -82,6 +78,17 @@ class DiaryAdderFragment : Fragment() {
                 }
                 .create()
                 .show()
+        }
+
+        saveButton.setOnClickListener {
+            lifecycleScope.launch {
+                diaryViewModel.createDiary(
+                    diaryTitle.text.toString(),
+                    diaryContent.text.toString(),
+                    navArgs.date
+                )
+                findNavController().navigateUp()
+            }
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(this.viewLifecycleOwner, object : OnBackPressedCallback(true) {
