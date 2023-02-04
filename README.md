@@ -135,7 +135,6 @@ login_graph : 시작 페이지, 회원가입 페이지, 이메일 인증 페이�
 ![슬라이드23](https://user-images.githubusercontent.com/40379446/216739519-7cb43991-4efc-493f-b9f6-d7fe482f4d05.PNG)
 ---
 ### 헤더에 토큰 자동 추가 및 자동 refresh 기능
-
 #### 토큰 자동 추가 
 - retrofit 및 okhttp3의 interceptor 기능을 활용하여 사용자의 access token을 자동으로 Authorization 헤더에 넘겨주는 기능을 추가하였습니다.
 - 최초 로그인 또는 재로그인 시에는 access token을 넘겨줄 필요가 없기 때문에 if 문을 통해서 Authorization 헤더에 빈 String을 넘겨주도록 처리했습니다.
