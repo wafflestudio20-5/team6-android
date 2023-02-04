@@ -141,6 +141,6 @@ login_graph : 시작 페이지, 회원가입 페이지, 이메일 인증 페이�
 - 최초 로그인 또는 재로그인 시에는 access token을 넘겨줄 필요가 없기 때문에 if 문을 통해서 Authorization 헤더에 빈 String을 넘겨주도록 처리했습니다.
 
 #### 토큰 자동 refresh  
-- access token의 유효기간이 만료되면 401 에러가 발생하면 에러를 catch하여, sharedPreference에 저장된 refresh token을 사용해 access token을 재발급 받도록 했습니다. 
+- access token의 유효기간이 만료되면 발생하는 401 에러를 catch하여, sharedPreference에 저장된 refresh token을 사용해 access token을 재발급 받도록 했습니다. 
 - sharedPreference에 재발급된 토큰을 저장한 후 chain 의 Request 객체를 복사해 재발급한 토큰을 헤더에 넣고 다시 요청을 보내도록 했습니다. 
 - refresh token으로 access token을 재발급하는 로직은 Request.Builder()를 사용해 refreshRequest를 생성하여 OkHttpClient().newCall(refreshRequest).execute()를 통해 직접 서버에 요청을 넘기도록 구성하였습니다.
