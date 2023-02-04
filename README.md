@@ -51,11 +51,11 @@ TodoMate 어플을 참고하여 Wafflemate 어플을 제작했습니다.
 ### 4. 로그인 페이지
 ![슬라이드4](https://user-images.githubusercontent.com/40379446/216739458-9fcc461e-e6c8-4b29-a5ef-ac1c3526df0e.PNG)
 <br/>
-#### 자동 로그인 <br/>
-<br/>
+
+#### 자동 로그인 
 - 사용자 로그인 요청 처리 시에 앱의 shared preference에 access token, refresh token, 사용자 정보를 저장합니다. <br/>
 - 인증 정보를 나타내는 data class AuthInfo 를 만들고 인증 정보를  AuthStorage class의 변수 authInfo에 StateFlow<AuthInfo>의 형태로 저장합니다. <br/>
-- 앱의 startdestination 을 메인페이지로 설정해놓고, 메인페이지의 lifecycle 중 OnViewCreated 에서 사용자의 authInfo 값이 null인지 확인합니다. <br/>
+- 앱의 startdestination을 메인페이지로 설정해놓고, 메인페이지의 lifecycle 중 OnViewCreated 에서 사용자의 authInfo 값이 null인지 확인합니다. <br/>
 - 값이 null이라면 로그인 요청을 처리하는 중첩그래프 login_graph로 navigate 됩니다. <br/>
  <br/>
 login_graph : 시작 페이지, 회원가입 페이지, 이메일 인증 페이지, 로그인 페이지로 구성
@@ -125,7 +125,7 @@ login_graph : 시작 페이지, 회원가입 페이지, 이메일 인증 페이�
 ### 20. 일기 목록 페이지
 ![슬라이드20](https://user-images.githubusercontent.com/40379446/216739513-a2adc12c-1db9-4d17-abac-4076c2d51490.PNG)
 
-### 21. 일기 작성 페이지![Uploading 슬라이드20.PNG…]()
+### 21. 일기 작성 페이지
 ![슬라이드21](https://user-images.githubusercontent.com/40379446/216739515-b17202b6-a6d6-4835-a8e8-111b0bceee62.PNG)
 
 ### 22. 일기 세부정보 페이지
@@ -137,6 +137,10 @@ login_graph : 시작 페이지, 회원가입 페이지, 이메일 인증 페이�
 ### 헤더에 토큰 자동 추가 및 자동 refresh 기능
 
 #### 토큰 자동 추가 
-retrofit 및 okhttp3의 interceptor 기능을 활용하여 사용자의 access token을 자동으로 Authorization 헤더에 넘겨주는 기능을 추가하였으며, 최초 로그인 또는 재로그인 시에는 access token을 넘겨줄 필요가 없기 때문에 if 문 로직을 통해서 sharedPreference에 저장된 access token이 없을 때 Authorization 헤더에 빈 String을 넘겨주도록 처리했습니다.
+- retrofit 및 okhttp3의 interceptor 기능을 활용하여 사용자의 access token을 자동으로 Authorization 헤더에 넘겨주는 기능을 추가하였습니다.
+- 최초 로그인 또는 재로그인 시에는 access token을 넘겨줄 필요가 없기 때문에 if 문을 통해서 Authorization 헤더에 빈 String을 넘겨주도록 처리했습니다.
+
 #### 토큰 자동 refresh  
-access token의 유효기간이 만료되어 API 요청에서 401 Unauthorizaed error가 발생했을 경우 해당 에러를 catch하여 response code가 401일 때, sharedPreference에 저장된 refresh token을 사용해 access_token을 재발급 받도록 했습니다. 그 후 sharedPreference에 재발급된 토큰을 저장한 후 chain 의 Request 객체를 복사해 재발급한 토큰을 헤더에 넣고 요청을 다시 보내도록 했습니다. refresh token으로 access token을 재발급하는 로직은 Request.Builder()를 사용해 refreshRequest를 생성하여 OkHttpClient().newCall(refreshRequest).execute()를 통해 직접 서버에 요청을 넘기도록 구성하였습니다.
+- access token의 유효기간이 만료되면 401 에러가 발생하면 에러를 catch하여, sharedPreference에 저장된 refresh token을 사용해 access token을 재발급 받도록 했습니다. 
+- sharedPreference에 재발급된 토큰을 저장한 후 chain 의 Request 객체를 복사해 재발급한 토큰을 헤더에 넣고 다시 요청을 보내도록 했습니다. 
+- refresh token으로 access token을 재발급하는 로직은 Request.Builder()를 사용해 refreshRequest를 생성하여 OkHttpClient().newCall(refreshRequest).execute()를 통해 직접 서버에 요청을 넘기도록 구성하였습니다.
