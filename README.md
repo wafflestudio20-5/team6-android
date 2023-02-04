@@ -25,7 +25,7 @@ TodoMate 어플을 참고하여 Wafflemate 어플을 제작했습니다.
 ![image](https://user-images.githubusercontent.com/40379446/216748806-38cec0ff-630f-4585-86b7-67db31572757.png)
 
 ## 🚀 기술스택
-![image](https://user-images.githubusercontent.com/40379446/216739413-8761bdfa-ea59-4eee-9fc2-8e743abcacc3.png)
+![image](https://user-images.githubusercontent.com/40379446/216749056-1084e546-12d9-4532-a0e7-9d5911f06d75.png)
 
 
 ## 🔨 만든 사람
