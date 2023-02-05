@@ -1,0 +1,110 @@
+<resources>
+    <string name="app_name">waffle mate</string>
+    <string name="login">로그인</string>
+    <string name="logout">로그아웃</string>
+    <string name="guest_login">게스트로 시작</string>
+    <string name="signup">회원가입</string>
+    <string name="email_authenticate">이메일 인증하기</string>
+    <string name="email_resend">이메일 재전송</string>
+    <string name="prompt_username">이름</string>
+    <string name="prompt_email">이메일</string>
+    <string name="prompt_password">비밀번호</string>
+    <string name="check_password">비밀번호 재확인</string>
+    <string name="action_sign_in">로그인</string>
+    <string name="explanation_sign_up">가입하면:
+        <item>다른기기에서 로그인 가능합니다.</item>
+        <item>다른 사용자들과 함께할 수 있습니다.</item>
+    </string>
+    <string name="email_auth_code">인증 번호 6자리</string>
+    <string name="explanation_email_authenticate">인증 이메일을 보냈습니다. 인증 번호 6자리를 입력해주세요. 만약, 이메일이 오지 않는다면, 이메일 주소가 올바른지 확인하고, 재전송 버튼을 눌러주세요.</string>
+    <string name="verified">확인</string>
+    <string name="account">계정</string>
+    <string name="linked_email">연동된 이메일</string>
+    <string name="google_revoke">구글 계정 연동 해제</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile">프로필</string>
+    <string name="change_email">이메일 변경</string>
+    <string name="change_password">비밀번호 재설정</string>
+    <string name="delete_account">계정 삭제하기</string>
+    <string name="kakao_app_key">fae7bb96d4999fa3bf475728a31c6711</string>
+    <string name="google_server_client_id">189776577344-db1p2bqio25foooglemunepjku3nblf4.apps.googleusercontent.com</string>
+    <!-- app bar string resource -->
+    <string name="menu">메뉴</string>
+    <string name="notice">알림</string>
+    <string name="follow">팔로우</string>
+    <!-- navigation menu string resource -->
+    <string name="user_page">계정페이지</string>
+    <string name="todo_page">할일 목록</string>
+    <string name="diary_page">일기 목록</string>
+    <!-- diary string resource-->
+    <string name="diary_title">일기 제목입니다</string>
+    <string name="diary_user">사용자</string>
+    <string name="up_button">navigate up</string>
+    <string name="diary_list">일기장</string>
+    <string name="diary_detail">일기</string>
+    <string name="diary_adder">일기 작성</string>
+    <string name="add_new_diary">일기 목록</string>
+    <string name="diary_hint_title">제목</string>
+    <string name="diary_hint_content">내용을 입력하세요</string>
+    <string name="comment">댓글</string>
+    <string name="comment_hint">댓글을 입력하세요</string>
+    <string name="diary_comment_content">댓글 내용입니다.</string>
+    <string name="edit_diary">수정하기</string>
+    <string name="delete_diary">삭제하기</string>
+    <string name="edit_comment">수정하기</string>
+    <string name="delete_comment">삭제하기</string>
+    <!-- task string resource-->
+
+    <string name="write_name_hint">할 일을 입력하세요</string>
+    <string name="write_date_hint">날짜를 입력하세요</string>
+    <string name="content_name">태그</string>
+    <string name="title_name">할 일</string>
+    <string name="status">상태</string>
+    <string name="add_new_todo">Add new todo</string>
+    <string name="no">no</string>
+    <string name="yes">yes</string>
+    <string name="delete_question">정말 삭제하시겠습니까?</string>
+    <string name="sell">Sell</string>
+    <string name="content">content:</string>
+    <string name="content_req">Content <font color='#FF0000'>*</font></string>
+    <string name="item_name_req">Item Name <font color='#FF0000'>*</font></string>
+    <string name="item_date_req">Item Date <font color='#FF0000'>*</font></string>
+    <string name="save_action">저장</string>
+    <string name="item_detail_fragment_title">Item Details</string>
+    <string name="add_fragment_title">Add Item</string>
+    <string name="edit_fragment_title">Edit Item</string>
+    <string name="date">날짜</string>
+    <string name="content_of_diary">내용</string>
+    <string name="item">일기</string>
+    <string name="delete">삭제하기</string>
+    <string name="currency_symbol">$</string>
+    <string name="edit_item">Edit Item</string>
+    <string name="add_new_item">Add new item</string>
+    <string name="calendar">달력</string>
+    <string name="todaytodo">오늘의 할 일</string>
+    <string name="starttime">시작 시간:  </string>
+    <string name="endtime">종료 시간:  </string>
+    <string name="fixed">완료</string>
+    <string name="fix">수정하기</string>
+    <string name="delay">하루 미루기</string>
+    <string name="today">오늘 하기</string>
+    <string name="mailexample">hello@gmail.com</string>
+    <string name="searchforuser">찾고 싶은 이메일을 입력하세요</string>
+    <string name="nouser">해당 사용자가 존재하지 않거나\n자기 자신입니다.</string>
+    <string name="following">팔로잉</string>
+    <string name="will_follow">팔로우</string>
+
+    <string name="followinglist">팔로잉 목록</string>
+    <string name="followerlist">팔로워 목록</string>
+    <string name="check">확인</string>
+    <string name="user_name">이름</string>
+    <string name="user_detail">자기소개</string>
+    <string name="user_detail_hint">자기소개 입력 (최대 50글자)</string>
+    <string name="following_text">팔로잉</string>
+    <string name="follower_text">팔로워</string>
+    <string name="block_list">차단 목록</string>
+    <string name="go_to_todoCalendar">할일 보러가기</string>
+    <string name="go_to_diaryCalendar">일기 보러가기</string>
+
+
+</resources>
